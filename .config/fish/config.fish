@@ -21,7 +21,7 @@ eval (direnv hook fish)
 #
 # ASDF
 #
-source /opt/homebrew/opt/asdf/asdf.fish
+source (brew --prefix asdf)/asdf.fish
 
 #
 # Settings
