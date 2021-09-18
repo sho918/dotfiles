@@ -31,5 +31,6 @@ cask "dropbox"
 cask "imageoptim"
 cask "appdelete"
 cask "obsidian"
+cask "spotify"
 
 mas "Amphetamine", id: 937984704
