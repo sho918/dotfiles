@@ -11,7 +11,7 @@ $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/
 $ brew bundle
 
 # Symlink
-$ ln -s .config/fish/config.fish ~/.config/fish/
-$ ln -s .config/fish/fish_plugins ~/.config/fish/
-$ ln -s .tmux.conf ~/.tmux.conf
+$ ln -s (PWD)/.config/fish/config.fish ~/.config/fish/
+$ ln -s (PWD)/.config/fish/fish_plugins ~/.config/fish/
+$ ln -s (PWD)/.tmux.conf ~/.tmux.conf
 ```
