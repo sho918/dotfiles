@@ -14,4 +14,7 @@ $ brew bundle
 $ ln -s (PWD)/.config/fish/config.fish ~/.config/fish/
 $ ln -s (PWD)/.config/fish/fish_plugins ~/.config/fish/
 $ ln -s (PWD)/.tmux.conf ~/.tmux.conf
+
+# Install fish plugins
+$ fisher update
 ```
