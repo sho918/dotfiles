@@ -32,5 +32,7 @@ cask "imageoptim"
 cask "appdelete"
 cask "obsidian"
 cask "spotify"
+cask "zoom"
+cask "microsoft-teams"
 
 mas "Amphetamine", id: 937984704
