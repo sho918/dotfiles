@@ -34,6 +34,7 @@ cask "obsidian"
 cask "spotify"
 cask "zoom"
 cask "microsoft-teams"
+cask "alacritty"
 
 tap "homebrew/cask-fonts"
 cask "font-jetbrains-mono"
