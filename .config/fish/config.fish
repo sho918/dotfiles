@@ -32,7 +32,6 @@ set -x GPG_TTY `tty`
 #
 # Alias
 #
-alias f  "fzf"
 alias t  "tmux attach || tmux"
 alias tl "tmux list-sessions"
 
