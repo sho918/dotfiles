@@ -35,4 +35,7 @@ cask "spotify"
 cask "zoom"
 cask "microsoft-teams"
 
+tap "homebrew/cask-fonts"
+cask "font-jetbrains-mono"
+
 mas "Amphetamine", id: 937984704
