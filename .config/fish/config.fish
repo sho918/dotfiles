@@ -24,9 +24,13 @@ eval (direnv hook fish)
 source (brew --prefix asdf)/asdf.fish
 
 #
+# FZF
+#
+fzf_configure_bindings --directory=\ct --git_status=\cs
+
+#
 # Settings
 #
-set -U FZF_LEGACY_KEYBINDINGS 0
 set -x GPG_TTY `tty`
 
 #
