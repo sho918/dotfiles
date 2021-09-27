@@ -15,6 +15,7 @@ brew "nkf"
 brew "pinentry-mac"
 brew "tmux"
 brew "tree"
+brew "bat"
 
 cask "bitwarden"
 cask "google-chrome"
