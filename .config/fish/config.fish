@@ -36,6 +36,8 @@ set -x GPG_TTY `tty`
 #
 # Alias
 #
+alias lzd "lazydocker"
+
 alias t  "tmux attach || tmux"
 alias tl "tmux list-sessions"
 

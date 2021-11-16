@@ -16,6 +16,7 @@ brew "pinentry-mac"
 brew "tmux"
 brew "tree"
 brew "bat"
+brew "lazydocker"
 
 cask "bitwarden"
 cask "google-chrome"
