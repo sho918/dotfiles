@@ -41,14 +41,6 @@ alias lzd "lazydocker"
 alias t  "tmux attach || tmux"
 alias tl "tmux list-sessions"
 
-alias b  "bundle"
-alias bx "bundle exec"
-alias r  "bin/rails"
-alias rc "bin/rails console"
-alias rd "bin/dev"
-
-alias proco "bundle exec procodile start --dev"
-
 alias gp  "git pull --prune"
 alias gb  "git branch"
 alias gba "git branch -a"
