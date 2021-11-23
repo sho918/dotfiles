@@ -1,15 +1,9 @@
-background_opacity: 0.95
-
 window:
-  dimensions:
-    columns: 120
-    lines: 30
-
   padding:
     x: 5
-    y: 25
+    y: 5
 
-  decorations: transparent
+  startup_mode: Fullscreen
 
 font:
   size: 12.0
