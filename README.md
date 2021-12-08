@@ -7,8 +7,11 @@ $ xcode-select --install
 # Install homebrew
 $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# Install
+# Install brew packages
 $ brew bundle
+
+# Install tmux plugin manager
+$ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # Symlink
 $ ln -s (PWD)/.config/fish/config.fish ~/.config/fish/
