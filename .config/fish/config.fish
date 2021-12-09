@@ -41,7 +41,7 @@ set -x GPG_TTY `tty`
 #
 # Alias
 #
-alias lzd "lazydocker"
+alias dcu "docker compose up"
 
 alias t  "tmux attach || tmux"
 alias tl "tmux list-sessions"
@@ -56,5 +56,5 @@ alias gst "git status -sb"
 alias gl  "git log --pretty=format:'%C(red)%h%Creset %C(green)%cd%Creset %s %C(yellow)[%an] <%ae>%Creset %C(cyan)%d%Creset' --abbrev-commit --date=format-local:'%Y-%m-%d %H:%M' -n 5"
 alias gla "git log --pretty=format:'%C(red)%h%Creset %C(green)%cd%Creset %s %C(yellow)[%an] <%ae>%Creset %C(cyan)%d%Creset' --abbrev-commit --date=format-local:'%Y-%m-%d %H:%M'"
 alias glm "git log --pretty=format:'%C(red)%h%Creset %C(green)%cd%Creset %s %C(yellow)[%an] <%ae>%Creset %C(cyan)%d%Creset' --abbrev-commit --date=format-local:'%Y-%m-%d %H:%M' --no-merges"
-alias grb "git branch --merged | egrep -v '(^\*|master|main)' | xargs git branch -d"
+alias grb "git branch --merged | egrep -v '(^\*|master|main|develop)' | xargs git branch -d"
 alias gsw "git switch -"
