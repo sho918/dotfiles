@@ -21,6 +21,9 @@ $ ln -s (PWD)/.alacritty.yml ~/.alacritty.yml
 $ ln -s (PWD)/.gnupg/gpg-agent.conf ~/.gnupg/
 $ ln -s (PWD)/.gnupg/gpg.conf ~/.gnupg/
 
+# Git-trim
+$ git config --global trim.bases develop,master
+
 # Install fish plugins
 $ fisher update
 ```

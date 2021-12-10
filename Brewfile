@@ -15,6 +15,7 @@ brew "tmux"
 brew "tree"
 brew "bat"
 brew "lazydocker"
+brew "git-trim"
 
 cask "bitwarden"
 cask "google-chrome"
