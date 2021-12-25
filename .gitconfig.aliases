@@ -9,6 +9,8 @@
   sw = switch -
   st = status -sb
   cc = commit
+  ccm = commit -m
+  ccam = commit -am
   swd = switch develop
 
   amend = commit --amend --no-edit
