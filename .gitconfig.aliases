@@ -1,18 +1,16 @@
 # git config --global include.path ~/.gitconfig.aliases
 
 [alias]
-  br = branch
+  b = branch
+  d = !git diff --color | diff-so-fancy
+  l = log --pretty=format:'%C(red)%h%Creset %C(green)%cd%Creset %s %C(yellow)[%an] <%ae>%Creset %C(cyan)%d%Creset' --abbrev-commit --date=format-local:'%Y-%m-%d %H:%M' -n 10
+  ll = log --pretty=format:'%C(red)%h%Creset %C(green)%cd%Creset %s %C(yellow)[%an] <%ae>%Creset %C(cyan)%d%Creset' --abbrev-commit --date=format-local:'%Y-%m-%d %H:%M'
+  s = status -sb
+  p = pull --prune
   co = checkout
-  di = !git diff --color | diff-so-fancy
-  lo = log --pretty=format:'%C(red)%h%Creset %C(green)%cd%Creset %s %C(yellow)[%an] <%ae>%Creset %C(cyan)%d%Creset' --abbrev-commit --date=format-local:'%Y-%m-%d %H:%M' -n 10
-  pu = pull --prune
-  sw = switch -
-  st = status -sb
-  cc = commit
-  ccm = commit -m
-  ccam = commit -am
-  swd = switch develop
+  cm = commit -m
 
+  dev = switch develop
   amend = commit --amend --no-edit
   undo = reset HEAD~
   pushup = !git push --set-upstream origin `git symbolic-ref --short HEAD`

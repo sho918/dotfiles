@@ -14,16 +14,6 @@ if test -d (brew --prefix)"/share/fish/vendor_completions.d"
 end
 
 #
-# Poetry
-#
-export PATH="/Users/araishota/.local/bin:$PATH"
-
-#
-# Direnv
-#
-eval (direnv hook fish)
-
-#
 # ASDF
 #
 source (brew --prefix asdf)/asdf.fish
