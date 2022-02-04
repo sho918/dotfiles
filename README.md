@@ -10,6 +10,10 @@ $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/
 # Install brew packages
 $ brew bundle
 
+# Change shell
+$ echo /opt/homebrew/bin/fish | sudo tee -a /etc/shells
+$ chsh -s /opt/homebrew/bin/fish
+
 # Install tmux plugin manager
 $ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
