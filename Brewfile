@@ -1,28 +1,37 @@
-brew "asdf"
-brew "diff-so-fancy"
-brew "docker"
-brew "fish"
-brew "fzf"
-brew "ghq"
+# Git
 brew "git"
 brew "git-now"
-brew "gnupg"
-brew "jq"
-brew "pinentry-mac"
-brew "tmux"
-brew "bat"
-brew "lazydocker"
-brew "git-trim"
+brew "diff-so-fancy"
+brew "ghq"
 
+# GPG
+brew "gnupg"
+brew "pinentry-mac"
+
+# Fish
+brew "fish"
+brew "fzf"
+brew "bat"
+brew "fd"
+
+# Dev
+brew "asdf"
+brew "jq"
+brew "tmux"
+brew "docker"
+brew "lazydocker"
+
+# Font
+tap "homebrew/cask-fonts"
+cask "font-jetbrains-mono"
+
+# App
 cask "bitwarden"
 cask "google-chrome"
 cask "slack"
 cask "visual-studio-code"
 cask "notion"
-cask "iterm2"
 cask "jetbrains-toolbox"
-cask "gifox"
-cask "google-drive"
 cask "dropbox"
 cask "appdelete"
 cask "obsidian"
@@ -31,6 +40,4 @@ cask "zoom"
 cask "alacritty"
 cask "obsidian"
 cask "raycast"
-
-tap "homebrew/cask-fonts"
-cask "font-jetbrains-mono"
+cask "cmd-eikana"

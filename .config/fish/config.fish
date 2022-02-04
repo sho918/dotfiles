@@ -24,6 +24,12 @@ source (brew --prefix asdf)/asdf.fish
 fzf_configure_bindings --directory=\ct --git_status=\cs
 
 #
+# iTerm2 
+# (https://iterm2.com/documentation-shell-integration.html)
+#
+source {$HOME}/.iterm2_shell_integration.fish
+
+#
 # Settings
 #
 set -x GPG_TTY `tty`
