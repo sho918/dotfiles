@@ -16,8 +16,8 @@ brew "fd"
 
 # Dev
 brew "asdf"
-brew "jq"
 brew "tmux"
+brew "tmuxp"
 brew "docker"
 brew "lazydocker"
 
@@ -37,7 +37,7 @@ cask "appdelete"
 cask "obsidian"
 cask "spotify"
 cask "zoom"
-cask "alacritty"
+cask "iterm2"
 cask "obsidian"
 cask "raycast"
 cask "cmd-eikana"
