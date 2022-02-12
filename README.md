@@ -33,13 +33,15 @@ $ tools/import-scheme.sh schemes/*
 
 # Git
 $ ln -s (PWD)/.gitconfig.aliases ~/.gitconfig.aliases
-$ git config --local user.name "<name>"
-$ git config --local user.email <email>
-$ git config --local commit.gpgsign true
+$ git config --global user.name "<name>"
+$ git config --global user.email <email>
 $ git config --global include.path ~/.gitconfig.aliases
 
 # GPG
 $ gpg --import --allow-secret-key-import <KEY>
 $ ln -s (PWD)/.gnupg/gpg-agent.conf ~/.gnupg/
 $ ln -s (PWD)/.gnupg/gpg.conf ~/.gnupg/
+$ git config --global gpg.program (which gpg)
+$ git config --global commit.gpgsign true
+$ git config --global user.signingkey <KEYID>!
 ```
