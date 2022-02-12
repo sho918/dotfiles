@@ -44,4 +44,8 @@ $ ln -s (PWD)/.gnupg/gpg.conf ~/.gnupg/
 $ git config --global gpg.program (which gpg)
 $ git config --global commit.gpgsign true
 $ git config --global user.signingkey <KEYID>!
+
+# SpaceVim
+$ curl -sLf https://spacevim.org/install.sh | bash
+$ ln -s (PWD)/.SpaceVim.d/init.toml ~/.SpaceVim.d/
 ```
