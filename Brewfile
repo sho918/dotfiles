@@ -1,7 +1,7 @@
 # Git
 brew "git"
 brew "git-now"
-brew "diff-so-fancy"
+brew "git-delta"
 brew "ghq"
 
 # GPG
