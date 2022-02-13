@@ -33,11 +33,3 @@ source {$HOME}/.iterm2_shell_integration.fish
 # Settings
 #
 set -x GPG_TTY `tty`
-
-#
-# Alias
-#
-alias dcu "docker compose up"
-
-alias t  "tmux attach || tmux"
-alias tl "tmux list-sessions"

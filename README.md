@@ -25,6 +25,7 @@ $ fisher update
 # Symlink
 $ ln -s (PWD)/.config/fish/config.fish ~/.config/fish/
 $ ln -s (PWD)/.config/fish/fish_plugins ~/.config/fish/
+$ ln -s (PWD)/.config/fish/conf.d/abbr.fish ~/.config/fish/conf.d/
 $ ln -s (PWD)/.tmux.conf ~/.tmux.conf
 
 # Add iterm2 color schemes
