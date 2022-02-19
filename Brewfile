@@ -20,6 +20,7 @@ brew "tmux"
 brew "tmuxp"
 brew "docker"
 brew "lazydocker"
+brew "karabiner-elements"
 
 # Font
 tap "homebrew/cask-fonts"
@@ -40,5 +41,4 @@ cask "zoom"
 cask "iterm2"
 cask "obsidian"
 cask "raycast"
-cask "cmd-eikana"
 cask "postman"
