@@ -72954,6 +72954,8 @@
 	</dict>
 	<key>Print In Black And White</key>
 	<true/>
+	<key>SaveScrollBufferWhenClearing</key>
+	<true/>
 	<key>ShowNewOutputIndicator</key>
 	<true/>
 	<key>SmartPlacement</key>
