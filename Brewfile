@@ -20,7 +20,6 @@ brew "tmux"
 brew "tmuxp"
 brew "docker"
 brew "lazydocker"
-brew "karabiner-elements"
 
 # Font
 tap "homebrew/cask-fonts"
