@@ -1,8 +1,8 @@
 #
 # Homebrew
 #
-export PATH="/opt/homebrew/bin:$PATH"
-export PATH="/opt/homebrew/sbin:$PATH"
+fish_add_path /opt/homebrew/bin
+fish_add_path /opt/homebrew/sbin
 
 # Configuring Completions in fish
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-fish
@@ -33,3 +33,4 @@ source {$HOME}/.iterm2_shell_integration.fish
 # Settings
 #
 set -x GPG_TTY `tty`
+fish_add_path $HOME/bin 
