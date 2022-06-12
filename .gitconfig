@@ -19,3 +19,5 @@
 [delta]
     navigate = true
     line-numbers = true
+[init]
+	defaultBranch = main
