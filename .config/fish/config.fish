@@ -30,6 +30,11 @@ fzf_configure_bindings --directory=\ct --history=\cr --git_log=\ck --git_status=
 source {$HOME}/.iterm2_shell_integration.fish
 
 #
+# Zoxide
+#
+zoxide init fish | source
+
+#
 # Settings
 #
 set -x GPG_TTY `tty`

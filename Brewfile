@@ -13,6 +13,7 @@ brew "fish"
 brew "fzf"
 brew "bat"
 brew "fd"
+brew "zoxide"
 
 # Dev
 brew "asdf"
