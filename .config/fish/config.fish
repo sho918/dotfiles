@@ -35,6 +35,11 @@ source {$HOME}/.iterm2_shell_integration.fish
 zoxide init fish | source
 
 #
+# Direnv
+#
+direnv hook fish | source
+
+#
 # Settings
 #
 set -x GPG_TTY `tty`

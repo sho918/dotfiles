@@ -21,6 +21,7 @@ brew "tmux"
 brew "tmuxp"
 brew "docker"
 brew "lazydocker"
+brew "direnv"
 
 # Font
 tap "homebrew/cask-fonts"
