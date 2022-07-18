@@ -40,7 +40,11 @@ zoxide init fish | source
 direnv hook fish | source
 
 #
-# Settings
+# Jetbrains
+#
+fish_add_path $HOME/bin
+
+#
+# GPG
 #
 set -x GPG_TTY `tty`
-fish_add_path $HOME/bin 
