@@ -21,7 +21,7 @@ source (brew --prefix asdf)/asdf.fish
 #
 # FZF
 #
-fzf_configure_bindings --directory=\ct --history=\cr --git_log=\ck --git_status=\cs --variables --processes
+fzf_configure_bindings --directory=\ct --history=\cr --git_log=\co --git_status=\cs --variables --processes
 
 #
 # iTerm2 
