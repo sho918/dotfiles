@@ -44,4 +44,5 @@ $ ln -s (PWD)/.gnupg/gpg.conf ~/.gnupg/
 # SpaceVim
 $ curl -sLf https://spacevim.org/install.sh | bash
 $ ln -s (PWD)/.SpaceVim.d/init.toml ~/.SpaceVim.d/
+$ ln -s (PWD)/.ideavimrc ~/.ideavimrc
 ```
