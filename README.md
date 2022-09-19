@@ -27,6 +27,7 @@ $ ln -s (PWD)/.config/fish/config.fish ~/.config/fish/
 $ ln -s (PWD)/.config/fish/fish_plugins ~/.config/fish/
 $ ln -s (PWD)/.config/fish/conf.d/abbr.fish ~/.config/fish/conf.d/
 $ ln -s (PWD)/.tmux.conf ~/.tmux.conf
+$ ln -s (PWD)/.alacritty.yml ~/.alacritty.yml
 
 # Add iterm2 color schemes
 $ ghq get git@github.com:mbadolato/iTerm2-Color-Schemes.git
