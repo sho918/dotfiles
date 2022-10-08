@@ -25,6 +25,8 @@ $ ln -s (PWD)/.config/fish/fish_plugins ~/.config/fish/
 $ ln -s (PWD)/.config/fish/conf.d/abbr.fish ~/.config/fish/conf.d/
 $ ln -s (PWD)/.tmux.conf ~/.tmux.conf
 $ ln -s (PWD)/.alacritty.yml ~/.alacritty.yml
+$ ln -s (PWD)/.vimrc ~/.vimrc
+$ ln -s (PWD)/.ideavimrc ~/.ideavimrc
 
 # Git
 $ ln -s (PWD)/.gitconfig ~/.gitconfig
