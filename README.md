@@ -41,9 +41,4 @@ $ ln -s (PWD)/.gitconfig.aliases ~/.gitconfig.aliases
 $ gpg --import --allow-secret-key-import <KEY>
 $ ln -s (PWD)/.gnupg/gpg-agent.conf ~/.gnupg/
 $ ln -s (PWD)/.gnupg/gpg.conf ~/.gnupg/
-
-# SpaceVim
-$ curl -sLf https://spacevim.org/install.sh | bash
-$ ln -s (PWD)/.SpaceVim.d/init.toml ~/.SpaceVim.d/
-$ ln -s (PWD)/.ideavimrc ~/.ideavimrc
 ```
