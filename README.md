@@ -15,9 +15,6 @@ $ chsh -s /opt/homebrew/bin/fish
 # Install tmux plugin manager (Press `prefix + I` to install plugins)
 $ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-# Install iterm2 shell integration
-$ curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | bash
-
 # Install fisher
 $ curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 $ fisher update
@@ -28,10 +25,6 @@ $ ln -s (PWD)/.config/fish/fish_plugins ~/.config/fish/
 $ ln -s (PWD)/.config/fish/conf.d/abbr.fish ~/.config/fish/conf.d/
 $ ln -s (PWD)/.tmux.conf ~/.tmux.conf
 $ ln -s (PWD)/.alacritty.yml ~/.alacritty.yml
-
-# Add iterm2 color schemes
-$ ghq get git@github.com:mbadolato/iTerm2-Color-Schemes.git
-$ tools/import-scheme.sh schemes/*
 
 # Git
 $ ln -s (PWD)/.gitconfig ~/.gitconfig

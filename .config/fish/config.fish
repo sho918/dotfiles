@@ -24,12 +24,6 @@ source (brew --prefix asdf)/asdf.fish
 fzf_configure_bindings --directory=\ct --history=\cr --git_log=\co --git_status=\cs --variables --processes
 
 #
-# iTerm2 
-# (https://iterm2.com/documentation-shell-integration.html)
-#
-source {$HOME}/.iterm2_shell_integration.fish
-
-#
 # Zoxide
 #
 zoxide init fish | source
