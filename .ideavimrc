@@ -1,1 +1,71 @@
-set surround
+""" Leader
+let mapleader="\<SPACE>"
+
+""" Training
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+
+""" Editing and Reloading the Config
+set clipboard+=unnamed
+set clipboard+=ideaput
+
+""" Distraction Free Mode
+nnoremap <Leader>td :action ToggleDistractionFreeMode<CR>
+
+""" Navigation
+nnoremap <TAB> :action PreviousTab<CR>
+nnoremap <s-TAB> :action NextTab<CR>
+
+nnoremap <Leader>\ :action SplitVertically<CR>
+nnoremap <Leader>= :action Unsplit<CR>
+nnoremap <Leader>m :action MoveEditorToOppositeTabGroup<CR>
+nnoremap <Leader>[ <C-w>h
+nnoremap <Leader>] <C-w>l
+
+nnoremap <Leader>h HideAllWindows<CR>
+
+""" Find
+set incsearch
+nnoremap <Leader>fs :action FileStructurePopup<CR>
+nnoremap <Leader>fu :action FindUsages<CR>
+nnoremap <Leader>fp :action SelectInProjectView<CR>
+nnoremap <Leader>gf :action GotoFile<CR>
+nnoremap <Leader>gc :action GotoClass<CR>
+nnoremap <Leader>gs :action GotoSymbol<CR>
+nnoremap <Leader>gt :action GotoTest<CR>
+nnoremap <Leader>gb :action Git.Branches<CR>
+nnoremap <Leader>ga :action Annotate<CR>
+
+""" Editing
+set ideajoin
+set idearefactormode=keep
+
+nnoremap [ :action MethodUp<CR>
+nnoremap ] :action MethodDown<CR>
+
+nnoremap <Leader>zc :action CollapseRegion<CR>
+nnoremap <Leader>zo :action ExpandRegion<CR>
+
+nnoremap <Leader>r :action Refactorings.QuickListPopupAction<CR>
+nnoremap <Leader>p :action ReformatCode<CR>
+nnoremap <Leader>l :action RecentLocations<CR>
+nnoremap <Leader>cr :action CopyReference<CR>
+
+sethandler <C-j> a:vim
+sethandler <C-k> a:vim
+noremap <C-j> :action MoveLineDown<CR>
+noremap <C-k> :action MoveLineUp<CR>
+
+inoremap <C-p> <Up>
+inoremap <C-n> <Down>
+inoremap <C-b> <Left>
+inoremap <C-f> <Right>
+
+""" Plugins
+Plug 'tpope/vim-surround'
+
+Plug 'easymotion/vim-easymotion'
+map <Leader>j <Plug>(easymotion-f)
+map <Leader>J <Plug>(easymotion-s)
