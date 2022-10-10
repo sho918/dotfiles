@@ -1,3 +1,6 @@
+set relativenumber
+set number
+
 """ Leader
 let mapleader="\<SPACE>"
 
@@ -7,7 +10,7 @@ noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 
-""" Editing and Reloading the Config
+""" Editing
 set clipboard+=unnamed
 set clipboard+=ideaput
 
@@ -65,7 +68,15 @@ inoremap <C-f> <Right>
 
 """ Plugins
 Plug 'tpope/vim-surround'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'vim-scripts/argtextobj.vim'
+Plug 'tpope/vim-commentary'
+Plug 'machakann/vim-highlightedyank'
 
 Plug 'easymotion/vim-easymotion'
 map <Leader>j <Plug>(easymotion-f)
-map <Leader>J <Plug>(easymotion-s)
+map <Leader>k <Plug>(easymotion-s)
+
+Plug 'terryma/vim-multiple-cursors'
+map <C-g> <A-n>
+map <C-h> <A-p>
