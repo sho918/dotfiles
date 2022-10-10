@@ -21,13 +21,13 @@ nnoremap <Leader>td :action ToggleDistractionFreeMode<CR>
 nnoremap <TAB> :action PreviousTab<CR>
 nnoremap <s-TAB> :action NextTab<CR>
 
+nnoremap <Leader>q :action CloseContent<CR>
+
 nnoremap <Leader>\ :action SplitVertically<CR>
 nnoremap <Leader>= :action Unsplit<CR>
 nnoremap <Leader>m :action MoveEditorToOppositeTabGroup<CR>
 nnoremap <Leader>[ <C-w>h
 nnoremap <Leader>] <C-w>l
-
-nnoremap <Leader>h HideAllWindows<CR>
 
 """ Find
 set incsearch
@@ -71,7 +71,9 @@ Plug 'tpope/vim-surround'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'vim-scripts/argtextobj.vim'
 Plug 'tpope/vim-commentary'
+
 Plug 'machakann/vim-highlightedyank'
+let g:highlightedyank_highlight_duration = 1000
 
 Plug 'easymotion/vim-easymotion'
 map <Leader>j <Plug>(easymotion-f)
@@ -80,3 +82,6 @@ map <Leader>k <Plug>(easymotion-s)
 Plug 'terryma/vim-multiple-cursors'
 map <C-g> <A-n>
 map <C-h> <A-p>
+
+Plug 'preservim/nerdtree'
+map <C-t> :NERDTree<CR>
