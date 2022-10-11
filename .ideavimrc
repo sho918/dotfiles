@@ -40,6 +40,7 @@ nnoremap <Leader>gs :action GotoSymbol<CR>
 nnoremap <Leader>gt :action GotoTest<CR>
 nnoremap <Leader>gb :action Git.Branches<CR>
 nnoremap <Leader>ga :action Annotate<CR>
+nnoremap <Leader>d :action GotoDeclaration<CR>
 
 """ Editing
 set ideajoin
@@ -54,6 +55,8 @@ nnoremap <Leader>zo :action ExpandRegion<CR>
 nnoremap <Leader>r :action Refactorings.QuickListPopupAction<CR>
 nnoremap <Leader>p :action ReformatCode<CR>
 nnoremap <Leader>l :action RecentLocations<CR>
+nnoremap <Leader>o :action ShowIntentionActions<CR>
+nnoremap <Leader>s :action SaveAll<CR>
 nnoremap <Leader>cr :action CopyReference<CR>
 
 sethandler <C-j> a:vim
