@@ -1,5 +1,6 @@
 set relativenumber
 set number
+set keep-english-in-normal
 
 """ Leader
 let mapleader="\<SPACE>"
@@ -58,6 +59,7 @@ nnoremap <Leader>l :action RecentLocations<CR>
 nnoremap <Leader>o :action ShowIntentionActions<CR>
 nnoremap <Leader>s :action SaveAll<CR>
 nnoremap <Leader>cr :action CopyReference<CR>
+nnoremap <Leader>e :action ShowErrorDescription<CR>
 
 sethandler <C-j> a:vim
 sethandler <C-k> a:vim
