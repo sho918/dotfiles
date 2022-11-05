@@ -41,6 +41,7 @@ nnoremap <Leader>gs :action GotoSymbol<CR>
 nnoremap <Leader>gt :action GotoTest<CR>
 nnoremap <Leader>gb :action Git.Branches<CR>
 nnoremap <Leader>ga :action Annotate<CR>
+nnoremap <Leader>ge :action GotoNextError<CR>
 nnoremap <Leader>d :action GotoDeclaration<CR>
 
 """ Editing
