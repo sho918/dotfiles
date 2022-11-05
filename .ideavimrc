@@ -40,6 +40,7 @@ nnoremap <Leader>gc :action GotoClass<CR>
 nnoremap <Leader>gs :action GotoSymbol<CR>
 nnoremap <Leader>gt :action GotoTest<CR>
 nnoremap <Leader>gb :action Git.Branches<CR>
+nnoremap <Leader>gv :action Vcs.QuickListPopupAction<CR>
 nnoremap <Leader>ga :action Annotate<CR>
 nnoremap <Leader>ge :action GotoNextError<CR>
 nnoremap <Leader>d :action GotoDeclaration<CR>
@@ -50,9 +51,6 @@ set idearefactormode=keep
 
 nnoremap [ :action MethodUp<CR>
 nnoremap ] :action MethodDown<CR>
-
-nnoremap <Leader>zc :action CollapseRegion<CR>
-nnoremap <Leader>zo :action ExpandRegion<CR>
 
 nnoremap <Leader>r :action Refactorings.QuickListPopupAction<CR>
 nnoremap <Leader>p :action ReformatCode<CR>
