@@ -22,6 +22,7 @@ source (brew --prefix asdf)/asdf.fish
 # FZF
 #
 fzf_configure_bindings --directory=\ct --history=\cr --git_log=\cy --git_status=\cs --variables --processes
+set -x GHQ_SELECTOR fzf-tmux
 
 #
 # Zoxide
