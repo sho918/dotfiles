@@ -44,6 +44,7 @@ nnoremap <Leader>gv :action Vcs.QuickListPopupAction<CR>
 nnoremap <Leader>ga :action Annotate<CR>
 nnoremap <Leader>ge :action GotoNextError<CR>
 nnoremap <Leader>d :action GotoDeclaration<CR>
+nnoremap <Leader>l :action JumpToLastChange<CR>
 
 """ Editing
 set ideajoin
@@ -52,9 +53,11 @@ set idearefactormode=keep
 nnoremap [ :action MethodUp<CR>
 nnoremap ] :action MethodDown<CR>
 
+nnoremap <C-o> :action Back<CR>
+nnoremap <C-i> :action Forward<CR>
+
 nnoremap <Leader>r :action Refactorings.QuickListPopupAction<CR>
 nnoremap <Leader>p :action ReformatCode<CR>
-nnoremap <Leader>l :action RecentLocations<CR>
 nnoremap <Leader>o :action ShowIntentionActions<CR>
 nnoremap <Leader>s :action SaveAll<CR>
 nnoremap <Leader>cr :action CopyReference<CR>
