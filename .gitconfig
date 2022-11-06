@@ -8,12 +8,13 @@
     signingkey = DD89CF3449C309E4!
 [commit]
     gpgsign = true
+	verbose = true
 [gpg]
     program = /opt/homebrew/bin/gpg
 [interactive]
     diffFilter = delta --color-only
 [merge]
-    conflictstyle = diff3
+	conflictStyle = diff3
 [diff]
     colorMoved = default
 [delta]
