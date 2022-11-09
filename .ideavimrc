@@ -24,7 +24,7 @@ nnoremap <s-TAB> :action NextTab<CR>
 
 nnoremap <Leader>q :action CloseContent<CR>
 
-nnoremap <Leader>\ :action SplitVertically<CR>
+nnoremap <Leader>\ :action MoveTabRight<CR>
 nnoremap <Leader>= :action Unsplit<CR>
 nnoremap <Leader>m :action MoveEditorToOppositeTabGroup<CR>
 nnoremap <Leader>[ <C-w>h
@@ -72,6 +72,11 @@ inoremap <C-p> <Up>
 inoremap <C-n> <Down>
 inoremap <C-b> <Left>
 inoremap <C-f> <Right>
+
+""" Bookmark
+nnoremap <Leader>bl :action ActivateBookmarksToolWindow<CR>
+nnoremap <Leader>bs :action ShowBookmarks<CR>
+nnoremap <Leader>bb :action ToggleBookmark<CR>
 
 """ Plugins
 Plug 'tpope/vim-surround'
