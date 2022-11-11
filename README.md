@@ -28,6 +28,9 @@ $ ln -s (PWD)/.alacritty.yml ~/.alacritty.yml
 $ ln -s (PWD)/.vimrc ~/.vimrc
 $ ln -s (PWD)/.ideavimrc ~/.ideavimrc
 
+# Espanso
+$ ln -s (PWD)/espanso/match/dev.yml (espanso path config)/match/
+
 # Git
 $ ln -s (PWD)/.gitconfig ~/.gitconfig
 $ ln -s (PWD)/.gitconfig.aliases ~/.gitconfig.aliases

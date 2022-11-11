@@ -1,0 +1,9 @@
+matches:
+  - trigger: ";pdb"
+    replace: "import ipdb; ipdb.set_trace()"
+
+  - trigger: ";con"
+    replace: "console.debug($|$)"
+
+  - trigger: ";test"
+    replace: "python manage.py test --keepdb $|$"

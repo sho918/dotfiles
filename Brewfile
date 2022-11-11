@@ -23,6 +23,10 @@ brew "docker"
 brew "lazydocker"
 brew "direnv"
 
+# Espanso
+tap "espanso/espanso"
+brew "espanso"
+
 # Font
 tap "homebrew/cask-fonts"
 cask "font-jetbrains-mono"
