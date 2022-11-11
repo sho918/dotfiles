@@ -76,7 +76,7 @@ inoremap <C-f> <Right>
 """ Bookmark
 nnoremap <Leader>bl :action ActivateBookmarksToolWindow<CR>
 nnoremap <Leader>bs :action ShowBookmarks<CR>
-nnoremap <Leader>bb :action ToggleBookmark<CR>
+nnoremap <Leader>ba :action ToggleBookmark<CR>
 
 """ Plugins
 Plug 'tpope/vim-surround'
