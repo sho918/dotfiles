@@ -14,6 +14,7 @@
   main = switch main
   amend = commit --amend --no-edit
   undo = reset HEAD~
+  fpush = push --force-with-lease --force-if-includes
   co = !git branch | fzf | xargs git checkout
   cor = !git branch --remotes | fzf | tr -d '[:space:]' | cut -c 8- | xargs -I {} git checkout -b {} origin/{}
   pushup = !git push --set-upstream origin `git symbolic-ref --short HEAD`
