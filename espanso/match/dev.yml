@@ -4,6 +4,3 @@ matches:
 
   - trigger: ";con"
     replace: "console.debug($|$)"
-
-  - trigger: ";test"
-    replace: "python manage.py test --keepdb $|$"
