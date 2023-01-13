@@ -27,8 +27,6 @@ nnoremap <Leader>q :action CloseContent<CR>
 nnoremap <Leader>\ :action MoveTabRight<CR>
 nnoremap <Leader>= :action Unsplit<CR>
 nnoremap <Leader>m :action MoveEditorToOppositeTabGroup<CR>
-nnoremap <Leader>[ <C-w>h
-nnoremap <Leader>] <C-w>l
 
 """ Find
 set incsearch
