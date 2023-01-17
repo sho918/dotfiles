@@ -9,6 +9,7 @@
   p = pull --prune
   f = fetch --prune
   cm = commit -m
+  cob = checkout -b
 
   dev = switch develop
   main = switch main
