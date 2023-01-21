@@ -22,7 +22,6 @@ brew "tmuxp"
 brew "docker"
 brew "lazydocker"
 brew "direnv"
-brew "awsume"
 
 # Espanso
 tap "espanso/espanso"
