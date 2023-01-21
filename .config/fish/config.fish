@@ -16,7 +16,7 @@ end
 #
 # ASDF
 #
-source (brew --prefix asdf)/asdf.fish
+source (brew --prefix asdf)/libexec/asdf.fish
 
 #
 # FZF
@@ -43,3 +43,8 @@ fish_add_path $HOME/bin
 # GPG
 #
 set -x GPG_TTY `tty`
+
+#
+# Pipx
+#
+fish_add_path $HOME/.local/bin
