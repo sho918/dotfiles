@@ -1,6 +1,14 @@
 matches:
+  # Python
   - trigger: ";pdb"
-    replace: "import ipdb; ipdb.set_trace()"
+    replace: "import ipdb\n\nipdb.set_trace()"
+  
+  - trigger: ";t"
+    replace: "python manage.py test --keepdb $|$"
 
-  - trigger: ";con"
+  # Javascript
+  - trigger: ";c"
     replace: "console.debug($|$)"
+
+  - trigger: ";deps"
+    replace: "// eslint-disable-next-line react-hooks/exhaustive-deps"
