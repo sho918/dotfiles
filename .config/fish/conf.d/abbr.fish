@@ -5,3 +5,4 @@ abbr -a -g t tmux attach || tmux
 abbr -a -g tl tmux list-sessions
 abbr -a -g cd z
 abbr -a -g pp pnpm
+abbr -a -g ppi pnpm install
