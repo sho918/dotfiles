@@ -31,6 +31,9 @@ $ ln -s (PWD)/.ideavimrc ~/.ideavimrc
 # Espanso
 $ ln -s (PWD)/espanso/match/dev.yml (espanso path config)/match/
 
+# AWSume
+$ pipx install awsume
+
 # Git
 $ ln -s (PWD)/.gitconfig ~/.gitconfig
 $ ln -s (PWD)/.gitconfig.aliases ~/.gitconfig.aliases
