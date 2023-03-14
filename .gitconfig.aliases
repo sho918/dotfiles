@@ -13,6 +13,7 @@
 
   dev = switch develop
   main = switch main
+  back = switch -
   amend = commit --amend --no-edit
   undo = reset HEAD~
   pushf = push --force-with-lease --force-if-includes
