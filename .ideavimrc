@@ -60,6 +60,7 @@ nnoremap <Leader>o :action ShowIntentionActions<CR>
 nnoremap <Leader>s :action SaveAll<CR>
 nnoremap <Leader>cr :action CopyReference<CR>
 nnoremap <Leader>e :action ShowErrorDescription<CR>
+nnoremap <Leader>t :action QuickJavaDoc<CR>
 
 sethandler <C-j> a:vim
 sethandler <C-k> a:vim
