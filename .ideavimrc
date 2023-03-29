@@ -1,6 +1,7 @@
 set relativenumber
 set number
 set keep-english-in-normal
+set quickscope
 
 """ Leader
 let mapleader="\<SPACE>"
