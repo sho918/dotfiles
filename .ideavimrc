@@ -1,7 +1,6 @@
 set relativenumber
 set number
 set keep-english-in-normal
-set quickscope
 
 """ Leader
 let mapleader="\<SPACE>"
@@ -96,4 +95,4 @@ map <C-g> <A-n>
 map <C-h> <A-p>
 
 Plug 'preservim/nerdtree'
-map <C-t> :NERDTree<CR>
+map <Leader>t :NERDTree<CR>
