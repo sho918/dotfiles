@@ -4,6 +4,11 @@
 fish_add_path /opt/homebrew/bin
 fish_add_path /opt/homebrew/sbin
 
+# Linux Brew
+if test -d "/home/linuxbrew/.linuxbrew"
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+end
+
 # Configuring Completions in fish
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-fish
 if test -d (brew --prefix)"/share/fish/completions"
