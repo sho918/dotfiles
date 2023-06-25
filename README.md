@@ -37,9 +37,4 @@ $ pipx install awsume
 # Git
 $ ln -s (PWD)/.gitconfig ~/.gitconfig
 $ ln -s (PWD)/.gitconfig.aliases ~/.gitconfig.aliases
-
-# GPG
-$ gpg --import --allow-secret-key-import <KEY>
-$ ln -s (PWD)/.gnupg/gpg-agent.conf ~/.gnupg/
-$ ln -s (PWD)/.gnupg/gpg.conf ~/.gnupg/
 ```

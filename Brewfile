@@ -4,10 +4,6 @@ brew "git-now"
 brew "git-delta"
 brew "ghq"
 
-# GPG
-brew "gnupg"
-brew "pinentry-mac"
-
 # Fish
 brew "fish"
 brew "fzf"

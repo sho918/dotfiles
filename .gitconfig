@@ -5,12 +5,9 @@
 [user]
     name = Arai Shota
     email = s.arai@hkn.jp
-    signingkey = DD89CF3449C309E4!
 [commit]
-    gpgsign = true
+    gpgsign = false
     verbose = true
-[gpg]
-    program = /opt/homebrew/bin/gpg
 [interactive]
     diffFilter = delta --color-only
 [merge]
