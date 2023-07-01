@@ -6,6 +6,9 @@ matches:
   - trigger: ";t"
     replace: "APP_ENV=test python manage.py test --keepdb $|$"
 
+  - trigger: ";s"
+    replace: "print('=' * 30)"
+
   # Javascript
   - trigger: ";c"
     replace: "console.debug($|$)"
