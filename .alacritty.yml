@@ -24,31 +24,29 @@ font:
     x: 0
     y: 5
 
-# Colors (Nord)
+# Colors (NightFox)
 colors:
   # Default colors
   primary:
-    background: '0x2E3440'
-    foreground: '0xD8DEE9'
-
+    background: '0x192330'
+    foreground: '0xcdcecf'
   # Normal colors
   normal:
-    black:   '0x3B4252'
-    red:     '0xBF616A'
-    green:   '0xA3BE8C'
-    yellow:  '0xEBCB8B'
-    blue:    '0x81A1C1'
-    magenta: '0xB48EAD'
-    cyan:    '0x88C0D0'
-    white:   '0xE5E9F0'
-
+    black:   '0x393b44'
+    red:     '0xc94f6d'
+    green:   '0x81b29a'
+    yellow:  '0xdbc074'
+    blue:    '0x719cd6'
+    magenta: '0x9d79d6'
+    cyan:    '0x63cdcf'
+    white:   '0xdfdfe0'
   # Bright colors
   bright:
-    black:   '0x4C566A'
-    red:     '0xBF616A'
-    green:   '0xA3BE8C'
-    yellow:  '0xEBCB8B'
-    blue:    '0x81A1C1'
-    magenta: '0xB48EAD'
-    cyan:    '0x8FBCBB'
-    white:   '0xECEFF4'
+    black:   '0x575860'
+    red:     '0xd16983'
+    green:   '0x8ebaa4'
+    yellow:  '0xe0c989'
+    blue:    '0x86abdc'
+    magenta: '0xbaa1e2'
+    cyan:    '0x7ad5d6'
+    white:   '0xe4e4e5'
