@@ -1,15 +1,15 @@
 window:
   decorations: none
-  opacity: 0.9
+  opacity: 0.85
   padding:
-    x: 5
-    y: 5
+    x: 3
+    y: 3
 
 selection:
   save_to_clipboard: true
 
 font:
-  size: 12.0
+  size: 13.0
 
   normal:
     family: JetBrainsMono Nerd Font
@@ -25,7 +25,7 @@ font:
 
   offset:
     x: 0
-    y: 5
+    y: 0
 
 # Colors (NightFox)
 colors:
