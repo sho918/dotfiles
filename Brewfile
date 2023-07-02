@@ -27,6 +27,7 @@ brew "espanso"
 # Font
 tap "homebrew/cask-fonts"
 cask "font-jetbrains-mono"
+cask "font-jetbrains-mono-nerd-font"
 
 # App
 cask "bitwarden"
