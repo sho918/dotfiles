@@ -37,4 +37,9 @@ pipx install awsume
 # Git
 ln -s (PWD)/.gitconfig ~/.gitconfig
 ln -s (PWD)/.gitconfig.aliases ~/.gitconfig.aliases
+
+# Neovim
+brew install neovim
+git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+ln -s (PWD)/.config/nvim/lua/custom ~/.config/nvim/lua/custom
 ```
