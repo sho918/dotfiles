@@ -95,3 +95,7 @@ map <C-h> <A-p>
 
 Plug 'preservim/nerdtree'
 map <Leader>t :NERDTree<CR>
+
+""" QuickScope
+let g:qs_primary_color = '#427cff'
+let g:qs_secondary_color = '#188dc2'
