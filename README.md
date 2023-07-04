@@ -25,6 +25,8 @@ ln -s (PWD)/.config/fish/fish_plugins ~/.config/fish/
 ln -s (PWD)/.config/fish/conf.d/abbr.fish ~/.config/fish/conf.d/
 ln -s (PWD)/.config/tmux/tmux.conf ~/.config/tmux/
 ln -s (PWD)/.config/alacritty/alacritty.yml ~/.config/alacritty/
+ln -s (PWD)/.config/git/config ~/.config/git/
+ln -s (PWD)/.config/git/aliases ~/.config/git/
 ln -s (PWD)/.vimrc ~/.vimrc
 ln -s (PWD)/.ideavimrc ~/.ideavimrc
 
@@ -33,10 +35,6 @@ ln -s (PWD)/espanso/match/dev.yml (espanso path config)/match/
 
 # AWSume
 pipx install awsume
-
-# Git
-ln -s (PWD)/.gitconfig ~/.gitconfig
-ln -s (PWD)/.gitconfig.aliases ~/.gitconfig.aliases
 
 # Neovim
 brew install neovim
