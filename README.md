@@ -27,7 +27,6 @@ ln -s (PWD)/.config/tmux/tmux.conf ~/.config/tmux/
 ln -s (PWD)/.config/alacritty/alacritty.yml ~/.config/alacritty/
 ln -s (PWD)/.config/git/config ~/.config/git/
 ln -s (PWD)/.config/git/aliases ~/.config/git/
-ln -s (PWD)/.vimrc ~/.vimrc
 ln -s (PWD)/.ideavimrc ~/.ideavimrc
 
 # Espanso
