@@ -1,6 +1,5 @@
 set number
 set keep-english-in-normal
-set quickscope
 
 """ Leader
 let mapleader="\<SPACE>"
@@ -86,8 +85,12 @@ Plug 'machakann/vim-highlightedyank'
 let g:highlightedyank_highlight_duration = 1500
 
 Plug 'easymotion/vim-easymotion'
-map <Leader>j <Plug>(easymotion-f)
-map <Leader>k <Plug>(easymotion-s)
+map f <Plug>(easymotion-fl)
+map t <Plug>(easymotion-tl)
+map F <Plug>(easymotion-Fl)
+map T <Plug>(easymotion-Tl)
+map s <Plug>(easymotion-s2)
+let g:EasyMotion_enter_jump_first = 1
 
 Plug 'terryma/vim-multiple-cursors'
 map <C-g> <A-n>
@@ -95,3 +98,4 @@ map <C-h> <A-p>
 
 Plug 'preservim/nerdtree'
 map <Leader>t :NERDTree<CR>
+nnoremap <Leader>e :action SelectInProjectView<CR>
