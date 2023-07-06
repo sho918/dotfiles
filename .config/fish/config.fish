@@ -53,8 +53,3 @@ set -x GPG_TTY `tty`
 # Pipx
 #
 fish_add_path $HOME/.local/bin
-
-#
-# Tmux
-#
-fish_add_path $HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin
