@@ -26,7 +26,7 @@ source (brew --prefix asdf)/libexec/asdf.fish
 #
 # FZF
 #
-fzf_configure_bindings --directory=\ct --history=\cr --git_log=\cy --git_status=\cs --variables --processes
+fzf_configure_bindings --directory=\ct --git_log= --git_status= --history=\cr --processes= --variables=
 set -x GHQ_SELECTOR fzf-tmux
 
 #
