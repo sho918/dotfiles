@@ -37,6 +37,6 @@ pipx install awsume
 
 # Neovim
 brew install neovim
-git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
-ln -s (PWD)/.config/nvim/lua/custom ~/.config/nvim/lua/custom
+git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+git clone git@github.com:sho918/astronvim-config.git ~/.config/nvim/lua/user
 ```
