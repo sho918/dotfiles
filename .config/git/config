@@ -2,12 +2,21 @@
     pager = delta
 [include]
     path = ~/.config/git/aliases
+[init]
+    defaultBranch = main
 [user]
     name = Arai Shota
     email = s.arai@hkn.jp
+    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMH1iu4wdUeX32UT+LuEgKEPBHE4JahIP66qad19O1np me@arsho.dev
+[gpg]
+    format = ssh
+[gpg "ssh"]
+    allowedSignersFile = ~/.config/git/allowed_signers
 [commit]
-    gpgsign = false
+    gpgsign = true
     verbose = true
+[tag]
+    gpgsign = true
 [interactive]
     diffFilter = delta --color-only
 [merge]
@@ -17,5 +26,3 @@
 [delta]
     navigate = true
     line-numbers = true
-[init]
-    defaultBranch = main
