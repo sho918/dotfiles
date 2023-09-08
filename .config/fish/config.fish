@@ -53,3 +53,8 @@ set -x GPG_TTY `tty`
 # Pipx
 #
 fish_add_path $HOME/.local/bin
+
+#
+# Rye
+#
+fish_add_path $HOME/.rye/shims
