@@ -37,6 +37,7 @@ nnoremap <Leader>gc :action GotoClass<CR>
 nnoremap <Leader>gs :action GotoSymbol<CR>
 nnoremap <Leader>gt :action GotoTest<CR>
 nnoremap <Leader>gb :action Git.Branches<CR>
+nnoremap <Leader>gh :action Vcs.ShowHistoryForBlock<CR>
 nnoremap <Leader>gv :action Vcs.QuickListPopupAction<CR>
 nnoremap <Leader>ga :action Annotate<CR>
 nnoremap <Leader>ge :action GotoNextError<CR>
@@ -57,8 +58,9 @@ nnoremap <Leader>r :action Refactorings.QuickListPopupAction<CR>
 nnoremap <Leader>p :action ReformatCode<CR>
 nnoremap <Leader>o :action ShowIntentionActions<CR>
 nnoremap <Leader>s :action SaveAll<CR>
-nnoremap <Leader>cr :action CopyReference<CR>
 nnoremap <Leader>e :action ShowErrorDescription<CR>
+nnoremap <Leader>cr :action CopyReference<CR>
+nnoremap <Leader>cg :action GitHub.Copy.Link<CR>
 
 sethandler <C-j> a:vim
 sethandler <C-k> a:vim
