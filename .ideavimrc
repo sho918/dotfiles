@@ -43,6 +43,7 @@ nnoremap <Leader>ga :action Annotate<CR>
 nnoremap <Leader>ge :action GotoNextError<CR>
 nnoremap <Leader>d :action GotoDeclaration<CR>
 nnoremap <Leader>l :action JumpToLastChange<CR>
+nnoremap <Leader>h :action HighlightUsagesInFile<CR>
 
 """ Editing
 set ideajoin
