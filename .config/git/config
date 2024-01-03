@@ -1,5 +1,3 @@
-[core]
-    pager = delta
 [include]
     path = ~/.config/git/aliases
 [init]
@@ -17,12 +15,7 @@
     verbose = true
 [tag]
     gpgsign = true
-[interactive]
-    diffFilter = delta --color-only
 [merge]
     conflictStyle = diff3
 [diff]
-    colorMoved = default
-[delta]
-    navigate = true
-    line-numbers = true
+    external = difft

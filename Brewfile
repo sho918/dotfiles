@@ -1,8 +1,8 @@
 # Git
 brew "git"
 brew "git-now"
-brew "git-delta"
 brew "ghq"
+brew "difftastic"
 
 # Fish
 brew "fish"
