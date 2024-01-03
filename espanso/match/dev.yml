@@ -1,8 +1,5 @@
 matches:
   # Python
-  - trigger: ";pdb"
-    replace: "import ipdb\n\nipdb.set_trace()"
-  
   - trigger: ";t"
     replace: "APP_ENV=test python manage.py test --keepdb $|$"
 
