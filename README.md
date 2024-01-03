@@ -24,7 +24,7 @@ ln -s (PWD)/.config/fish/config.fish ~/.config/fish/
 ln -s (PWD)/.config/fish/fish_plugins ~/.config/fish/
 ln -s (PWD)/.config/fish/conf.d/abbr.fish ~/.config/fish/conf.d/
 ln -s (PWD)/.config/tmux/tmux.conf ~/.config/tmux/
-ln -s (PWD)/.config/alacritty/alacritty.yml ~/.config/alacritty/
+ln -s (PWD)/.config/alacritty/alacritty.toml ~/.config/alacritty/
 ln -s (PWD)/.config/git/config ~/.config/git/
 ln -s (PWD)/.config/git/aliases ~/.config/git/
 ln -s (PWD)/.config/git/allowed_signers ~/.config/git/
