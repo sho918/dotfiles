@@ -28,6 +28,7 @@ ln -s (PWD)/.config/alacritty/alacritty.yml ~/.config/alacritty/
 ln -s (PWD)/.config/git/config ~/.config/git/
 ln -s (PWD)/.config/git/aliases ~/.config/git/
 ln -s (PWD)/.config/git/allowed_signers ~/.config/git/
+ln -s (PWD)/.config/git/hooks ~/.config/git/
 ln -s (PWD)/.ideavimrc ~/.ideavimrc
 
 # Espanso
@@ -38,6 +39,8 @@ pipx install awsume
 
 # Neovim
 brew install neovim
-git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
-git clone git@github.com:sho918/astronvim-config.git ~/.config/nvim/lua/user
+ln -s (PWD)/.config/nvim/init.lua ~/.config/nvim/
+ln -s (PWD)/.config/nvim/.stylua.toml ~/.config/nvim/
+ln -s (PWD)/.config/nvim/.luarc.json ~/.config/nvim/
+ln -s (PWD)/.config/nvim/lua ~/.config/nvim/lua
 ```

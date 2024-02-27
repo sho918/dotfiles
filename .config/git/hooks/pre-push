@@ -1,0 +1,19 @@
+#!/bin/bash
+
+protected_branches=('master' 'main' 'develop')
+current_branch=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+
+for branch in "${protected_branches[@]}"
+do
+    if [ "$branch" = "$current_branch" ]; then
+        read -p "You're about to push $branch, is that what you intended? [y|n] " -n 1 -r < /dev/tty
+        echo
+        if echo $REPLY | grep -E '^[Yy]$' > /dev/null; then
+            exit 0 # push will execute
+        fi
+        exit 1 # push will not execute
+    fi
+done
+
+exit 0 # push will execute if not in protected branches
+

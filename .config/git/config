@@ -19,3 +19,5 @@
     conflictStyle = diff3
 [diff]
     external = difft
+[core]
+    hooksPath = ~/.config/git/hooks
