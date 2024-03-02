@@ -59,7 +59,6 @@ nnoremap <Leader>r :action Refactorings.QuickListPopupAction<CR>
 nnoremap <Leader>p :action ReformatCode<CR>
 nnoremap <Leader>o :action ShowIntentionActions<CR>
 nnoremap <Leader>s :action SaveAll<CR>
-nnoremap <Leader>e :action ShowErrorDescription<CR>
 nnoremap <Leader>cr :action CopyReference<CR>
 nnoremap <Leader>cg :action GitHub.Copy.Link<CR>
 
