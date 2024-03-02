@@ -29,6 +29,7 @@ ln -s (PWD)/.config/git/config ~/.config/git/
 ln -s (PWD)/.config/git/aliases ~/.config/git/
 ln -s (PWD)/.config/git/allowed_signers ~/.config/git/
 ln -s (PWD)/.config/git/hooks ~/.config/git/
+ln -s (PWD)/.config/wezterm/wezterm.lua ~/.config/wezterm/
 ln -s (PWD)/.ideavimrc ~/.ideavimrc
 
 # Espanso
