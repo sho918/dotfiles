@@ -20,6 +20,10 @@ brew "lazydocker"
 brew "direnv"
 brew "pipx"
 
+# im-select
+tap "daipeihust/tap"
+brew "im-select"
+
 # Espanso
 tap "espanso/espanso"
 brew "espanso"
