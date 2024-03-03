@@ -28,6 +28,10 @@ brew "im-select"
 tap "espanso/espanso"
 brew "espanso"
 
+# lazygit
+tap "jesseduffield/lazygit/lazygit"
+brew "lazygit"
+
 # Font
 tap "homebrew/cask-fonts"
 cask "font-jetbrains-mono"
