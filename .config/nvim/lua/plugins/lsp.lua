@@ -34,20 +34,20 @@ return {
       vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { desc = "Show references" })
       vim.keymap.set({ "n", "v" }, "<leader>o", vim.lsp.buf.code_action, { desc = "Show code actions" })
     end,
-    {
-      "nvimtools/none-ls.nvim",
-      config = function()
-        local null_ls = require("null-ls")
-        null_ls.setup({
-          sources = {
-            null_ls.builtins.formatting.stylua,
-            null_ls.builtins.formatting.prettier,
-            null_ls.builtins.diagnostics.eslint,
-          },
-        })
+  },
+  {
+    "nvimtools/none-ls.nvim",
+    config = function()
+      local null_ls = require("null-ls")
+      null_ls.setup({
+        sources = {
+          null_ls.builtins.formatting.stylua,
+          null_ls.builtins.formatting.prettier,
+          null_ls.builtins.diagnostics.eslint,
+        },
+      })
 
-        vim.keymap.set("n", "<leader>p", vim.lsp.buf.format, { desc = "Format" })
-      end,
-    },
+      vim.keymap.set("n", "<leader>p", vim.lsp.buf.format, { desc = "Format" })
+    end,
   },
 }
