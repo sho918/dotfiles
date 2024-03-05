@@ -1,38 +1,47 @@
 return {
   {
     "williamboman/mason.nvim",
+    dependencies = {
+      "williamboman/mason-lspconfig.nvim",
+      "neovim/nvim-lspconfig",
+      "hrsh7th/cmp-nvim-lsp",
+      {
+        "SmiteshP/nvim-navbuddy",
+        dependencies = {
+          "SmiteshP/nvim-navic",
+          "MunifTanjim/nui.nvim",
+          "numToStr/Comment.nvim",
+          "nvim-telescope/telescope.nvim",
+        },
+        opts = { lsp = { auto_attach = true } },
+      },
+    },
     lazy = false,
     config = function()
       require("mason").setup()
-    end,
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    lazy = false,
-    config = function()
+
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "tsserver" },
+        ensure_installed = {
+          "lua_ls",
+          "tsserver",
+        },
       })
-    end,
-  },
-  {
-    "neovim/nvim-lspconfig",
-    lazy = false,
-    config = function()
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-      local lspconfig = require("lspconfig")
-      lspconfig.lua_ls.setup({
-        capabilities = capabilities,
-      })
-      lspconfig.tsserver.setup({
-        capabilities = capabilities,
+      require("mason-lspconfig").setup_handlers({
+        function(server_name)
+          require("lspconfig")[server_name].setup({
+            capabilities = require("cmp_nvim_lsp").default_capabilities(),
+          })
+        end,
       })
 
+      -- LSP
       vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show hover" })
       vim.keymap.set("n", "<leader>d", vim.lsp.buf.definition, { desc = "Go to definition" })
       vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { desc = "Show references" })
       vim.keymap.set({ "n", "v" }, "<leader>o", vim.lsp.buf.code_action, { desc = "Show code actions" })
+
+      -- Navbuddy
+      vim.keymap.set("n", "<leader>nb", vim.cmd.Navbuddy, { desc = "Toggle navbuddy" })
     end,
   },
   {
