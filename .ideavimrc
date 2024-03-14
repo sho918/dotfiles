@@ -36,18 +36,22 @@ nnoremap <Leader>gf :action GotoFile<CR>
 nnoremap <Leader>gc :action GotoClass<CR>
 nnoremap <Leader>gs :action GotoSymbol<CR>
 nnoremap <Leader>gt :action GotoTest<CR>
-nnoremap <Leader>gb :action Git.Branches<CR>
-nnoremap <Leader>gh :action Vcs.ShowHistoryForBlock<CR>
-nnoremap <Leader>gv :action Vcs.QuickListPopupAction<CR>
-nnoremap <Leader>ga :action Annotate<CR>
 nnoremap <Leader>ge :action GotoNextError<CR>
 nnoremap <Leader>d :action GotoDeclaration<CR>
 nnoremap <Leader>l :action JumpToLastChange<CR>
 nnoremap <Leader>h :action HighlightUsagesInFile<CR>
 
+nnoremap <Leader>gb :action Git.Branches<CR>
+nnoremap <Leader>gh :action Vcs.ShowHistoryForBlock<CR>
+nnoremap <Leader>gv :action Vcs.QuickListPopupAction<CR>
+nnoremap <Leader>ga :action Annotate<CR>
+nnoremap <Leader>gd :action Github.Pull.Request.Review.In.Editor.Toggle<CR>
+nnoremap <Leader>gp :action Github.Pull.Request.Show.In.Toolwindow<CR>
+
 """ Editing
 set ideajoin
 set idearefactormode=keep
+set scrolloff=10
 
 nnoremap [ :action MethodUp<CR>
 nnoremap ] :action MethodDown<CR>
@@ -58,7 +62,7 @@ nnoremap <C-i> :action Forward<CR>
 nnoremap <Leader>r :action Refactorings.QuickListPopupAction<CR>
 nnoremap <Leader>p :action ReformatCode<CR>
 nnoremap <Leader>o :action ShowIntentionActions<CR>
-nnoremap <Leader>s :action SaveAll<CR>
+nnoremap <Leader>w :action SaveAll<CR>
 nnoremap <Leader>cr :action CopyReference<CR>
 nnoremap <Leader>cg :action GitHub.Copy.Link<CR>
 
@@ -73,8 +77,8 @@ inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 
 """ Bookmark
-nnoremap <Leader>bl :action ShowBookmarks<CR>
-nnoremap <Leader>bb :action ToggleBookmark<CR>
+nnoremap <Leader>hl :action ShowBookmarks<CR>
+nnoremap <Leader>ha :action ToggleBookmark<CR>
 
 """ Plugins
 Plug 'tpope/vim-surround'
