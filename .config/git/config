@@ -20,4 +20,4 @@
 [diff]
     external = difft
 [core]
-    hooksPath = ~/.config/git/hooks
+#    hooksPath = ~/.config/git/hooks

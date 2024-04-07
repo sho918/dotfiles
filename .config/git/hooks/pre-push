@@ -16,4 +16,3 @@ do
 done
 
 exit 0 # push will execute if not in protected branches
-
