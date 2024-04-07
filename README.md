@@ -2,13 +2,16 @@
 # Install Command Line Tools
 xcode-select --install
 
+# Install rosetta
+sudo softwareupdate --install-rosetta
+
 # Install brew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Install brew packages
 brew bundle
 
-# Change shell
+# Change default shell to fish
 echo /opt/homebrew/bin/fish | sudo tee -a /etc/shells
 chsh -s /opt/homebrew/bin/fish
 
@@ -34,9 +37,6 @@ ln -s (PWD)/.ideavimrc ~/.ideavimrc
 
 # Espanso
 ln -s (PWD)/espanso/match/dev.yml (espanso path config)/match/
-
-# AWSume
-pipx install awsume
 
 # Neovim
 brew install neovim
