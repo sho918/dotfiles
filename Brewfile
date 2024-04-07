@@ -17,6 +17,7 @@ brew "tmux"
 brew "orbstack"
 brew "lazydocker"
 brew "direnv"
+brew "awscli"
 brew "awsume"
 
 # Espanso
