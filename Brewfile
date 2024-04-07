@@ -14,7 +14,7 @@ brew "zoxide"
 # Dev
 brew "asdf"
 brew "tmux"
-brew "docker"
+brew "orbstack"
 brew "lazydocker"
 brew "direnv"
 brew "awsume"
