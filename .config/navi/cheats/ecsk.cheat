@@ -1,0 +1,4 @@
+% ecsk bash
+
+# aws ecs execute-command
+ecsk exec -i -- /bin/bash

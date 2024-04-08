@@ -19,6 +19,8 @@ brew "lazydocker"
 brew "direnv"
 brew "awscli"
 brew "awsume"
+brew "yukiarrr/tap/ecsk"
+brew "navi"
 
 # Espanso
 tap "espanso/espanso"
@@ -29,10 +31,14 @@ tap "homebrew/cask-fonts"
 cask "font-jetbrains-mono"
 cask "font-jetbrains-mono-nerd-font"
 
+# Browser
+tap "homebrew/cask-versions"
+cask "firefox-developer-edition"
+cask "google-chrome"
+
 # App - Essential
 cask "cmd-eikana"
 cask "bitwarden"
-cask "google-chrome"
 cask "raycast"
 cask "bartender"
 
@@ -48,6 +54,7 @@ cask "wezterm"
 cask "jetbrains-toolbox"
 cask "awesome"
 cask "obsidian"
+cask "tablecruncher"
 
 # App - Other
 cask "zoom"
