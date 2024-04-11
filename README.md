@@ -45,6 +45,10 @@ ln -s (PWD)/.ideavimrc ~/.ideavimrc
 # Espanso
 ln -s (PWD)/espanso/match/dev.yml (espanso path config)/match/
 
+# AWSume
+pipx install awsume
+awsume-configure
+
 # Neovim
 brew install neovim
 ln -s (PWD)/.config/nvim/init.lua ~/.config/nvim/

@@ -18,9 +18,9 @@ brew "orbstack"
 brew "lazydocker"
 brew "direnv"
 brew "awscli"
-brew "awsume"
 brew "yukiarrr/tap/ecsk"
 brew "navi"
+brew "pipx"
 
 # Espanso
 tap "espanso/espanso"
