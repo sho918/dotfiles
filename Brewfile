@@ -21,6 +21,7 @@ brew "awscli"
 brew "yukiarrr/tap/ecsk"
 brew "navi"
 brew "pipx"
+brew "gh"
 
 # Espanso
 tap "espanso/espanso"
