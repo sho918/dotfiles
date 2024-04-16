@@ -26,7 +26,7 @@ curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 fisher update
 
 # Symlink
-mkdir -p ~/.config/{fish,tmux,alacritty,git,wezterm,navi}
+mkdir -p ~/.config/{fish,tmux,alacritty,git,wezterm,navi,zed}
 mkdir -p ~/.config/fish/conf.d
 ln -s (PWD)/.config/fish/config.fish ~/.config/fish/
 ln -s (PWD)/.config/fish/fish_plugins ~/.config/fish/
@@ -40,6 +40,7 @@ ln -s (PWD)/.config/git/hooks ~/.config/git/
 ln -s (PWD)/.config/wezterm/wezterm.lua ~/.config/wezterm/
 ln -s (PWD)/.config/navi/config.yaml ~/.config/navi/
 ln -s (PWD)/.config/navi/cheats/ ~/.config/navi/cheats
+ln -s (PWD)/.config/zed/settings.json ~/.config/zed/
 ln -s (PWD)/.ideavimrc ~/.ideavimrc
 
 # Espanso
