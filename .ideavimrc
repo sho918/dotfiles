@@ -51,7 +51,7 @@ nnoremap <Leader>gp :action Github.Pull.Request.Show.In.Toolwindow<CR>
 """ Editing
 set ideajoin
 set idearefactormode=keep
-set scrolloff=10
+set scrolloff=5
 
 nnoremap [ :action MethodUp<CR>
 nnoremap ] :action MethodDown<CR>
