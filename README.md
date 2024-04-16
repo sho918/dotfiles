@@ -41,6 +41,7 @@ ln -s (PWD)/.config/wezterm/wezterm.lua ~/.config/wezterm/
 ln -s (PWD)/.config/navi/config.yaml ~/.config/navi/
 ln -s (PWD)/.config/navi/cheats/ ~/.config/navi/cheats
 ln -s (PWD)/.config/zed/settings.json ~/.config/zed/
+ln -s (PWD)/.config/zed/keymap.json ~/.config/zed/
 ln -s (PWD)/.ideavimrc ~/.ideavimrc
 
 # Espanso
