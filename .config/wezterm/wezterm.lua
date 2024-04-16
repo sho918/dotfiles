@@ -1,21 +1,18 @@
 local wezterm = require("wezterm")
 
-wezterm.on("gui-startup", function(cmd)
-	local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
-	window:gui_window():toggle_fullscreen()
-end)
-
 return {
-	use_ime = true,
+  use_ime = true,
 
-	-- font
-	font = wezterm.font("JetBrainsMono Nerd Font"),
-	font_size = 13.0,
-	color_scheme = "Catppuccin Mocha",
-	harfbuzz_features = {"calt=0", "clig=0", "liga=0"},
+  -- font
+  font = wezterm.font("JetBrainsMono Nerd Font"),
+  font_size = 13.0,
+  color_scheme = "Catppuccin Mocha",
+  harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
 
-	-- window
-	enable_tab_bar = true,
-	hide_tab_bar_if_only_one_tab = true,
-	window_decorations = "NONE",
+  -- window
+  enable_tab_bar = true,
+  hide_tab_bar_if_only_one_tab = true,
+  window_decorations = "RESIZE",
+  window_background_opacity = 0.8,
+  macos_window_background_blur = 5,
 }
