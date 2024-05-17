@@ -22,7 +22,7 @@ chsh -s /opt/homebrew/bin/fish
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # Install fisher
-curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
 fisher update
 
 # Symlink
@@ -50,6 +50,14 @@ ln -s (PWD)/espanso/match/dev.yml (espanso path config)/match/
 # AWSume
 pipx install awsume
 awsume-configure
+
+# asdf
+brew install gpg
+asdf plugin-add python https://github.com/asdf-community/asdf-python.git
+asdf plugin-add poetry https://github.com/asdf-community/asdf-poetry.git
+asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+asdf plugin-add yarn https://github.com/twuni/asdf-yarn.git
+asdf plugin-add terraform https://github.com/asdf-community/asdf-hashicorp.git
 
 # Neovim
 brew install neovim
