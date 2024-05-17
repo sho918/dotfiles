@@ -17,11 +17,14 @@ brew "tmux"
 brew "orbstack"
 brew "lazydocker"
 brew "direnv"
-brew "awscli"
-brew "yukiarrr/tap/ecsk"
 brew "navi"
 brew "pipx"
 brew "gh"
+
+# AWS
+brew "awscli"
+brew "yukiarrr/tap/ecsk"
+cask session-manager-plugin
 
 # Espanso
 tap "espanso/espanso"
