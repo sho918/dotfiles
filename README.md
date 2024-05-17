@@ -46,6 +46,7 @@ ln -s (PWD)/.ideavimrc ~/.ideavimrc
 
 # Espanso
 ln -s (PWD)/espanso/match/dev.yml (espanso path config)/match/
+ln -s (PWD)/espanso/config/default.yml (espanso path config)/config/
 
 # AWSume
 pipx install awsume
