@@ -57,6 +57,7 @@ asdf plugin-add python https://github.com/asdf-community/asdf-python.git
 asdf plugin-add poetry https://github.com/asdf-community/asdf-poetry.git
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 asdf plugin-add yarn https://github.com/twuni/asdf-yarn.git
+asdf plugin-add pnpm https://github.com/jonathanmorley/asdf-pnpm.git
 asdf plugin-add terraform https://github.com/asdf-community/asdf-hashicorp.git
 
 # Neovim
