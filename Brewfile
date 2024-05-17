@@ -33,8 +33,7 @@ cask "font-jetbrains-mono"
 cask "font-jetbrains-mono-nerd-font"
 
 # Browser
-tap "homebrew/cask-versions"
-cask "firefox-developer-edition"
+cask "firefox@developer-edition"
 cask "google-chrome"
 
 # App - Essential
@@ -53,12 +52,10 @@ cask "akiflow"
 cask "zed"
 cask "wezterm"
 cask "jetbrains-toolbox"
-cask "awesome"
 cask "obsidian"
 cask "tablecruncher"
 
 # App - Other
 cask "zoom"
 cask "spotify"
-cask "google-japanese-ime"
 cask "ticktick"
