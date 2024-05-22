@@ -63,6 +63,7 @@ asdf plugin-add terraform https://github.com/asdf-community/asdf-hashicorp.git
 
 # Neovim
 brew install neovim
+mkdir -p ~/.config/nvim
 ln -s (PWD)/.config/nvim/init.lua ~/.config/nvim/
 ln -s (PWD)/.config/nvim/.stylua.toml ~/.config/nvim/
 ln -s (PWD)/.config/nvim/.luarc.json ~/.config/nvim/
