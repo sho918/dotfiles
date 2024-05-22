@@ -26,7 +26,7 @@ curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fi
 fisher update
 
 # Symlink
-mkdir -p ~/.config/{fish,tmux,alacritty,git,wezterm,navi,zed}
+mkdir -p ~/.config/{fish,tmux,alacritty,git,wezterm,navi,zed,nvim}
 mkdir -p ~/.config/fish/conf.d
 ln -s (PWD)/.config/fish/config.fish ~/.config/fish/
 ln -s (PWD)/.config/fish/fish_plugins ~/.config/fish/
@@ -48,6 +48,12 @@ ln -s (PWD)/.ideavimrc ~/.ideavimrc
 ln -s (PWD)/espanso/match/dev.yml (espanso path config)/match/
 ln -s (PWD)/espanso/config/default.yml (espanso path config)/config/
 
+# Neovim
+ln -s (PWD)/.config/nvim/init.lua ~/.config/nvim/
+ln -s (PWD)/.config/nvim/.stylua.toml ~/.config/nvim/
+ln -s (PWD)/.config/nvim/.luarc.json ~/.config/nvim/
+ln -s (PWD)/.config/nvim/lua ~/.config/nvim/lua
+
 # AWSume
 pipx install awsume
 awsume-configure
@@ -60,12 +66,4 @@ asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 asdf plugin-add yarn https://github.com/twuni/asdf-yarn.git
 asdf plugin-add pnpm https://github.com/jonathanmorley/asdf-pnpm.git
 asdf plugin-add terraform https://github.com/asdf-community/asdf-hashicorp.git
-
-# Neovim
-brew install neovim
-mkdir -p ~/.config/nvim
-ln -s (PWD)/.config/nvim/init.lua ~/.config/nvim/
-ln -s (PWD)/.config/nvim/.stylua.toml ~/.config/nvim/
-ln -s (PWD)/.config/nvim/.luarc.json ~/.config/nvim/
-ln -s (PWD)/.config/nvim/lua ~/.config/nvim/lua
 ```

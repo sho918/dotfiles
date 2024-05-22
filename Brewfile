@@ -39,6 +39,11 @@ cask "font-jetbrains-mono-nerd-font"
 cask "firefox@developer-edition"
 cask "google-chrome"
 
+# Vim
+tap "daipeihust/tap"
+brew "im-select"
+brew "neovim"
+
 # App - Essential
 cask "cmd-eikana"
 cask "bitwarden"
