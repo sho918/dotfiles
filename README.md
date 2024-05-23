@@ -56,6 +56,7 @@ ln -s (PWD)/.config/nvim/lua ~/.config/nvim/lua
 
 # AWSume
 pipx install awsume
+pipx inject awsume setuptools
 awsume-configure
 
 # asdf
