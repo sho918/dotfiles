@@ -53,6 +53,7 @@ cask "bartender"
 # App - Work
 cask "slack"
 cask "notion"
+cask "notion-calendar"
 cask "discord"
 cask "akiflow"
 
