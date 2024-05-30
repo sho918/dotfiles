@@ -62,7 +62,7 @@ cask "zed"
 cask "wezterm"
 cask "jetbrains-toolbox"
 cask "obsidian"
-cask "tablecruncher"
+cask "table-tool"
 
 # App - Other
 cask "zoom"
