@@ -68,4 +68,5 @@ asdf plugin-add yarn https://github.com/twuni/asdf-yarn.git
 asdf plugin-add pnpm https://github.com/jonathanmorley/asdf-pnpm.git
 asdf plugin-add terraform https://github.com/asdf-community/asdf-hashicorp.git
 asdf plugin add ecspresso https://github.com/kayac/asdf-ecspresso.git
+asdf plugin-add deno https://github.com/asdf-community/asdf-deno.git
 ```
