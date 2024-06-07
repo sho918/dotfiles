@@ -38,6 +38,7 @@ nnoremap <Leader>gs :action GotoSymbol<CR>
 nnoremap <Leader>gt :action GotoTest<CR>
 nnoremap <Leader>ge :action GotoNextError<CR>
 nnoremap <Leader>d :action GotoDeclaration<CR>
+nnoremap <Leader>D :action GotoTypeDeclaration<CR>
 nnoremap <Leader>l :action JumpToLastChange<CR>
 nnoremap <Leader>h :action HighlightUsagesInFile<CR>
 
