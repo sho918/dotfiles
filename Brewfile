@@ -20,6 +20,7 @@ brew "direnv"
 brew "navi"
 brew "pipx"
 brew "gh"
+brew "yazi"
 
 # AWS
 brew "awscli"

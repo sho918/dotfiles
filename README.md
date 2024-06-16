@@ -26,7 +26,7 @@ curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fi
 fisher update
 
 # Symlink
-mkdir -p ~/.config/{fish,tmux,alacritty,git,wezterm,navi,zed,nvim}
+mkdir -p ~/.config/{fish,tmux,alacritty,git,wezterm,navi,zed,nvim,yazi}
 mkdir -p ~/.config/fish/conf.d
 ln -s (PWD)/.config/fish/config.fish ~/.config/fish/
 ln -s (PWD)/.config/fish/fish_plugins ~/.config/fish/
@@ -39,9 +39,11 @@ ln -s (PWD)/.config/git/allowed_signers ~/.config/git/
 ln -s (PWD)/.config/git/hooks ~/.config/git/
 ln -s (PWD)/.config/wezterm/wezterm.lua ~/.config/wezterm/
 ln -s (PWD)/.config/navi/config.yaml ~/.config/navi/
-ln -s (PWD)/.config/navi/cheats/ ~/.config/navi/cheats
+ln -s (PWD)/.config/navi/cheats ~/.config/navi/cheats
 ln -s (PWD)/.config/zed/settings.json ~/.config/zed/
 ln -s (PWD)/.config/zed/keymap.json ~/.config/zed/
+ln -s (PWD)/.config/yazi/flavors ~/.config/yazi/flavors
+ln -s (PWD)/.config/yazi/theme.toml ~/.config/yazi/
 ln -s (PWD)/.ideavimrc ~/.ideavimrc
 
 # Espanso
