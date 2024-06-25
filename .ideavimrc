@@ -27,6 +27,9 @@ nnoremap <Leader>\ :action MoveTabRight<CR>
 nnoremap <Leader>= :action Unsplit<CR>
 nnoremap <Leader>m :action MoveEditorToOppositeTabGroup<CR>
 
+nnoremap <Leader>s :action Switcher<CR>
+nnoremap <Leader>f :action RecentFiles<CR>
+
 """ Find
 set incsearch
 nnoremap <Leader>fs :action FileStructurePopup<CR>
