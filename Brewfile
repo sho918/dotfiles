@@ -21,6 +21,8 @@ brew "navi"
 brew "pipx"
 brew "gh"
 brew "yazi"
+brew "eza"
+brew "ripgrep"
 
 # AWS
 brew "awscli"
