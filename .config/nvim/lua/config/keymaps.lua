@@ -31,10 +31,10 @@ keymap.set("i", "<C-b>", "<Left>", { desc = "Move left" })
 keymap.set("i", "<C-f>", "<Right>", { desc = "Move right" })
 
 -- Move line
-keymap.set("n", "<C-k>", "<cmd>m .-2<CR>", { desc = "Move line up" })
-keymap.set("n", "<C-j>", "<cmd>m .+1<CR>", { desc = "Move line down" })
-keymap.set("v", "<C-k>", "<cmd>m '>+1<CR>", { desc = "Move line up (visual mode)" })
-keymap.set("v", "<C-j>", "<cmd>m '<-2<CR>", { desc = "Move line down (visual mode)" })
+-- keymap.set("n", "<C-k>", "<cmd>m .-2<CR>", { desc = "Move line up" })
+-- keymap.set("n", "<C-j>", "<cmd>m .+1<CR>", { desc = "Move line down" })
+-- keymap.set("v", "<C-k>", "<cmd>m '>+1<CR>", { desc = "Move line up (visual mode)" })
+-- keymap.set("v", "<C-j>", "<cmd>m '<-2<CR>", { desc = "Move line down (visual mode)" })
 
 -- Search
 keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
