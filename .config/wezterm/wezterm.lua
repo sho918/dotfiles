@@ -1,6 +1,7 @@
 local wezterm = require("wezterm")
 
 return {
+  automatically_reload_config = true,
   use_ime = true,
 
   -- font
@@ -15,4 +16,10 @@ return {
   window_decorations = "RESIZE",
   window_background_opacity = 0.8,
   macos_window_background_blur = 5,
+
+  -- keymap
+  disable_default_key_bindings = true,
+  keys = require("keybinds").keys,
+  key_tables = require("keybinds").key_tables,
+  leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1500 },
 }
