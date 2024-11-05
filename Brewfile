@@ -37,6 +37,7 @@ brew "espanso"
 tap "homebrew/cask-fonts"
 cask "font-jetbrains-mono"
 cask "font-jetbrains-mono-nerd-font"
+cask "font-udev-gothic-nf"
 
 # Browser
 cask "firefox@developer-edition"
