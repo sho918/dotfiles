@@ -46,6 +46,7 @@ ln -s (PWD)/.config/zed/keymap.json ~/.config/zed/
 ln -s (PWD)/.config/yazi/flavors ~/.config/yazi/flavors
 ln -s (PWD)/.config/yazi/theme.toml ~/.config/yazi/
 ln -s (PWD)/.ideavimrc ~/.ideavimrc
+ln -s (PWD)/.tool-versions ~/.tool-versions
 
 # Espanso
 ln -s (PWD)/espanso/match/dev.yml (espanso path config)/match/
