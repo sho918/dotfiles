@@ -45,6 +45,7 @@ cask "cmd-eikana"
 cask "bitwarden"
 cask "raycast"
 cask "bartender"
+cask "google-japanese-ime"
 
 # App - Work
 cask "slack"
@@ -59,5 +60,6 @@ cask "jetbrains-toolbox"
 cask "obsidian"
 
 # App - Other
+cask "chatgpt"
 cask "zoom"
 cask "spotify"
