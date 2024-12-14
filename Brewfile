@@ -14,7 +14,6 @@ brew "zoxide"
 # Dev
 brew "asdf"
 brew "tmux"
-brew "orbstack"
 brew "lazydocker"
 brew "direnv"
 brew "navi"
@@ -23,18 +22,14 @@ brew "gh"
 brew "yazi"
 brew "eza"
 brew "ripgrep"
+brew "neovim"
 
 # AWS
 brew "awscli"
 brew "yukiarrr/tap/ecsk"
-cask session-manager-plugin
-
-# Espanso
-tap "espanso/espanso"
-brew "espanso"
+cask "session-manager-plugin"
 
 # Font
-tap "homebrew/cask-fonts"
 cask "font-jetbrains-mono"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-udev-gothic-nf"
@@ -43,12 +38,9 @@ cask "font-udev-gothic-nf"
 cask "firefox@developer-edition"
 cask "google-chrome"
 
-# Vim
-tap "daipeihust/tap"
-brew "im-select"
-brew "neovim"
-
 # App - Essential
+cask "orbstack"
+cask "espanso"
 cask "cmd-eikana"
 cask "bitwarden"
 cask "raycast"
@@ -59,16 +51,13 @@ cask "slack"
 cask "notion"
 cask "notion-calendar"
 cask "discord"
-cask "akiflow"
 
 # App - Dev
 cask "zed"
 cask "wezterm"
 cask "jetbrains-toolbox"
 cask "obsidian"
-cask "table-tool"
 
 # App - Other
 cask "zoom"
 cask "spotify"
-cask "ticktick"
