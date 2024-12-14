@@ -52,12 +52,6 @@ ln -s (PWD)/.tool-versions ~/.tool-versions
 ln -s (PWD)/espanso/match/dev.yml (espanso path config)/match/
 ln -s (PWD)/espanso/config/default.yml (espanso path config)/config/
 
-# Neovim
-ln -s (PWD)/.config/nvim/init.lua ~/.config/nvim/
-ln -s (PWD)/.config/nvim/.stylua.toml ~/.config/nvim/
-ln -s (PWD)/.config/nvim/.luarc.json ~/.config/nvim/
-ln -s (PWD)/.config/nvim/lua ~/.config/nvim/lua
-
 # AWSume
 pipx install awsume
 pipx inject awsume setuptools
