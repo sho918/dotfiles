@@ -24,6 +24,11 @@ brew "eza"
 brew "ripgrep"
 brew "neovim"
 
+# LazyVim
+brew "gcc"
+brew "lazygit"
+brew "ast-grep"
+
 # AWS
 brew "awscli"
 brew "yukiarrr/tap/ecsk"
