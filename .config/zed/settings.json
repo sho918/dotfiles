@@ -1,6 +1,6 @@
 {
   "theme": "Ayu Mirage",
-  "vim_mode": true,
+  "vim_mode": false,
   "show_whitespaces": "all",
   "soft_wrap": "none",
   "tab_size": 2,
