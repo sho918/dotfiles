@@ -49,6 +49,9 @@ ln -s (PWD)/.config/stylua.toml ~/.config/stylua.toml
 ln -s (PWD)/.ideavimrc ~/.ideavimrc
 ln -s (PWD)/.tool-versions ~/.tool-versions
 
+# Neovim
+git clone git@github.com:sho918/lazyvim-starter.git ~/.config/nvim
+
 # Espanso
 ln -s (PWD)/espanso/match/dev.yml (espanso path config)/match/
 ln -s (PWD)/espanso/config/default.yml (espanso path config)/config/
