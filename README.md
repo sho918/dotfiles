@@ -50,6 +50,7 @@ ln -s (PWD)/.ideavimrc ~/.ideavimrc
 ln -s (PWD)/.tool-versions ~/.tool-versions
 
 # Neovim
+# https://github.com/sho918/lazyvim-starter/
 git clone git@github.com:sho918/lazyvim-starter.git ~/.config/nvim
 
 # Espanso
