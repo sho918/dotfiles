@@ -1,25 +1,85 @@
 local wezterm = require("wezterm")
+local smart_splits = wezterm.plugin.require('https://github.com/mrjones2014/smart-splits.nvim')
 
-return {
-  automatically_reload_config = true,
-  use_ime = true,
+local config = wezterm.config_builder()
 
-  -- font
-  font = wezterm.font("UDEV Gothic 35NF"),
-  font_size = 14.0,
-  color_scheme = "Catppuccin Mocha",
-  harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
+config.automatically_reload_config = true
+config.use_ime = true
 
-  -- window
-  enable_tab_bar = true,
-  hide_tab_bar_if_only_one_tab = true,
-  window_decorations = "RESIZE",
-  window_background_opacity = 0.8,
-  macos_window_background_blur = 5,
+-- font
+config.font = wezterm.font("UDEV Gothic 35NF")
+config.font_size = 14.0
+config.color_scheme = "Catppuccin Mocha"
+config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 
-  -- keymap
-  -- disable_default_key_bindings = true,
-  -- keys = require("keybinds").keys,
-  -- key_tables = require("keybinds").key_tables,
-  -- leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1500 },
+-- window
+config.enable_tab_bar = true
+config.hide_tab_bar_if_only_one_tab = true
+config.window_decorations = "RESIZE"
+config.window_background_opacity = 0.8
+config.macos_window_background_blur = 5
+
+-- keymap
+config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1500 }
+config.keys = {
+  {
+    mods = "LEADER",
+    key = "-",
+    action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
+  },
+  {
+    mods = "LEADER",
+    key = "\\",
+    action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+  },
+  {
+    mods = "LEADER",
+    key = "z",
+    action = wezterm.action.TogglePaneZoomState,
+  },
+  {
+    mods = "LEADER",
+    key = "Space",
+    action = wezterm.action.PaneSelect {
+      mode = 'SwapWithActive',
+    },
+  },
+  {
+    mods = 'LEADER',
+    key = 'Enter',
+    action = wezterm.action.ActivateCopyMode
+  },
+  {
+    mods = 'LEADER',
+    key = '1',
+    action = wezterm.action.ActivateTab(0)
+  },
+  {
+    mods = 'LEADER',
+    key = '2',
+    action = wezterm.action.ActivateTab(1)
+  },
+  {
+    mods = 'LEADER',
+    key = '3',
+    action = wezterm.action.ActivateTab(2)
+  },
+  {
+    mods = 'LEADER',
+    key = '4',
+    action = wezterm.action.ActivateTab(3)
+  },
+  {
+    mods = 'LEADER',
+    key = '5',
+    action = wezterm.action.ActivateTab(4)
+  },
+  {
+    mods = 'LEADER',
+    key = '6',
+    action = wezterm.action.ActivateTab(5)
+  },
 }
+
+smart_splits.apply_to_config(config)
+return config
