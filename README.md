@@ -73,4 +73,5 @@ asdf plugin-add bun https://github.com/cometkim/asdf-bun.git
 asdf plugin-add terraform https://github.com/asdf-community/asdf-hashicorp.git
 asdf plugin add ecspresso https://github.com/kayac/asdf-ecspresso.git
 asdf plugin-add deno https://github.com/asdf-community/asdf-deno.git
+asdf plugin add uv https://github.com/b1-luettje/asdf-uv.git
 ```
