@@ -23,6 +23,8 @@ brew "yazi"
 brew "eza"
 brew "ripgrep"
 brew "neovim"
+brew "mysql-client"
+brew "libpq"
 
 # LazyVim
 brew "gcc"
