@@ -60,6 +60,11 @@ fish_add_path $HOME/.local/bin
 fish_add_path $HOME/.rye/shims
 
 #
+# mysql-client
+#
+set -x PKG_CONFIG_PATH (brew --prefix)/opt/mysql-client/lib/pkgconfig
+
+#
 # yazi
 #
 function yy
