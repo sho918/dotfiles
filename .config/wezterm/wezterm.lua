@@ -20,6 +20,11 @@ config.window_decorations = "RESIZE"
 config.window_background_opacity = 0.8
 config.macos_window_background_blur = 5
 
+-- quick select
+config.quick_select_patterns = {
+  "[0-9a-zA-Z]+[._-][0-9a-zA-Z._-]+",
+}
+
 -- keymap
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1500 }
 config.keys = {
