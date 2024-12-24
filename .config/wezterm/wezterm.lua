@@ -1,10 +1,11 @@
 local wezterm = require("wezterm")
-local smart_splits = wezterm.plugin.require('https://github.com/mrjones2014/smart-splits.nvim')
+local smart_splits = wezterm.plugin.require("https://github.com/mrjones2014/smart-splits.nvim")
 
 local config = wezterm.config_builder()
 
 config.automatically_reload_config = true
 config.use_ime = true
+config.scrollback_lines = 5000
 
 -- font
 config.font = wezterm.font("UDEV Gothic 35NF")
@@ -39,45 +40,50 @@ config.keys = {
   },
   {
     mods = "LEADER",
+    key = "f",
+    action = wezterm.action.QuickSelect,
+  },
+  {
+    mods = "LEADER",
     key = "Space",
-    action = wezterm.action.PaneSelect {
-      mode = 'SwapWithActive',
-    },
+    action = wezterm.action.PaneSelect({
+      mode = "SwapWithActive",
+    }),
   },
   {
-    mods = 'LEADER',
-    key = 'Enter',
-    action = wezterm.action.ActivateCopyMode
+    mods = "LEADER",
+    key = "Enter",
+    action = wezterm.action.ActivateCopyMode,
   },
   {
-    mods = 'LEADER',
-    key = '1',
-    action = wezterm.action.ActivateTab(0)
+    mods = "LEADER",
+    key = "1",
+    action = wezterm.action.ActivateTab(0),
   },
   {
-    mods = 'LEADER',
-    key = '2',
-    action = wezterm.action.ActivateTab(1)
+    mods = "LEADER",
+    key = "2",
+    action = wezterm.action.ActivateTab(1),
   },
   {
-    mods = 'LEADER',
-    key = '3',
-    action = wezterm.action.ActivateTab(2)
+    mods = "LEADER",
+    key = "3",
+    action = wezterm.action.ActivateTab(2),
   },
   {
-    mods = 'LEADER',
-    key = '4',
-    action = wezterm.action.ActivateTab(3)
+    mods = "LEADER",
+    key = "4",
+    action = wezterm.action.ActivateTab(3),
   },
   {
-    mods = 'LEADER',
-    key = '5',
-    action = wezterm.action.ActivateTab(4)
+    mods = "LEADER",
+    key = "5",
+    action = wezterm.action.ActivateTab(4),
   },
   {
-    mods = 'LEADER',
-    key = '6',
-    action = wezterm.action.ActivateTab(5)
+    mods = "LEADER",
+    key = "6",
+    action = wezterm.action.ActivateTab(5),
   },
 }
 
