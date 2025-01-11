@@ -53,6 +53,7 @@ cask "bitwarden"
 cask "raycast"
 cask "bartender"
 cask "google-japanese-ime"
+cask "homerow"
 
 # App - Work
 cask "slack"
