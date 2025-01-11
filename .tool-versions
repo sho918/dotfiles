@@ -5,7 +5,7 @@ uv 0.5.9
 nodejs 22.12.0
 yarn 1.22.22
 deno 2.1.4
-bun 1.1.38
+bun 1.1.43
 pnpm 9.15.0
 terraform 1.10.2
 ecspresso 2.4.5
