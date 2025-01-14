@@ -6,22 +6,17 @@ fish_add_path /opt/homebrew/sbin
 
 # Linux Brew
 if test -d "/home/linuxbrew/.linuxbrew"
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 end
 
 # Configuring Completions in fish
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-fish
 if test -d (brew --prefix)"/share/fish/completions"
-  set -gx fish_complete_path $fish_complete_path (brew --prefix)/share/fish/completions
+    set -gx fish_complete_path $fish_complete_path (brew --prefix)/share/fish/completions
 end
 if test -d (brew --prefix)"/share/fish/vendor_completions.d"
-  set -gx fish_complete_path $fish_complete_path (brew --prefix)/share/fish/vendor_completions.d
+    set -gx fish_complete_path $fish_complete_path (brew --prefix)/share/fish/vendor_completions.d
 end
-
-#
-# ASDF
-#
-source (brew --prefix asdf)/libexec/asdf.fish
 
 #
 # FZF
@@ -68,10 +63,10 @@ set -x PKG_CONFIG_PATH (brew --prefix)/opt/mysql-client/lib/pkgconfig
 # yazi
 #
 function yy
-  set tmp (mktemp -t "yazi-cwd.XXXXXX")
-  yazi $argv --cwd-file="$tmp"
-  if set cwd (cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
-    cd -- "$cwd"
-  end
-  rm -f -- "$tmp"
+    set tmp (mktemp -t "yazi-cwd.XXXXXX")
+    yazi $argv --cwd-file="$tmp"
+    if set cwd (cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+        cd -- "$cwd"
+    end
+    rm -f -- "$tmp"
 end

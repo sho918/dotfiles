@@ -12,7 +12,7 @@ brew "fd"
 brew "zoxide"
 
 # Dev
-brew "asdf"
+brew "mise"
 brew "tmux"
 brew "lazydocker"
 brew "direnv"
