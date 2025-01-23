@@ -25,6 +25,9 @@ config.quick_select_patterns = {
   "[0-9a-zA-Z]+[._-][0-9a-zA-Z._-]+",
 }
 
+-- hyuperlinks
+config.hyperlink_rules = {}
+
 -- keymap
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1500 }
 config.keys = {
