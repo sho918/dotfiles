@@ -25,6 +25,7 @@ brew "ripgrep"
 brew "neovim"
 brew "mysql-client"
 brew "libpq"
+brew "doggo"
 
 # LazyVim
 brew "gcc"
