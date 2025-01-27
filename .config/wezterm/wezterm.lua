@@ -53,6 +53,23 @@ config.keys = {
   },
   {
     mods = "LEADER",
+    key = "s",
+    action = wezterm.action.ShowLauncherArgs({ flags = "WORKSPACES", title = "Select workspace" }),
+  },
+  {
+    mods = "LEADER",
+    key = ",",
+    action = wezterm.action.PromptInputLine({
+      description = "(wezterm) Set workspace title:",
+      action = wezterm.action_callback(function(win, pane, line)
+        if line then
+          wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), line)
+        end
+      end),
+    }),
+  },
+  {
+    mods = "LEADER",
     key = "Space",
     action = wezterm.action.PaneSelect({
       mode = "SwapWithActive",
