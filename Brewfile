@@ -43,8 +43,7 @@ cask "font-jetbrains-mono-nerd-font"
 cask "font-udev-gothic-nf"
 
 # Browser
-cask "firefox@developer-edition"
-cask "google-chrome"
+cask "zen-browser"
 
 # App - Essential
 cask "orbstack"
