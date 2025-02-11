@@ -42,6 +42,11 @@ cask "font-jetbrains-mono"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-udev-gothic-nf"
 
+# IME
+tap "daipeihust/tap"
+brew "im-select"
+cask "google-japanese-ime"
+
 # Browser
 cask "zen-browser"
 
@@ -52,7 +57,6 @@ cask "cmd-eikana"
 cask "bitwarden"
 cask "raycast"
 cask "bartender"
-cask "google-japanese-ime"
 cask "homerow"
 
 # App - Work
