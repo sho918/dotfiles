@@ -67,6 +67,7 @@ cask "discord"
 
 # App - Dev
 cask "zed"
+cask "cursor"
 cask "wezterm"
 cask "jetbrains-toolbox"
 cask "obsidian"
