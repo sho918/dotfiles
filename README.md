@@ -46,6 +46,7 @@ ln -s (PWD)/.config/zed/keymap.json ~/.config/zed/
 ln -s (PWD)/.config/yazi/flavors ~/.config/yazi/flavors
 ln -s (PWD)/.config/yazi/theme.toml ~/.config/yazi/
 ln -s (PWD)/.config/stylua.toml ~/.config/stylua.toml
+ln -s (PWD)/.bashrc ~/.bashrc
 ln -s (PWD)/.ideavimrc ~/.ideavimrc
 ln -s (PWD)/.tool-versions ~/.tool-versions
 
