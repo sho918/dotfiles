@@ -1,7 +1,6 @@
 ruby 3.3.6
 python 3.13.1
 poetry 1.8.5
-uv 0.5.9
 nodejs 22.12.0
 yarn 1.22.22
 deno 2.1.4
