@@ -4,6 +4,7 @@
   ds = diff --staged
   l = log --pretty=format:'%C(red)%h%Creset %C(green)%cd%Creset %s %C(yellow)[%an] <%ae>%Creset %C(cyan)%d%Creset' --abbrev-commit --date=format-local:'%Y-%m-%d %H:%M'
   s = status -sb
+  sh = show --ext-diff
   p = pull --prune
   f = fetch --prune
   cm = commit -m
