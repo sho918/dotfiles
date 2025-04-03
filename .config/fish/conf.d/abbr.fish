@@ -10,5 +10,5 @@ abbr -a -g dig doggo
 
 abbr -a -g vim nvim
 abbr -a -g pp pnpm
-abbr -a -g c cursor
-abbr -a -g code code-insiders
+abbr -a -g c code
+abbr -a -g ci code-insiders

@@ -71,6 +71,8 @@ cask "cursor"
 cask "wezterm"
 cask "jetbrains-toolbox"
 cask "obsidian"
+cask "visual-studio-code"
+cask "visual-studio-code@insiders"
 
 # App - Other
 cask "chatgpt"
