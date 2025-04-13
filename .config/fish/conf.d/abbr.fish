@@ -10,5 +10,6 @@ abbr -a -g dig doggo
 
 abbr -a -g vim nvim
 abbr -a -g pp pnpm
-abbr -a -g c code
-abbr -a -g ci code-insiders
+abbr -a -g c code-insiders
+abbr -a -g v aws-vault
+abbr -a -g ve aws-vault exec

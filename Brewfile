@@ -36,6 +36,7 @@ brew "ast-grep"
 brew "awscli"
 brew "yukiarrr/tap/ecsk"
 cask "session-manager-plugin"
+cask "aws-vault"
 
 # Font
 cask "font-jetbrains-mono"
