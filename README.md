@@ -31,6 +31,7 @@ mkdir -p ~/.config/fish/conf.d
 ln -s (PWD)/.config/fish/config.fish ~/.config/fish/
 ln -s (PWD)/.config/fish/fish_plugins ~/.config/fish/
 ln -s (PWD)/.config/fish/conf.d/abbr.fish ~/.config/fish/conf.d/
+ln -s (PWD)/.config/fish/completions/aws-vault.fish ~/.config/fish/completions/
 ln -s (PWD)/.config/tmux/tmux.conf ~/.config/tmux/
 ln -s (PWD)/.config/alacritty/alacritty.yml ~/.config/alacritty/
 ln -s (PWD)/.config/git/config ~/.config/git/
