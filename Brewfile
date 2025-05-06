@@ -51,13 +51,15 @@ cask "google-japanese-ime"
 # Browser
 cask "zen-browser"
 
+# Appearance
+brew "jordanbaird-ice"
+
 # App - Essential
 cask "orbstack"
 cask "espanso"
 cask "cmd-eikana"
 cask "bitwarden"
 cask "raycast"
-cask "bartender"
 cask "homerow"
 
 # App - Work
