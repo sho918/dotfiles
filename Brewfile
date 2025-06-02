@@ -51,16 +51,12 @@ cask "google-japanese-ime"
 # Browser
 cask "zen-browser"
 
-# Appearance
-brew "jordanbaird-ice"
-
 # App - Essential
 cask "orbstack"
 cask "espanso"
 cask "cmd-eikana"
 cask "bitwarden"
 cask "raycast"
-cask "homerow"
 
 # App - Work
 cask "slack"
@@ -69,13 +65,11 @@ cask "notion-calendar"
 cask "discord"
 
 # App - Dev
-cask "zed"
-cask "cursor"
 cask "wezterm"
-cask "jetbrains-toolbox"
 cask "obsidian"
-cask "visual-studio-code"
+cask "cursor"
 cask "visual-studio-code@insiders"
+cask "jetbrains-toolbox"
 
 # App - Other
 cask "chatgpt"
