@@ -12,5 +12,6 @@ abbr -a -g vim nvim
 abbr -a -g pp pnpm
 abbr -a -g c code-insiders
 abbr -a -g cs cursor
-abbr -a -g v aws-vault
-abbr -a -g ve aws-vault exec
+abbr -a -g a aws-vault
+abbr -a -g ae aws-vault exec
+abbr -a -g al aws-vault login
