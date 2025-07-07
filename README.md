@@ -56,11 +56,10 @@ git clone git@github.com:sho918/lazyvim-starter.git ~/.config/nvim
 ln -s (PWD)/espanso/match/dev.yml (espanso path config)/match/
 ln -s (PWD)/espanso/config/default.yml (espanso path config)/config/
 
-# AWSume
-pipx install awsume
-pipx inject awsume setuptools
-awsume-configure
-
 # Mise
 mise install
+
+# Claude Code
+mkdir -p ~/.claude
+ln -s (PWD)/.claude/CLAUDE.md ~/.claude/
 ```
