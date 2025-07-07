@@ -110,6 +110,12 @@ config.keys = {
     key = "6",
     action = wezterm.action.ActivateTab(5),
   },
+  -- for Claude Code
+  {
+    key = "Enter",
+    mods = "SHIFT",
+    action = wezterm.action.SendString("\n"),
+  },
 }
 
 smart_splits.apply_to_config(config)
