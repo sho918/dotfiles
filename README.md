@@ -27,7 +27,7 @@ fisher update
 
 # Symlink
 mkdir -p ~/.config/{fish,tmux,alacritty,git,wezterm,navi,zed,nvim,yazi,mise}
-mkdir -p ~/.config/fish/conf.d
+mkdir -p ~/.config/fish/{completions,conf.d}
 ln -s (PWD)/.config/fish/config.fish ~/.config/fish/
 ln -s (PWD)/.config/fish/fish_plugins ~/.config/fish/
 ln -s (PWD)/.config/fish/conf.d/abbr.fish ~/.config/fish/conf.d/

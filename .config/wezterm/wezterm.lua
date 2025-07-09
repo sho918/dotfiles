@@ -80,36 +80,6 @@ config.keys = {
     key = "Enter",
     action = wezterm.action.ActivateCopyMode,
   },
-  {
-    mods = "LEADER",
-    key = "1",
-    action = wezterm.action.ActivateTab(0),
-  },
-  {
-    mods = "LEADER",
-    key = "2",
-    action = wezterm.action.ActivateTab(1),
-  },
-  {
-    mods = "LEADER",
-    key = "3",
-    action = wezterm.action.ActivateTab(2),
-  },
-  {
-    mods = "LEADER",
-    key = "4",
-    action = wezterm.action.ActivateTab(3),
-  },
-  {
-    mods = "LEADER",
-    key = "5",
-    action = wezterm.action.ActivateTab(4),
-  },
-  {
-    mods = "LEADER",
-    key = "6",
-    action = wezterm.action.ActivateTab(5),
-  },
   -- for Claude Code
   {
     key = "Enter",
