@@ -63,4 +63,5 @@ mise install
 mkdir -p ~/.claude
 ln -s (PWD)/.claude/CLAUDE.md ~/.claude/
 ln -s (PWD)/.claude/settings.json ~/.claude/
+ln -s (PWD)/.claude/commands ~/.claude/commands
 ```
