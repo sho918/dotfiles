@@ -8,24 +8,13 @@
     "defaultMode": "acceptEdits"
   },
   "hooks": {
-    "Notification": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "osascript -e 'display notification \"Claude Codeが許可を求めています\" with title \"Claude Code\" subtitle \"確認待ち\" sound name \"Glass\"'"
-          }
-        ]
-      }
-    ],
     "Stop": [
       {
         "matcher": "",
         "hooks": [
           {
             "type": "command",
-            "command": "osascript -e 'display notification \"タスクが完了しました\" with title \"Claude Code\" sound name \"Hero\"'"
+            "command": "~/.claude/hooks/stop-send-notification.mjs"
           }
         ]
       }
