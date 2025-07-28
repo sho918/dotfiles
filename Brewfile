@@ -70,7 +70,10 @@ cask "cursor"
 cask "visual-studio-code@insiders"
 cask "jetbrains-toolbox"
 
-# App - Other
+# App - AI
 cask "chatgpt"
+cask "claude"
+
+# App - Other
 cask "zoom"
 cask "spotify"
