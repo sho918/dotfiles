@@ -66,5 +66,5 @@ ln -s (PWD)/.claude/settings.json ~/.claude/
 ln -s (PWD)/.claude/permissive-open.sb ~/.claude/
 ln -s (PWD)/.claude/hooks ~/.claude/hooks
 ln -s (PWD)/.claude/commands ~/.claude/commands
-ln -s (PWD)/.claude/agents ~/.claude/agents
+git clone https://github.com/wshobson/agents.git ~/.claude
 ```
