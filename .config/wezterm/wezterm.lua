@@ -1,5 +1,6 @@
 local wezterm = require("wezterm")
 local smart_splits = wezterm.plugin.require("https://github.com/mrjones2014/smart-splits.nvim")
+local balance = require("balance")
 
 local config = wezterm.config_builder()
 
@@ -85,6 +86,18 @@ config.keys = {
     key = "Enter",
     mods = "SHIFT",
     action = wezterm.action.SendString("\n"),
+  },
+  -- Balance panes horizontally (left/right)
+  {
+    mods = "LEADER",
+    key = "=",
+    action = wezterm.action_callback(balance.balance_panes("x")),
+  },
+  -- Balance panes vertically (up/down)
+  {
+    mods = "LEADER|SHIFT",
+    key = "=",
+    action = wezterm.action_callback(balance.balance_panes("y")),
   },
 }
 

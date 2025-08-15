@@ -37,6 +37,7 @@ ln -s (PWD)/.config/git/aliases ~/.config/git/
 ln -s (PWD)/.config/git/allowed_signers ~/.config/git/
 ln -s (PWD)/.config/git/hooks ~/.config/git/
 ln -s (PWD)/.config/wezterm/wezterm.lua ~/.config/wezterm/
+ln -s (PWD)/.config/wezterm/balance.lua ~/.config/wezterm/
 ln -s (PWD)/.config/wezterm/keybinds.lua ~/.config/wezterm/
 ln -s (PWD)/.config/navi/config.yaml ~/.config/navi/
 ln -s (PWD)/.config/navi/cheats ~/.config/navi/cheats
