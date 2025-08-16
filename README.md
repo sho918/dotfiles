@@ -66,6 +66,13 @@ ln -s (PWD)/.claude/CLAUDE.md ~/.claude/
 ln -s (PWD)/.claude/settings.json ~/.claude/
 ln -s (PWD)/.claude/permissive-open.sb ~/.claude/
 ln -s (PWD)/.claude/hooks ~/.claude/hooks
-git clone https://github.com/wshobson/agents.git ~/.claude
-git clone https://github.com/wasabeef/claude-code-cookbook.git ~/.claude
+
+# claude-code-cookbook
+git submodule update --init --recursive
+ln -s (PWD)/claude-code-cookbook/commands ~/.claude
+ln -s (PWD)/claude-code-cookbook/agents ~/.claude
+
+
+# Update
+# git submodule update --remote
 ```
