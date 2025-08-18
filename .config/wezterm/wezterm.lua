@@ -95,8 +95,8 @@ config.keys = {
   },
   -- Balance panes vertically (up/down)
   {
-    mods = "LEADER|SHIFT",
-    key = "=",
+    mods = "LEADER",
+    key = "+",
     action = wezterm.action_callback(balance.balance_panes("y")),
   },
 }
