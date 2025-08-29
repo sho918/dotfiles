@@ -1,10 +1,19 @@
 {
   "env": {
-    "CLAUDE_CODE_ENABLE_TELEMETRY": "0"
+    "CLAUDE_CODE_AUTO_CONNECT_IDE": "0",
+    "CLAUDE_CODE_IDE_SKIP_AUTO_INSTALL": "1",
+    "CLAUDE_CODE_IDE_SKIP_VALID_CHECK": "1",
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+    "DISABLE_ERROR_REPORTING": "1",
+    "DISABLE_TELEMETRY": "1",
+    "DISABLE_MICROCOMPACT": "1",
+    "DISABLE_INTERLEAVED_THINKING": "1",
+    "MAX_THINKING_TOKENS": "31999"
   },
   "permissions": {
     "allow": [],
-    "deny": [],
+    "deny": ["Bash(aws:*)", "Bash(aws-vault:*)"],
     "defaultMode": "plan"
   },
   "hooks": {
@@ -20,5 +29,10 @@
       }
     ]
   },
-  "model": "opus"
+  "model": "opus",
+  "statusLine": {
+    "type": "command",
+    "command": "npx -y ccusage statusline",
+    "padding": 0
+  }
 }
