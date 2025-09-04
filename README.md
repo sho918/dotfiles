@@ -68,12 +68,6 @@ ln -s (PWD)/.claude/settings.json ~/.claude/
 ln -s (PWD)/.claude/permissive-open.sb ~/.claude/
 ln -s (PWD)/.claude/hooks ~/.claude/hooks
 
-# claude-code-cookbook
-git submodule update --init --recursive
-ln -s (PWD)/claude-code-cookbook/commands ~/.claude
-ln -s (PWD)/claude-code-cookbook/agents ~/.claude
-
-
-# Update
-# git submodule update --remote
+# SuperClaude
+pipx install SuperClaude && SuperClaude install
 ```
