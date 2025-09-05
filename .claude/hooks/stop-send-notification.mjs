@@ -1,9 +1,9 @@
 #! /usr/bin/env node
 
 import { execFileSync } from "node:child_process";
-import { readFileSync, existsSync } from "node:fs";
-import path from "node:path";
+import { existsSync, readFileSync, realpathSync } from "node:fs";
 import os from "node:os";
+import path from "node:path";
 
 try {
   const input = JSON.parse(readFileSync(process.stdin.fd, "utf8"));
@@ -18,8 +18,8 @@ try {
     transcriptPath = path.join(homeDir, transcriptPath.slice(2));
   }
 
-  const allowedBase = path.join(homeDir, ".claude", "projects");
-  const resolvedPath = path.resolve(transcriptPath);
+  const allowedBase = path.join(homeDir, ".claude", "projects") + path.sep;
+  const resolvedPath = realpathSync(path.resolve(transcriptPath));
 
   if (!resolvedPath.startsWith(allowedBase)) {
     process.exit(1);
@@ -43,19 +43,16 @@ try {
   const lastMessageContent = transcript?.message?.content?.[0]?.text;
 
   if (lastMessageContent) {
-    const script = `
-          on run {notificationTitle, notificationMessage}
-            try
-              display notification notificationMessage with title notificationTitle
-            end try
-          end run
-        `;
+    // AppleScript のワンライナー通知
     execFileSync(
       "osascript",
-      ["-e", script, "Claude Code", lastMessageContent],
-      {
-        stdio: "ignore",
-      }
+      [
+        "-e",
+        `display notification ${JSON.stringify(
+          lastMessageContent
+        )} with title "Claude Code"`,
+      ],
+      { stdio: "ignore" }
     );
   }
 } catch (error) {
