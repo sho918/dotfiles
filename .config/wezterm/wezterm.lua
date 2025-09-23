@@ -99,6 +99,12 @@ config.keys = {
     key = "+",
     action = wezterm.action_callback(balance.balance_panes("y")),
   },
+  -- Leader + a + a  -> ctrl+a
+  {
+    key = "a",
+    mods = "LEADER",
+    action = wezterm.action.SendKey({ key = "a", mods = "CTRL" }),
+  },
 }
 
 smart_splits.apply_to_config(config)
