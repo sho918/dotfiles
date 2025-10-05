@@ -23,10 +23,11 @@
       }
     ]
   },
-  "model": "opus",
   "statusLine": {
     "type": "command",
     "command": "npx -y ccusage statusline",
     "padding": 0
-  }
+  },
+  "alwaysThinkingEnabled": true,
+  "model": "sonnet[1m]"
 }
