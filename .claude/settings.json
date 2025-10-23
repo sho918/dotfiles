@@ -1,33 +1,30 @@
 {
+  "alwaysThinkingEnabled": true,
   "env": {
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
-  },
-  "permissions": {
-    "allow": [],
-    "deny": [
-      "Bash(aws:*)",
-      "Bash(aws-vault:*)"
-    ],
-    "defaultMode": "plan"
   },
   "hooks": {
     "Stop": [
       {
-        "matcher": "",
         "hooks": [
           {
-            "type": "command",
-            "command": "~/.claude/hooks/stop-send-notification.mjs"
+            "command": "~/.claude/hooks/stop-send-notification.mjs",
+            "type": "command"
           }
-        ]
+        ],
+        "matcher": ""
       }
     ]
   },
-  "statusLine": {
-    "type": "command",
-    "command": "npx -y ccusage statusline",
-    "padding": 0
+  "model": "sonnet[1m]",
+  "permissions": {
+    "allow": [],
+    "defaultMode": "plan",
+    "deny": ["Bash(aws:*)", "Bash(aws-vault:*)"]
   },
-  "alwaysThinkingEnabled": true,
-  "model": "sonnet[1m]"
+  "statusLine": {
+    "command": "npx -y ccusage statusline",
+    "padding": 0,
+    "type": "command"
+  }
 }
