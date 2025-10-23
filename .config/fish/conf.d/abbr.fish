@@ -11,8 +11,8 @@ abbr -a -g dig doggo
 abbr -a -g vim nvim
 abbr -a -g pp pnpm
 abbr -a -g c code-insiders
-abbr -a -g cs cursor
 abbr -a -g cc claude
+abbr -a -g g lazygit
 abbr -a -g a aws-vault
 abbr -a -g ae aws-vault exec
 abbr -a -g al aws-vault login
