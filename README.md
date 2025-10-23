@@ -69,6 +69,10 @@ ln -s (PWD)/.claude/settings.json ~/.claude/
 ln -s (PWD)/.claude/permissive-open.sb ~/.claude/
 ln -s (PWD)/.claude/hooks ~/.claude/hooks
 
+# Codex
+mkdir -p ~/.codex
+ln -s (PWD)/.codex/config.toml ~/.codex/
+
 # SuperClaude
 pipx install SuperClaude && SuperClaude install
 ```
