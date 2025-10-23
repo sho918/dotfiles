@@ -19,6 +19,11 @@ if test -d (brew --prefix)"/share/fish/vendor_completions.d"
 end
 
 #
+# Home
+#
+set -x XDG_CONFIG_HOME "$HOME/.config"
+
+#
 # FZF
 #
 fzf_configure_bindings --directory=\ct --git_log= --git_status= --history=\cr --processes= --variables=
