@@ -10,7 +10,7 @@ abbr -a -g dig doggo
 
 abbr -a -g vim nvim
 abbr -a -g pp pnpm
-abbr -a -g c code-insiders
+abbr -a -g c cursor
 abbr -a -g cc claude
 abbr -a -g g lazygit
 abbr -a -g a aws-vault
