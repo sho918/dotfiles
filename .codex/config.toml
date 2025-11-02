@@ -1,7 +1,11 @@
 model = "gpt-5-codex"
 model_reasoning_effort = "high"
-tools.web_search = true
-tui.notifications = true
+
+[features]
+web_search_request = true
+
+[tui]
+notifications = true
 
 [mcp_servers.context7]
 command = "npx"

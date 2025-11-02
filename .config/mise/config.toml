@@ -2,7 +2,6 @@
 node = "latest"
 "npm:@anthropic-ai/claude-code" = "latest"
 "npm:@openai/codex" = "latest"
-"npm:@just-every/code" = "latest"
 python = "latest"
 uv = "latest"
 
