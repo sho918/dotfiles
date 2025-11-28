@@ -13,6 +13,4 @@ abbr -a -g pp pnpm
 abbr -a -g c cursor
 abbr -a -g cc claude
 abbr -a -g g lazygit
-abbr -a -g a aws-vault
-abbr -a -g ae aws-vault exec
-abbr -a -g al aws-vault login
+abbr -a -g a antigravity
