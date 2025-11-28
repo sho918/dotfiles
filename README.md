@@ -26,7 +26,7 @@ curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fi
 fisher update
 
 # Symlink
-mkdir -p ~/.config/{fish,tmux,alacritty,git,wezterm,navi,zed,nvim,yazi,mise,lazygit}
+mkdir -p ~/.config/{fish,tmux,alacritty,git,wezterm,navi,zed,yazi,mise,lazygit}
 mkdir -p ~/.config/fish/{completions,conf.d}
 ln -s (PWD)/.config/fish/config.fish ~/.config/fish/
 ln -s (PWD)/.config/fish/fish_plugins ~/.config/fish/
@@ -51,10 +51,6 @@ ln -s (PWD)/.bashrc ~/.bashrc
 ln -s (PWD)/.ideavimrc ~/.ideavimrc
 ln -s (PWD)/.tool-versions ~/.tool-versions
 
-# Neovim
-# https://github.com/sho918/lazyvim-starter/
-git clone git@github.com:sho918/lazyvim-starter.git ~/.config/nvim
-
 # Espanso
 ln -s (PWD)/espanso/match/dev.yml (espanso path config)/match/
 ln -s (PWD)/espanso/config/default.yml (espanso path config)/config/
@@ -72,7 +68,4 @@ ln -s (PWD)/.claude/hooks ~/.claude/hooks
 # Codex
 mkdir -p ~/.codex
 ln -s (PWD)/.codex/config.toml ~/.codex/
-
-# SuperClaude
-pipx install SuperClaude && SuperClaude install
 ```
