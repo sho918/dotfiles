@@ -10,7 +10,7 @@
     ],
     "defaultMode": "plan"
   },
-  "model": "sonnet[1m]",
+  "model": "opus",
   "hooks": {
     "Stop": [
       {
@@ -28,6 +28,9 @@
     "type": "command",
     "command": "npx -y ccusage statusline",
     "padding": 0
+  },
+  "enabledPlugins": {
+    "example-skills@anthropic-agent-skills": true
   },
   "alwaysThinkingEnabled": true
 }
