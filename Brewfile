@@ -25,6 +25,7 @@ brew "neovim"
 brew "mysql-client"
 brew "libpq"
 brew "doggo"
+brew "satococoa/tap/wtp"
 
 # LazyVim
 brew "gcc"

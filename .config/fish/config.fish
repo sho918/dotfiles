@@ -75,3 +75,8 @@ function yy
     end
     rm -f -- "$tmp"
 end
+
+#
+# wtp
+#
+wtp shell-init fish | source
