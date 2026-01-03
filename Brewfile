@@ -49,7 +49,11 @@ brew "im-select"
 cask "google-japanese-ime"
 
 # Browser
-cask "zen-browser"
+cask "thebrowsercompany-dia"
+
+# UI
+tap "FelixKratz/formulae"
+brew "sketchybar"
 
 # App - Essential
 cask "orbstack"
