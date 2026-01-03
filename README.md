@@ -46,6 +46,7 @@ ln -s (PWD)/.config/yazi/flavors ~/.config/yazi/flavors
 ln -s (PWD)/.config/yazi/theme.toml ~/.config/yazi/
 ln -s (PWD)/.config/mise/config.toml ~/.config/mise/
 ln -s (PWD)/.config/lazygit/config.yml ~/.config/lazygit/
+ln -s (PWD)/.config/nvim ~/.config/
 ln -s (PWD)/.config/stylua.toml ~/.config/stylua.toml
 ln -s (PWD)/.bashrc ~/.bashrc
 ln -s (PWD)/.ideavimrc ~/.ideavimrc
