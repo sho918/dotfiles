@@ -3,6 +3,7 @@ node = "latest"
 "npm:@anthropic-ai/claude-code" = "latest"
 "npm:@openai/codex" = "latest"
 python = "latest"
+stylua = "2.3.1"
 uv = "latest"
 
 [settings]

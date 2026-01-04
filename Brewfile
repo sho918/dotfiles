@@ -20,17 +20,16 @@ brew "navi"
 brew "gh"
 brew "yazi"
 brew "eza"
-brew "ripgrep"
-brew "neovim"
 brew "mysql-client"
 brew "libpq"
 brew "doggo"
 brew "satococoa/tap/wtp"
-
-# LazyVim
 brew "gcc"
+brew "neovim"
 brew "lazygit"
-brew "ast-grep"
+brew "ripgrep"
+tap "laishulu/homebrew"
+brew "macism"
 
 # AWS
 brew "awscli"
