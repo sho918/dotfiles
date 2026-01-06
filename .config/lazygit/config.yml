@@ -1,3 +1,4 @@
 git:
   pagers:
-    - externalDiffCommand: difft --color=always
+    - pager: git-split-diffs --color | less -RFX
+      colorArg: never

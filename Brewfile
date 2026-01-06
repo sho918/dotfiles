@@ -2,7 +2,7 @@
 brew "git"
 brew "git-now"
 brew "ghq"
-brew "difftastic"
+brew "git-split-diffs"
 
 # Fish
 brew "fish"
@@ -36,7 +36,7 @@ cask "jetbrains-toolbox"
 brew "awscli"
 brew "yukiarrr/tap/ecsk"
 cask "session-manager-plugin"
-brew "aws-vault"
+cask "aws-vault-binary"
 
 # Font
 cask "font-jetbrains-mono"
