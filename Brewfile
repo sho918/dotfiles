@@ -30,12 +30,13 @@ brew "lazygit"
 brew "ripgrep"
 tap "laishulu/homebrew"
 brew "macism"
+cask "jetbrains-toolbox"
 
 # AWS
 brew "awscli"
 brew "yukiarrr/tap/ecsk"
 cask "session-manager-plugin"
-cask "aws-vault"
+brew "aws-vault"
 
 # Font
 cask "font-jetbrains-mono"
