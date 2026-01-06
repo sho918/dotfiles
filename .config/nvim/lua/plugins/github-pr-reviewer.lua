@@ -1,0 +1,31 @@
+---@type NvPluginSpec
+return {
+  {
+    "otavioschwanck/github-pr-reviewer.nvim",
+    cmd = {
+      "PR",
+      "PRReviewMenu",
+      "PRReview",
+      "PRListReviewRequests",
+      "PRReviewCleanup",
+      "PRInfo",
+      "PROpen",
+      "PRLoadLastSession",
+      "PRReviewBuffer",
+      "PRReviewComment",
+      "PRLineComment",
+      "PRPendingComment",
+      "PRListPendingComments",
+      "PRListAllComments",
+      "PRReply",
+      "PREditComment",
+      "PRDeleteComment",
+      "PRToggleReaction",
+      "PRApprove",
+      "PRRequestChanges",
+      "PRComment",
+      "PRSuggestChange",
+    },
+    opts = {},
+  },
+}

@@ -51,6 +51,8 @@ map("n", "<leader>gH", "<cmd>DiffviewFileHistory<cr>", { desc = "Git Branch Hist
 map("n", "<leader>gs", "<cmd>DiffviewOpen --cached<cr>", { desc = "Git Diff (Staged)" })
 map("n", "<leader>gm", "<cmd>DiffviewOpen main...HEAD<cr>", { desc = "Git Diff (main)" })
 map("n", "<leader>gM", "<cmd>DiffviewOpen master...HEAD<cr>", { desc = "Git Diff (master)" })
+map("n", "<leader>gr", "<cmd>PR<cr>", { desc = "PR Review Menu" })
+map("v", "<leader>gr", ":<C-u>'<,'>PRSuggestChange<CR>", { desc = "PR Suggest Change" })
 map("n", "<leader>gq", "<cmd>DiffviewClose<cr>", { desc = "Git: Close Diffview" })
 map("n", "<leader>gt", "<cmd>DiffviewToggleFiles<cr>", { desc = "Git: Toggle File Panel" })
 map("n", "<leader>gp", module_call("gitsigns", "preview_hunk"), { desc = "Git: Preview Hunk" })
@@ -219,4 +221,16 @@ map("n", "grr", module_call("substitute", "line"), { desc = "Replace line with r
 map("x", "gr", module_call("substitute", "visual"), { desc = "Replace with register" })
 
 -- CopilotChat
-map("n", "<leader>cc", "<cmd>CopilotChat<cr>", { desc = "Copilot Chat" })
+map("n", "<leader>ag", "<cmd>CopilotChat<cr>", { desc = "Copilot Chat" })
+
+-- Claude Code
+map("n", "<leader>ac", "<cmd>ClaudeCode<cr>", { desc = "Claude Code" })
+map("n", "<leader>af", "<cmd>ClaudeCodeFocus<cr>", { desc = "Claude Code Focus" })
+map("n", "<leader>ar", "<cmd>ClaudeCode --resume<cr>", { desc = "Claude Code Resume" })
+map("n", "<leader>aC", "<cmd>ClaudeCode --continue<cr>", { desc = "Claude Code Continue" })
+map("n", "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", { desc = "Claude Code Select Model" })
+map("n", "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", { desc = "Claude Code Add Buffer" })
+map("n", "<leader>aB", "<cmd>ClaudeCodeTreeAdd<cr>", { desc = "Claude Code Add File (Tree)" })
+map("v", "<leader>as", "<cmd>ClaudeCodeSend<cr>", { desc = "Claude Code Send Selection" })
+map("n", "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", { desc = "Claude Code Diff Accept" })
+map("n", "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", { desc = "Claude Code Diff Deny" })
