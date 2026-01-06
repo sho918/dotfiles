@@ -182,6 +182,7 @@
 - `kevinhwang91/nvim-ufo`, `kevinhwang91/promise-async`
 - `tris203/precognition.nvim`
 - `gbprod/substitute.nvim`
+- `tpope/vim-surround`
 - `smjonas/inc-rename.nvim`
 - `WilliamHsieh/overlook.nvim`
 - `b0o/incline.nvim`

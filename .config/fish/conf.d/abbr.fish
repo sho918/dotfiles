@@ -9,5 +9,6 @@ abbr -a -g find fd
 abbr -a -g dig doggo
 
 abbr -a -g v nvim
+abbr -a -g vim nvim
 abbr -a -g pp pnpm
 abbr -a -g c cursor
