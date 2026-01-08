@@ -32,7 +32,7 @@
 | Oil          | Normal `<C-n>`      | Oil: Move down                         |
 | Oil          | Normal `<C-p>`      | Oil: Move up                           |
 | Save/Quit    | `<leader>ww`        | Save                                   |
-| Save/Quit    | `<leader>q`         | Quit                                   |
+| Save/Quit    | `<leader>q`         | Close buffer                           |
 | Split        | `<leader>-`         | Horizontal split                       |
 | Split        | `<leader>\`         | Vertical split                         |
 | Window       | `<C-h>`             | Move left window (smart-splits)        |
