@@ -16,6 +16,7 @@
 - Biome/dprint/oxfmt/oxlint/eslint/prettierd run only when a config is present (`biome.json*`, `dprint.json*`, `.oxfmtrc.json*`, `.oxlintrc*`, `oxlint.config.*`, `.eslintrc*`, `eslint.config.*`, `.prettierrc*`, `prettier.config.*`, or `package.json` with `eslintConfig` / `oxlint` / `prettier`).
 - `prettier` runs as a final fallback even without a config.
 - Python lint: ruff > flake8 (first available by config).
+- JS/TS lint: eslint_d when ESLint config is present.
 
 ## Keybindings
 
