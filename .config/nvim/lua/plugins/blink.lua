@@ -23,6 +23,10 @@ return {
       })
 
       opts.cmdline = vim.tbl_deep_extend("force", opts.cmdline or {}, {
+        keymap = {
+          preset = "cmdline",
+          ["<Tab>"] = { "show", "accept" },
+        },
         completion = {
           menu = {
             auto_show = true,
