@@ -6,6 +6,17 @@
 - Plugin manager: `lazy.nvim`
 - Tabline: theme toggle button is disabled
 
+## Formatting
+
+- Formatter selection is project-aware (see `lua/plugins/conform.lua`).
+- JS/TS: Biome > oxfmt > oxlint > ESLint > Prettier (first available).
+- JSON: dprint > Biome > Prettier (first available).
+- HTML/CSS/Markdown/YAML/TOML: dprint > Prettier (first available).
+- Python: isort + black when configured; otherwise ruff format if only ruff is configured.
+- Biome/dprint/oxfmt/oxlint/eslint/prettierd run only when a config is present (`biome.json*`, `dprint.json*`, `.oxfmtrc.json*`, `.oxlintrc*`, `oxlint.config.*`, `.eslintrc*`, `eslint.config.*`, `.prettierrc*`, `prettier.config.*`, or `package.json` with `eslintConfig` / `oxlint` / `prettier`).
+- `prettier` runs as a final fallback even without a config.
+- Python lint: ruff > flake8 (first available by config).
+
 ## Keybindings
 
 ### Custom overrides (`lua/mappings.lua`)
