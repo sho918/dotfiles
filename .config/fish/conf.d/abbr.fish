@@ -12,3 +12,4 @@ abbr -a -g v nvim
 abbr -a -g vim nvim
 abbr -a -g pp pnpm
 abbr -a -g c cursor
+abbr -a -g gd gh dash

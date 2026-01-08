@@ -60,6 +60,9 @@ ln -s (PWD)/espanso/config/default.yml (espanso path config)/config/
 # Mise
 mise install
 
+# gh
+gh extension install dlvhdr/gh-dash
+
 # Claude Code
 mkdir -p ~/.claude
 ln -s (PWD)/.claude/CLAUDE.md ~/.claude/
