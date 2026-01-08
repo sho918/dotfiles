@@ -2,12 +2,10 @@
   "env": {
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
   },
+  "language": "japanese",
   "permissions": {
     "allow": [],
-    "deny": [
-      "Bash(aws:*)",
-      "Bash(aws-vault:*)"
-    ],
+    "deny": ["Bash(aws:*)", "Bash(aws-vault:*)"],
     "defaultMode": "plan"
   },
   "model": "opus",
