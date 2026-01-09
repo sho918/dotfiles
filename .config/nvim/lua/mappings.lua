@@ -24,11 +24,8 @@ map("i", "<C-n>", "<Down>", { desc = "Move cursor down" })
 map("i", "<C-b>", "<Left>", { desc = "Move cursor left" })
 map("i", "<C-f>", "<Right>", { desc = "Move cursor right" })
 
--- Save / quit
+-- Save
 map("n", "<leader>ww", "<cmd>w<cr>", { desc = "Save" })
-map("n", "<leader>q", function()
-  require("nvchad.tabufline").close_buffer()
-end, { desc = "Close Buffer" })
 
 -- Window splits / move
 map("n", "<leader>-", "<cmd>split<cr>", { desc = "Split Below" })
