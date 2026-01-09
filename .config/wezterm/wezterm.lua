@@ -4,32 +4,49 @@ local balance = require("balance")
 
 local config = wezterm.config_builder()
 
+-- general
+-- https://wezterm.org/config/lua/config/automatically_reload_config.html
+-- https://wezterm.org/config/lua/config/use_ime.html
+-- https://wezterm.org/config/lua/config/scrollback_lines.html
 config.automatically_reload_config = true
 config.use_ime = true
 config.scrollback_lines = 5000
 
 -- font
+-- https://wezterm.org/config/lua/config/font.html
+-- https://wezterm.org/config/lua/config/font_size.html
+-- https://wezterm.org/config/lua/config/color_scheme.html
+-- https://wezterm.org/config/lua/config/harfbuzz_features.html
 config.font = wezterm.font("UDEV Gothic 35NF")
 config.font_size = 14.0
 config.color_scheme = "Catppuccin Mocha"
 config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 
 -- window
+-- https://wezterm.org/config/lua/config/enable_tab_bar.html
+-- https://wezterm.org/config/lua/config/hide_tab_bar_if_only_one_tab.html
+-- https://wezterm.org/config/lua/config/window_decorations.html
+-- https://wezterm.org/config/lua/config/window_background_opacity.html
+-- https://wezterm.org/config/lua/config/macos_window_background_blur.html
 config.enable_tab_bar = true
 config.hide_tab_bar_if_only_one_tab = true
 config.window_decorations = "RESIZE"
-config.window_background_opacity = 0.8
+config.window_background_opacity = 0.5
 config.macos_window_background_blur = 5
 
 -- quick select
+-- https://wezterm.org/config/lua/config/quick_select_patterns.html
 config.quick_select_patterns = {
   "[0-9a-zA-Z]+[._-][0-9a-zA-Z._-]+",
 }
 
--- hyuperlinks
-config.hyperlink_rules = {}
+-- hyperlinks
+-- https://wezterm.org/config/lua/config/hyperlink_rules.html
+config.hyperlink_rules = wezterm.default_hyperlink_rules()
 
 -- keymap
+-- https://wezterm.org/config/lua/config/leader.html
+-- https://wezterm.org/config/lua/config/keys.html
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1500 }
 config.keys = {
   {
@@ -54,7 +71,7 @@ config.keys = {
   },
   {
     mods = "LEADER",
-    key = "s",
+    key = "w",
     action = wezterm.action.ShowLauncherArgs({ flags = "WORKSPACES", title = "Select workspace" }),
   },
   {
