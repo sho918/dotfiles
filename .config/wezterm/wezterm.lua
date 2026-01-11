@@ -42,7 +42,16 @@ config.quick_select_patterns = {
 
 -- hyperlinks
 -- https://wezterm.org/config/lua/config/hyperlink_rules.html
-config.hyperlink_rules = wezterm.default_hyperlink_rules()
+config.hyperlink_rules = {
+  {
+    regex = [[\bhttps://[\w.-]+\.[a-zA-Z]{2,15}\S*\b]],
+    format = "$0",
+  },
+  {
+    regex = [[\bhttps://(?:[\d]{1,3}\.){3}[\d]{1,3}\S*\b]],
+    format = "$0",
+  },
+}
 
 -- keymap
 -- https://wezterm.org/config/lua/config/leader.html
