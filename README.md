@@ -26,13 +26,14 @@ curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fi
 fisher update
 
 # Symlink
-mkdir -p ~/.config/{fish,tmux,alacritty,git,wezterm,navi,zed,yazi,mise,lazygit,sketchybar}
+mkdir -p ~/.config/{fish,tmux,alacritty,git,wezterm,navi,zed,yazi,mise,lazygit,sketchybar,gwq}
 mkdir -p ~/.config/fish/{completions,conf.d}
 ln -s (PWD)/.config/fish/config.fish ~/.config/fish/
 ln -s (PWD)/.config/fish/fish_plugins ~/.config/fish/
 ln -s (PWD)/.config/fish/conf.d/abbr.fish ~/.config/fish/conf.d/
 ln -s (PWD)/.config/fish/completions/aws-vault.fish ~/.config/fish/completions/
 ln -s (PWD)/.config/fish/completions/container-use.fish ~/.config/fish/completions/
+ln -s (PWD)/.config/fish/completions/gwq.fish ~/.config/fish/completions/
 ln -s (PWD)/.config/git/config ~/.config/git/
 ln -s (PWD)/.config/git/aliases ~/.config/git/
 ln -s (PWD)/.config/git/allowed_signers ~/.config/git/
@@ -46,6 +47,7 @@ ln -s (PWD)/.config/yazi/flavors ~/.config/yazi/flavors
 ln -s (PWD)/.config/yazi/theme.toml ~/.config/yazi/
 ln -s (PWD)/.config/mise/config.toml ~/.config/mise/
 ln -s (PWD)/.config/lazygit/config.yml ~/.config/lazygit/
+ln -s (PWD)/.config/gwq/config.toml ~/.config/gwq/
 ln -s (PWD)/.config/nvim ~/.config/
 ln -s (PWD)/.config/sketchybar ~/.config/
 ln -s (PWD)/.config/stylua.toml ~/.config/stylua.toml
@@ -62,6 +64,9 @@ mise install
 
 # gh
 gh extension install dlvhdr/gh-dash
+
+# gwq
+go install github.com/d-kuro/gwq/cmd/gwq@latest
 
 # Claude Code
 mkdir -p ~/.claude
