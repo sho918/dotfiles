@@ -79,6 +79,6 @@ function yy
 end
 
 #
-# wtp
+# git-wt
 #
-wtp shell-init fish | source
+git wt --init fish | source
