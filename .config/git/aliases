@@ -22,4 +22,4 @@
   pushup = !git push --set-upstream origin `git symbolic-ref --short HEAD`
   cleanup = !git branch -vv | awk '/: gone]/{print $1}' | xargs -I {} git branch -D {}
   aliases = !git config -l | grep ^alias\\. | cut -c 7-
-  w = !cd $(git-wt | tail -n +2 | fzf | awk '{print $2}')
+  w = !cd $(git-wt | tail -n +2 | fzf | awk '{print $1}')
