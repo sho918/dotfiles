@@ -1,13 +1,11 @@
 {
   "env": {
-    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
   "permissions": {
     "allow": [],
-    "deny": [
-      "Bash(aws:*)",
-      "Bash(aws-vault:*)"
-    ],
+    "deny": ["Bash(aws:*)", "Bash(aws-vault:*)"],
     "defaultMode": "plan"
   },
   "model": "opus",
