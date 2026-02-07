@@ -9,6 +9,7 @@
   f = fetch --prune
   cm = commit -m
   cob = checkout -b
+  cow = wt
 
   dev = switch develop
   main = switch main
@@ -17,9 +18,7 @@
   amend = commit --amend --no-edit
   undo = reset HEAD~
   pushf = push --force-with-lease --force-if-includes
-  co = !git branch | fzf | xargs git checkout
-  cor = !git branch --remotes | fzf | tr -d '[:space:]' | cut -c 8- | xargs -I {} git checkout -b {} origin/{}
+  co = "!$HOME/.config/git/scripts/git-co"
   pushup = !git push --set-upstream origin `git symbolic-ref --short HEAD`
   cleanup = !git branch -vv | awk '/: gone]/{print $1}' | xargs -I {} git branch -D {}
   aliases = !git config -l | grep ^alias\\. | cut -c 7-
-  w = !cd $(git-wt | tail -n +2 | fzf | awk '{print $1}')

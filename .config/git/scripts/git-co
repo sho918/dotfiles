@@ -1,0 +1,521 @@
+#!/bin/sh
+
+set -eu
+
+script_path=$0
+
+die() {
+  printf 'git-co: %s\n' "$*" >&2
+  exit 1
+}
+
+ensure_repo() {
+  git rev-parse --is-inside-work-tree >/dev/null 2>&1 || die "not inside a Git repository"
+}
+
+ensure_deps() {
+  command -v fzf >/dev/null 2>&1 || die "fzf is required"
+}
+
+uppercase() {
+  printf '%s' "$1" | tr '[:lower:]' '[:upper:]'
+}
+
+is_protected_branch() {
+  case "${1:-}" in
+    main|master|develop)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
+strip_osc_reply_lines() {
+  awk '
+    BEGIN {
+      esc = sprintf("%c", 27)
+    }
+    {
+      clean = $0
+      gsub(esc, "", clean)
+      if (clean ~ /^\]1[01];/) {
+        next
+      }
+      print
+    }
+  '
+}
+
+list_worktrees() {
+  git worktree list --porcelain | awk '
+    function short_branch(ref, v) {
+      v = ref
+      sub(/^refs\/heads\//, "", v)
+      return v
+    }
+    function flush(  sha, name, target) {
+      if (path == "") {
+        return
+      }
+      sha = substr(head, 1, 7)
+      if (branch != "") {
+        name = short_branch(branch)
+        target = name
+      } else {
+        name = "(detached@" sha ")"
+        target = path
+      }
+      printf "WORKTREE\t%s\t%s\t%s\t%s\n", name, target, path, head
+    }
+    /^worktree / {
+      flush()
+      path = substr($0, 10)
+      head = ""
+      branch = ""
+      next
+    }
+    /^HEAD / {
+      head = substr($0, 6)
+      next
+    }
+    /^branch / {
+      branch = substr($0, 8)
+      next
+    }
+    /^$/ {
+      flush()
+      path = ""
+      head = ""
+      branch = ""
+      next
+    }
+    END {
+      flush()
+    }
+  '
+}
+
+list_local_branches() {
+  git for-each-ref --format='LOCAL%09%(refname:short)%09%(refname:short)%09%(upstream:short)%09%(objectname:short)' refs/heads \
+    | awk -F '\t' '{
+        if ($4 == "") {
+          $4 = "-"
+        }
+        OFS = "\t"
+        print $1, $2, $3, "upstream=" $4, $5
+      }'
+}
+
+list_remote_branches() {
+  git for-each-ref --format='%(refname)%09%(refname:short)%09%(objectname:short)' refs/remotes/origin \
+    | awk -F '\t' '
+        $1 != "refs/remotes/origin/HEAD" {
+          name = $2
+          sub(/^origin\//, "", name)
+          if (name == "" || name == "HEAD" || name == "origin") {
+            next
+          }
+          printf "REMOTE\t%s\torigin/%s\torigin/%s\t%s\n", name, name, name, $3
+        }
+      '
+}
+
+list_candidates() {
+  filter=${1:-ALL}
+  case "$filter" in
+    ALL|WORKTREE|LOCAL|REMOTE) ;;
+    *)
+      die "unknown filter: $filter"
+      ;;
+  esac
+
+  {
+    list_worktrees
+    list_local_branches
+    list_remote_branches
+  } | awk -F '\t' -v filter="$filter" '
+    function remember(key) {
+      if (!(key in seen)) {
+        seen[key] = 1
+        order[++count] = key
+      }
+    }
+    $1 == "WORKTREE" {
+      key = $2
+      # Detached worktrees do not map to a branch name.
+      if (key ~ /^\(detached@/) {
+        key = "DETACHED:" $4
+      }
+      remember(key)
+      names[key] = $2
+      worktree_path[key] = $4
+      worktree_head[key] = $5
+      next
+    }
+    $1 == "LOCAL" {
+      key = $2
+      remember(key)
+      if (!(key in names)) {
+        names[key] = $2
+      }
+      local_ref[key] = $3
+      local_upstream[key] = $4
+      sub(/^upstream=/, "", local_upstream[key])
+      local_head[key] = $5
+      next
+    }
+    $1 == "REMOTE" {
+      key = $2
+      remember(key)
+      if (!(key in names)) {
+        names[key] = $2
+      }
+      remote_ref[key] = $3
+      remote_head[key] = $5
+      next
+    }
+    END {
+      for (i = 1; i <= count; i++) {
+        key = order[i]
+        has_w = (worktree_path[key] != "") ? 1 : 0
+        has_l = (local_ref[key] != "") ? 1 : 0
+        has_r = (remote_ref[key] != "") ? 1 : 0
+
+        if (filter == "WORKTREE" && !has_w) {
+          continue
+        }
+        if (filter == "LOCAL" && !has_l) {
+          continue
+        }
+        if (filter == "REMOTE" && !has_r) {
+          continue
+        }
+
+        detail = "-"
+        if (has_r) {
+          detail = remote_ref[key]
+        }
+        if (has_l) {
+          detail = "upstream=" (local_upstream[key] == "" ? "-" : local_upstream[key])
+        }
+        if (has_w) {
+          detail = worktree_path[key]
+        }
+
+        printf "%s\t%d\t%d\t%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n",
+          names[key],
+          has_w,
+          has_l,
+          has_r,
+          (worktree_path[key] == "" ? "-" : worktree_path[key]),
+          (local_ref[key] == "" ? "-" : local_ref[key]),
+          (remote_ref[key] == "" ? "-" : remote_ref[key]),
+          (local_upstream[key] == "" ? "-" : local_upstream[key]),
+          (worktree_head[key] == "" ? "-" : worktree_head[key]),
+          (local_head[key] == "" ? "-" : local_head[key]),
+          (remote_head[key] == "" ? "-" : remote_head[key]),
+          detail
+      }
+    }
+  '
+}
+
+print_help_text() {
+  cat <<'EOF'
+Actions
+  Enter   : W -> cd to worktree, else L -> switch, else R -> track checkout
+  Ctrl-W  : create worktree from remote only (not for main/master/develop)
+
+Filters
+  Ctrl-T  : cycle ALL -> WORKTREE -> LOCAL -> REMOTE
+  ?       : toggle this help at top
+EOF
+}
+
+show_preview() {
+  line=${1:-}
+
+  [ -n "$line" ] || exit 0
+
+  name=$(printf '%s' "$line" | cut -f1)
+  has_w=$(printf '%s' "$line" | cut -f2)
+  has_l=$(printf '%s' "$line" | cut -f3)
+  has_r=$(printf '%s' "$line" | cut -f4)
+  worktree_path=$(printf '%s' "$line" | cut -f5)
+  local_ref=$(printf '%s' "$line" | cut -f6)
+  remote_ref=$(printf '%s' "$line" | cut -f7)
+  local_upstream=$(printf '%s' "$line" | cut -f8)
+  worktree_head=$(printf '%s' "$line" | cut -f9)
+  local_head=$(printf '%s' "$line" | cut -f10)
+  remote_head=$(printf '%s' "$line" | cut -f11)
+
+  c_reset=$(printf '\033[0m')
+  c_title=$(printf '\033[1;38;5;111m')
+  c_section=$(printf '\033[1;38;5;146m')
+  c_key=$(printf '\033[38;5;220m')
+  c_val=$(printf '\033[38;5;252m')
+  c_dim=$(printf '\033[38;5;245m')
+  c_w=$(printf '\033[38;5;79m')
+  c_l=$(printf '\033[38;5;75m')
+  c_r=$(printf '\033[38;5;180m')
+
+  b_w="${c_dim} ${c_reset}"
+  b_l="${c_dim} ${c_reset}"
+  b_r="${c_dim} ${c_reset}"
+  [ "$has_w" = "1" ] && b_w="${c_w}W${c_reset}"
+  [ "$has_l" = "1" ] && b_l="${c_l}L${c_reset}"
+  [ "$has_r" = "1" ] && b_r="${c_r}R${c_reset}"
+
+  printf '\n%sSelected%s: %s%s%s\n' "$c_title" "$c_reset" "$c_val" "$name" "$c_reset"
+  printf '%sAvail%s   : [%s][%s][%s]\n' "$c_key" "$c_reset" "$b_w" "$b_l" "$b_r"
+
+  if [ "$has_w" = "1" ]; then
+    printf '%sEnter%s   : %scd%s %s\n' "$c_key" "$c_reset" "$c_dim" "$c_reset" "$worktree_path"
+  elif [ "$has_l" = "1" ]; then
+    printf '%sEnter%s   : %sgit switch%s %s\n' "$c_key" "$c_reset" "$c_dim" "$c_reset" "$local_ref"
+  elif [ "$has_r" = "1" ]; then
+    printf '%sEnter%s   : %sgit switch -c%s %s %s--track%s %s\n' "$c_key" "$c_reset" "$c_dim" "$c_reset" "$name" "$c_dim" "$c_reset" "$remote_ref"
+  else
+    printf '%sEnter%s   : %sunavailable%s\n' "$c_key" "$c_reset" "$c_dim" "$c_reset"
+  fi
+
+  if is_protected_branch "$name"; then
+    printf '%sCtrl-W%s  : %sunavailable%s (protected branch)\n' "$c_key" "$c_reset" "$c_dim" "$c_reset"
+  elif [ "$has_w" = "1" ]; then
+    printf '%sCtrl-W%s  : %sunavailable%s (worktree already exists)\n' "$c_key" "$c_reset" "$c_dim" "$c_reset"
+  elif [ "$has_r" = "1" ]; then
+    printf '%sCtrl-W%s  : %sgit wt%s %s %s\n' "$c_key" "$c_reset" "$c_dim" "$c_reset" "$name" "$remote_ref"
+  else
+    printf '%sCtrl-W%s  : %sunavailable%s (remote branch required)\n' "$c_key" "$c_reset" "$c_dim" "$c_reset"
+  fi
+
+  printf '\n%sRefs%s\n' "$c_section" "$c_reset"
+  if [ "$has_w" = "1" ]; then
+    printf '  %sWorktree%s : %s\n' "$c_w" "$c_reset" "$worktree_path"
+    printf '  %sWT HEAD %s : %s\n' "$c_w" "$c_reset" "$worktree_head"
+  fi
+  if [ "$has_l" = "1" ]; then
+    printf '  %sLocal   %s : %s\n' "$c_l" "$c_reset" "$local_ref"
+    printf '  %sUpstream%s : %s\n' "$c_l" "$c_reset" "$local_upstream"
+    printf '  %sL HEAD  %s : %s\n' "$c_l" "$c_reset" "$local_head"
+  fi
+  if [ "$has_r" = "1" ]; then
+    printf '  %sRemote  %s : %s\n' "$c_r" "$c_reset" "$remote_ref"
+    printf '  %sR HEAD  %s : %s\n' "$c_r" "$c_reset" "$remote_head"
+  fi
+
+  if [ "$has_w" = "1" ] && [ -d "$worktree_path" ]; then
+    printf '\n%sStatus%s\n' "$c_section" "$c_reset"
+    git -C "$worktree_path" status -sb 2>/dev/null | sed -n '1,40p'
+  fi
+
+  ref=''
+  if [ "$has_l" = "1" ]; then
+    ref=$local_ref
+  elif [ "$has_r" = "1" ]; then
+    ref=$remote_ref
+  fi
+
+  if [ -n "$ref" ] && [ "$ref" != "-" ]; then
+    printf '\n%sRecent Commits%s\n' "$c_section" "$c_reset"
+    git log --oneline -n 20 "$ref" 2>/dev/null | sed -n '1,40p'
+  fi
+}
+
+render_candidates() {
+  awk -F '\t' '
+    function fit(s, w,   l, pad) {
+      l = length(s)
+      if (l > w) {
+        if (w <= 3) {
+          return substr(s, 1, w)
+        }
+        return substr(s, 1, w - 3) "..."
+      }
+      pad = sprintf("%" (w - l) "s", "")
+      return s pad
+    }
+    function badge(has, label, color,   reset) {
+      reset = "\033[0m"
+      if (has == 1) {
+        return color "[" label "]" reset
+      }
+      return "\033[38;5;240m[ ]" reset
+    }
+    {
+      name = $1
+      has_w = $2
+      has_l = $3
+      has_r = $4
+      detail = $12
+      avail = badge(has_w, "W", "\033[38;5;79m") \
+              badge(has_l, "L", "\033[38;5;75m") \
+              badge(has_r, "R", "\033[38;5;180m")
+      display = avail "  " fit(name, 28) "  " detail
+      printf "%s\t%s\n", $0, display
+    }
+  '
+}
+
+cycle_filter_action() {
+  prompt=${FZF_PROMPT:-co[ALL]> }
+  next=ALL
+  case "$prompt" in
+    *"[ALL]"*)
+      next=WORKTREE
+      ;;
+    *"[WORKTREE]"*)
+      next=LOCAL
+      ;;
+    *"[LOCAL]"*)
+      next=REMOTE
+      ;;
+    *"[REMOTE]"*)
+      next=ALL
+      ;;
+  esac
+
+  printf 'reload(%s --render --type %s)+change-prompt(co[%s]> )' "$script_path" "$next" "$next"
+}
+
+render_for_filter() {
+  filter=${1:-ALL}
+  list_candidates "$filter" | render_candidates
+}
+
+run_action() {
+  key=$1
+  line=$2
+
+  name=$(printf '%s' "$line" | cut -f1)
+  has_w=$(printf '%s' "$line" | cut -f2)
+  has_l=$(printf '%s' "$line" | cut -f3)
+  has_r=$(printf '%s' "$line" | cut -f4)
+  worktree_path=$(printf '%s' "$line" | cut -f5)
+  local_ref=$(printf '%s' "$line" | cut -f6)
+  remote_ref=$(printf '%s' "$line" | cut -f7)
+
+  if [ "$key" = "ctrl-w" ]; then
+    if is_protected_branch "$name"; then
+      printf 'git-co: Ctrl-W is unavailable for protected branches (main/master/develop).\n' >&2
+      return 2
+    fi
+    if [ "$has_w" = "1" ]; then
+      printf 'git-co: Ctrl-W is unavailable because worktree already exists.\n' >&2
+      return 2
+    fi
+    if [ "$has_r" = "1" ]; then
+      git wt "$name" "$remote_ref"
+      return 0
+    fi
+    printf 'git-co: Ctrl-W requires a remote branch.\n' >&2
+    return 2
+  fi
+
+  if [ "$has_w" = "1" ]; then
+    printf '%s\n' "$worktree_path"
+    return 0
+  fi
+
+  if [ "$has_l" = "1" ]; then
+    git switch "$local_ref"
+    return 0
+  fi
+
+  if [ "$has_r" = "1" ]; then
+    git switch -c "$name" --track "$remote_ref"
+    return 0
+  fi
+
+  printf 'git-co: no actionable target for "%s".\n' "$name" >&2
+  return 1
+}
+
+pick_candidate() {
+  filter=${1:-ALL}
+  help_header=$(print_help_text)
+  filter=$(uppercase "$filter")
+  rendered=$(render_for_filter "$filter")
+
+  while :; do
+    [ -n "$rendered" ] || {
+      printf 'git-co: no candidates for filter %s\n' "$filter" >&2
+      return 1
+    }
+
+    if ! result=$(printf '%s\n' "$rendered" | fzf \
+      --ansi \
+      --delimiter '\t' \
+      --with-nth 13 \
+      --nth '1,12' \
+      --layout reverse \
+      --height 100% \
+      --border \
+      --prompt "co[$filter]> " \
+      --header "$help_header" \
+      --expect=ctrl-w \
+      --bind "start:hide-header+reload($script_path --render --type $filter)" \
+      --bind '?:toggle-header' \
+      --bind "ctrl-t:transform:$script_path --cycle-filter-action" \
+      --preview "$script_path --preview {}" \
+      --list-label ' Avail        Name                          Detail ' \
+      --preview-window 'right,40%,wrap'); then
+      return 0
+    fi
+
+    result=$(printf '%s\n' "$result" | strip_osc_reply_lines)
+
+    key=$(printf '%s\n' "$result" | sed -n '1p')
+    line=$(printf '%s\n' "$result" | sed -n '2p')
+    [ -n "$line" ] || continue
+
+    if run_action "$key" "$line"; then
+      return 0
+    fi
+
+    rc=$?
+    if [ $rc -eq 2 ]; then
+      continue
+    fi
+    return $rc
+  done
+}
+
+if [ "${1:-}" = "--preview" ]; then
+  shift
+  show_preview "${1:-}"
+  exit 0
+fi
+
+if [ "${1:-}" = "--list" ]; then
+  shift
+  filter=ALL
+  if [ "${1:-}" = "--type" ]; then
+    shift
+    filter=$(uppercase "${1:-}")
+  fi
+  ensure_repo
+  list_candidates "$filter"
+  exit 0
+fi
+
+if [ "${1:-}" = "--render" ]; then
+  shift
+  filter=ALL
+  if [ "${1:-}" = "--type" ]; then
+    shift
+    filter=$(uppercase "${1:-}")
+  fi
+  ensure_repo
+  render_for_filter "$filter"
+  exit 0
+fi
+
+if [ "${1:-}" = "--cycle-filter-action" ]; then
+  cycle_filter_action
+  exit 0
+fi
+
+ensure_repo
+ensure_deps
+pick_candidate ALL

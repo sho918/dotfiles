@@ -82,3 +82,50 @@ end
 # git-wt
 #
 git wt --init fish | source
+
+#
+# git-co
+#
+function __git_co_strip_osc_reply_lines
+    set -l esc (printf "\e")
+    for line in $argv
+        set -l clean (string replace -a -- $esc "" -- $line)
+        if string match -qr '^\\]1[01];' -- $clean
+            continue
+        end
+        printf "%s\n" "$line"
+    end
+end
+
+if functions -q git
+    if functions -q __git_wt_git
+        functions -e __git_wt_git
+    end
+    functions -c git __git_wt_git
+
+    function git --wraps git
+        if test "$argv[1]" = "co"
+            set -l raw_result (__git_wt_git $argv)
+            set -l exit_code $status
+            set -l result (__git_co_strip_osc_reply_lines $raw_result)
+
+            if test $exit_code -eq 0 -a (count $result) -gt 0
+                set -l last_line $result[-1]
+                if test -d "$last_line"
+                    for line in $result[1..-2]
+                        printf "%s\n" "$line"
+                    end
+                    cd "$last_line"
+                    return 0
+                end
+            end
+
+            for line in $result
+                printf "%s\n" "$line"
+            end
+            return $exit_code
+        end
+
+        __git_wt_git $argv
+    end
+end
