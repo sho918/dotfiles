@@ -12,7 +12,7 @@
   cow = wt
 
   dev = switch develop
-  main = switch main
+  main = "!f(){ if git show-ref --verify --quiet refs/heads/main; then git switch main; else git switch master; fi; }; f"
   master = switch master
   back = switch -
   amend = commit --amend --no-edit
