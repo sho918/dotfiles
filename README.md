@@ -74,4 +74,7 @@ ln -s (PWD)/.claude/hooks ~/.claude/hooks
 # Codex
 mkdir -p ~/.codex
 ln -s (PWD)/.codex/config.toml ~/.codex/
+
+# Agent Skills
+npx skills add https://github.com/vercel-labs/skills --skill find-skills
 ```
