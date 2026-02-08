@@ -3,6 +3,8 @@
 set -eu
 
 script_path=$0
+AVAIL_COL_WIDTH=9
+NAME_COL_WIDTH=28
 
 die() {
   printf 'git-co: %s\n' "$*" >&2
@@ -19,6 +21,12 @@ ensure_deps() {
 
 uppercase() {
   printf '%s' "$1" | tr '[:lower:]' '[:upper:]'
+}
+
+repeat_char() {
+  char=${1:- }
+  count=${2:-0}
+  printf '%*s' "$count" '' | tr ' ' "$char"
 }
 
 is_protected_branch() {
@@ -55,6 +63,12 @@ list_worktrees() {
     }
     function flush(  sha, name, target) {
       if (path == "") {
+        return
+      }
+      # `git worktree list` always includes the main working tree first.
+      # Exclude it so only additional worktrees are treated as WORKTREE.
+      if (main_path == "") {
+        main_path = path
         return
       }
       sha = substr(head, 1, 7)
@@ -221,15 +235,19 @@ list_candidates() {
 }
 
 print_help_text() {
-  cat <<'EOF'
-Actions
-  Enter   : W -> cd to worktree, else L -> switch, else R -> track checkout
-  Ctrl-W  : create worktree from remote only (not for main/master/develop)
+  key_label_width=10
+  printf '%s\n' 'Actions'
+  printf '  %-*s : %s\n' "$key_label_width" 'Enter' 'W -> cd to worktree, else L -> switch, else R -> track checkout'
+  printf '  %-*s : %s\n' "$key_label_width" 'Alt-Enter' 'create worktree from remote only (not for main/master/develop)'
+  printf '\n%s\n' 'Filters'
+  printf '  %-*s : %s\n' "$key_label_width" 'Ctrl-T' 'cycle ALL -> WORKTREE -> LOCAL -> REMOTE'
+}
 
-Filters
-  Ctrl-T  : cycle ALL -> WORKTREE -> LOCAL -> REMOTE
-  ?       : toggle this help at top
-EOF
+print_header_text() {
+  avail_sep=$(repeat_char '-' "$AVAIL_COL_WIDTH")
+  name_sep=$(repeat_char '-' "$NAME_COL_WIDTH")
+  printf '%-*s  %-*s  %s\n' "$AVAIL_COL_WIDTH" 'Avail' "$NAME_COL_WIDTH" 'Name' 'Detail'
+  printf '%-*s  %-*s  %s\n' "$AVAIL_COL_WIDTH" "$avail_sep" "$NAME_COL_WIDTH" "$name_sep" '------'
 }
 
 show_preview() {
@@ -265,28 +283,29 @@ show_preview() {
   [ "$has_w" = "1" ] && b_w="${c_w}W${c_reset}"
   [ "$has_l" = "1" ] && b_l="${c_l}L${c_reset}"
   [ "$has_r" = "1" ] && b_r="${c_r}R${c_reset}"
+  action_label_width=10
 
-  printf '\n%sSelected%s: %s%s%s\n' "$c_title" "$c_reset" "$c_val" "$name" "$c_reset"
-  printf '%sAvail%s   : [%s][%s][%s]\n' "$c_key" "$c_reset" "$b_w" "$b_l" "$b_r"
+  printf '\n%s%-*s%s : %s%s%s\n' "$c_title" "$action_label_width" 'Selected' "$c_reset" "$c_val" "$name" "$c_reset"
+  printf '%s%-*s%s : [%s][%s][%s]\n' "$c_key" "$action_label_width" 'Avail' "$c_reset" "$b_w" "$b_l" "$b_r"
 
   if [ "$has_w" = "1" ]; then
-    printf '%sEnter%s   : %scd%s %s\n' "$c_key" "$c_reset" "$c_dim" "$c_reset" "$worktree_path"
+    printf '%s%-*s%s : %scd%s %s\n' "$c_key" "$action_label_width" 'Enter' "$c_reset" "$c_dim" "$c_reset" "$worktree_path"
   elif [ "$has_l" = "1" ]; then
-    printf '%sEnter%s   : %sgit switch%s %s\n' "$c_key" "$c_reset" "$c_dim" "$c_reset" "$local_ref"
+    printf '%s%-*s%s : %sgit switch%s %s\n' "$c_key" "$action_label_width" 'Enter' "$c_reset" "$c_dim" "$c_reset" "$local_ref"
   elif [ "$has_r" = "1" ]; then
-    printf '%sEnter%s   : %sgit switch -c%s %s %s--track%s %s\n' "$c_key" "$c_reset" "$c_dim" "$c_reset" "$name" "$c_dim" "$c_reset" "$remote_ref"
+    printf '%s%-*s%s : %sgit switch -c%s %s %s--track%s %s\n' "$c_key" "$action_label_width" 'Enter' "$c_reset" "$c_dim" "$c_reset" "$name" "$c_dim" "$c_reset" "$remote_ref"
   else
-    printf '%sEnter%s   : %sunavailable%s\n' "$c_key" "$c_reset" "$c_dim" "$c_reset"
+    printf '%s%-*s%s : %sunavailable%s\n' "$c_key" "$action_label_width" 'Enter' "$c_reset" "$c_dim" "$c_reset"
   fi
 
   if is_protected_branch "$name"; then
-    printf '%sCtrl-W%s  : %sunavailable%s (protected branch)\n' "$c_key" "$c_reset" "$c_dim" "$c_reset"
+    printf '%s%-*s%s : %sunavailable%s (protected branch)\n' "$c_key" "$action_label_width" 'Alt-Enter' "$c_reset" "$c_dim" "$c_reset"
   elif [ "$has_w" = "1" ]; then
-    printf '%sCtrl-W%s  : %sunavailable%s (worktree already exists)\n' "$c_key" "$c_reset" "$c_dim" "$c_reset"
+    printf '%s%-*s%s : %sunavailable%s (worktree already exists)\n' "$c_key" "$action_label_width" 'Alt-Enter' "$c_reset" "$c_dim" "$c_reset"
   elif [ "$has_r" = "1" ]; then
-    printf '%sCtrl-W%s  : %sgit wt%s %s %s\n' "$c_key" "$c_reset" "$c_dim" "$c_reset" "$name" "$remote_ref"
+    printf '%s%-*s%s : %sgit wt%s %s %s\n' "$c_key" "$action_label_width" 'Alt-Enter' "$c_reset" "$c_dim" "$c_reset" "$name" "$remote_ref"
   else
-    printf '%sCtrl-W%s  : %sunavailable%s (remote branch required)\n' "$c_key" "$c_reset" "$c_dim" "$c_reset"
+    printf '%s%-*s%s : %sunavailable%s (remote branch required)\n' "$c_key" "$action_label_width" 'Alt-Enter' "$c_reset" "$c_dim" "$c_reset"
   fi
 
   printf '\n%sRefs%s\n' "$c_section" "$c_reset"
@@ -305,8 +324,13 @@ show_preview() {
   fi
 
   if [ "$has_w" = "1" ] && [ -d "$worktree_path" ]; then
-    printf '\n%sStatus%s\n' "$c_section" "$c_reset"
-    git -C "$worktree_path" status -sb 2>/dev/null | sed -n '1,40p'
+    status_lines=$(git -C "$worktree_path" status -sb 2>/dev/null | sed -n '1,40p' || true)
+    printf '\n%sStatus%s (worktree)\n' "$c_section" "$c_reset"
+    if [ -n "$status_lines" ]; then
+      printf '%s\n' "$status_lines"
+    else
+      printf '%sstatus unavailable%s\n' "$c_dim" "$c_reset"
+    fi
   fi
 
   ref=''
@@ -323,7 +347,7 @@ show_preview() {
 }
 
 render_candidates() {
-  awk -F '\t' '
+  awk -F '\t' -v name_w="$NAME_COL_WIDTH" '
     function fit(s, w,   l, pad) {
       l = length(s)
       if (l > w) {
@@ -351,7 +375,7 @@ render_candidates() {
       avail = badge(has_w, "W", "\033[38;5;79m") \
               badge(has_l, "L", "\033[38;5;75m") \
               badge(has_r, "R", "\033[38;5;180m")
-      display = avail "  " fit(name, 28) "  " detail
+      display = avail "  " fit(name, name_w) "  " detail
       printf "%s\t%s\n", $0, display
     }
   '
@@ -395,20 +419,20 @@ run_action() {
   local_ref=$(printf '%s' "$line" | cut -f6)
   remote_ref=$(printf '%s' "$line" | cut -f7)
 
-  if [ "$key" = "ctrl-w" ]; then
+  if [ "$key" = "alt-enter" ]; then
     if is_protected_branch "$name"; then
-      printf 'git-co: Ctrl-W is unavailable for protected branches (main/master/develop).\n' >&2
+      printf 'git-co: Alt-Enter is unavailable for protected branches (main/master/develop).\n' >&2
       return 2
     fi
     if [ "$has_w" = "1" ]; then
-      printf 'git-co: Ctrl-W is unavailable because worktree already exists.\n' >&2
+      printf 'git-co: Alt-Enter is unavailable because worktree already exists.\n' >&2
       return 2
     fi
     if [ "$has_r" = "1" ]; then
       git wt "$name" "$remote_ref"
       return 0
     fi
-    printf 'git-co: Ctrl-W requires a remote branch.\n' >&2
+    printf 'git-co: Alt-Enter requires a remote branch.\n' >&2
     return 2
   fi
 
@@ -433,7 +457,8 @@ run_action() {
 
 pick_candidate() {
   filter=${1:-ALL}
-  help_header=$(print_help_text)
+  help_header=$(print_header_text)
+  help_footer=$(print_help_text)
   filter=$(uppercase "$filter")
   rendered=$(render_for_filter "$filter")
 
@@ -453,9 +478,9 @@ pick_candidate() {
       --border \
       --prompt "co[$filter]> " \
       --header "$help_header" \
-      --expect=ctrl-w \
-      --bind "start:hide-header+reload($script_path --render --type $filter)" \
-      --bind '?:toggle-header' \
+      --footer "$help_footer" \
+      --expect=alt-enter \
+      --bind "start:reload($script_path --render --type $filter)" \
       --bind "ctrl-t:transform:$script_path --cycle-filter-action" \
       --preview "$script_path --preview {}" \
       --list-label ' Avail        Name                          Detail ' \
