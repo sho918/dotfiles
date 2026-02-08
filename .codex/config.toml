@@ -1,25 +1,26 @@
 model = "gpt-5.3-codex"
 model_reasoning_effort = "xhigh"
-sandbox_mode = "workspace-write"
+
+# sandbox_mode = "workspace-write"
 network_access = true
 web_search = "live"
+personality = "pragmatic"
 
 [features]
-unified_exec = true
 shell_snapshot = true
-collaboration_modes = true
+collab = true
+apps = true
 
 [tui]
 notifications = true
 
+# [mcp_servers.context7]
+# command = "npx"
+# args = ["-y", "@upstash/context7-mcp"]
 
-[mcp_servers.context7]
-command = "npx"
-args = ["-y", "@upstash/context7-mcp"]
-
-[mcp_servers.sequential-thinking]
-command = "npx"
-args = ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+# [mcp_servers.sequential-thinking]
+# command = "npx"
+# args = ["-y", "@modelcontextprotocol/server-sequential-thinking"]
 
 # [mcp_servers.serena]
 # command = "uvx"
