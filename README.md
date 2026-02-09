@@ -77,4 +77,6 @@ ln -s (PWD)/.codex/config.toml ~/.codex/
 
 # Agent Skills
 npx skills add https://github.com/vercel-labs/skills --skill find-skills
+npx skills add https://github.com/github/awesome-copilot --skill gh-cli
+npx skills add https://github.com/github/awesome-copilot --skill git-commit
 ```
