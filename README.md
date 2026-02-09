@@ -75,8 +75,24 @@ ln -s (PWD)/.claude/hooks ~/.claude/hooks
 mkdir -p ~/.codex
 ln -s (PWD)/.codex/config.toml ~/.codex/
 
+#
 # Agent Skills
+#
 npx skills add https://github.com/vercel-labs/skills --skill find-skills
+
+# git
 npx skills add https://github.com/github/awesome-copilot --skill gh-cli
 npx skills add https://github.com/github/awesome-copilot --skill git-commit
+
+# frontend design
+npx skills add https://github.com/vercel-labs/agent-skills --skill web-design-guidelines
+npx skills add https://github.com/anthropics/skills --skill frontend-design
+npx skills add https://github.com/nextlevelbuilder/ui-ux-pro-max-skill --skill ui-ux-pro-max
+
+# react
+npx skills add https://github.com/vercel-labs/agent-skills --skill vercel-react-best-practices
+npx skills add https://github.com/vercel-labs/agent-skills --skill vercel-composition-patterns
+
+# database
+npx skills add https://github.com/supabase/agent-skills --skill supabase-postgres-best-practices
 ```
