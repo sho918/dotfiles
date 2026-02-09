@@ -38,22 +38,6 @@ is_protected_branch() {
   return 1
 }
 
-strip_osc_reply_lines() {
-  awk '
-    BEGIN {
-      esc = sprintf("%c", 27)
-    }
-    {
-      clean = $0
-      gsub(esc, "", clean)
-      if (clean ~ /^\]1[01];/) {
-        next
-      }
-      print
-    }
-  '
-}
-
 list_worktrees() {
   git worktree list --porcelain | awk '
     function short_branch(ref, v) {
@@ -487,8 +471,6 @@ pick_candidate() {
       --preview-window 'right,40%,wrap'); then
       return 0
     fi
-
-    result=$(printf '%s\n' "$result" | strip_osc_reply_lines)
 
     key=$(printf '%s\n' "$result" | sed -n '1p')
     line=$(printf '%s\n' "$result" | sed -n '2p')
