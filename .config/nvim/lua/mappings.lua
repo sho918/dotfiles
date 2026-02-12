@@ -131,6 +131,15 @@ map("c", "<C-s>", module_call("flash", "toggle"), { desc = "Toggle Flash Search"
 -- Multi-cursor (multicursor.nvim)
 map("n", "<C-g>", multicursor_call("matchAddCursor", 1), { desc = "MultiCursor: Add next match" })
 map("x", "<C-g>", multicursor_call("matchAddCursor", 1), { desc = "MultiCursor: Add next match (visual)" })
+map({ "n", "x" }, "<Esc>", function()
+  local ok, mc = pcall(require, "multicursor-nvim")
+  if ok and mc.hasCursors() then
+    mc.clearCursors()
+  else
+    vim.cmd "nohlsearch"
+  end
+  vim.cmd [[normal! <Esc>]]
+end, { desc = "Esc: Clear multicursor or search highlight" })
 
 -- Lasterisk
 map("n", "*", module_call("lasterisk", "search"), { desc = "Search word (Lasterisk)" })
