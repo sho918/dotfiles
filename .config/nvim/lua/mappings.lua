@@ -15,6 +15,17 @@ local function module_call(mod, method, ...)
   end
 end
 
+local function multicursor_call(method, ...)
+  local args = { ... }
+  return function()
+    local ok, mc = pcall(require, "multicursor-nvim")
+    if not ok then
+      return
+    end
+    mc[method](unpack(args))
+  end
+end
+
 -- Basics
 map("n", ";", ":", { desc = "CMD enter command mode" })
 
@@ -116,6 +127,10 @@ map({ "n", "x", "o" }, "S", module_call("flash", "treesitter"), { desc = "Flash 
 map("o", "r", module_call("flash", "remote"), { desc = "Remote Flash" })
 map({ "o", "x" }, "R", module_call("flash", "treesitter_search"), { desc = "Treesitter Search" })
 map("c", "<C-s>", module_call("flash", "toggle"), { desc = "Toggle Flash Search" })
+
+-- Multi-cursor (multicursor.nvim)
+map("n", "<C-g>", multicursor_call("matchAddCursor", 1), { desc = "MultiCursor: Add next match" })
+map("x", "<C-g>", multicursor_call("matchAddCursor", 1), { desc = "MultiCursor: Add next match (visual)" })
 
 -- Lasterisk
 map("n", "*", module_call("lasterisk", "search"), { desc = "Search word (Lasterisk)" })

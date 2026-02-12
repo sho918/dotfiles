@@ -119,6 +119,7 @@
 | Overlook     | `<leader>pf`        | Switch focus                           |
 | Overlook     | `<leader>ps`        | Open in split                          |
 | Overlook     | `<leader>pv`        | Open in vsplit                         |
+| MultiCursor  | `<C-g>`             | Add next match (multicursor.nvim)      |
 | Substitute   | `gr`                | Replace operator                       |
 | Substitute   | `grr`               | Replace line                           |
 | Substitute   | Visual `gr`         | Replace selection                      |
@@ -203,6 +204,7 @@
 - `folke/noice.nvim`, `rcarriga/nvim-notify`, `MunifTanjim/nui.nvim`
 - `folke/trouble.nvim`
 - `folke/flash.nvim`
+- `jake-stewart/multicursor.nvim`
 - `rapan931/lasterisk.nvim`
 - `kevinhwang91/nvim-bqf`
 - `kevinhwang91/nvim-ufo`, `kevinhwang91/promise-async`
