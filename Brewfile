@@ -32,6 +32,9 @@ brew "macism"
 cask "jetbrains-toolbox"
 brew "k1LoW/tap/git-wt"
 
+tap "entireio/tap"
+brew "entireio/tap/entire"
+
 # AWS
 brew "awscli"
 brew "yukiarrr/tap/ecsk"
