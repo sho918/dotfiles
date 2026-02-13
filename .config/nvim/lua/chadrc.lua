@@ -28,6 +28,9 @@ M.ui = {
         end
         return statusline.render()
       end,
+      cursor = function()
+        return "%#StText# Ln %l, Col %v, %p%% "
+      end,
     },
   },
   tabufline = {
