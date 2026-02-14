@@ -22,12 +22,6 @@ return {
         async = true,
       })
 
-      opts.keymap = vim.tbl_deep_extend("force", opts.keymap or {}, {
-        ["<Tab>"] = { "select_and_accept", "fallback" },
-        ["<C-n>"] = { "select_next", "fallback_to_mappings" },
-        ["<C-p>"] = { "select_prev", "fallback_to_mappings" },
-      })
-
       opts.cmdline = vim.tbl_deep_extend("force", opts.cmdline or {}, {
         keymap = {
           preset = "cmdline",

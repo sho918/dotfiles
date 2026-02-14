@@ -27,8 +27,8 @@
 | Basic        | `;`                 | Command line                           |
 | Basic        | `<Esc>`             | Clear multicursor/search highlight     |
 | Completion   | Insert `<Tab>`      | Confirm selected completion            |
-| Completion   | Insert `<C-p>`      | Select previous completion             |
-| Completion   | Insert `<C-n>`      | Select next completion                 |
+| Movement     | Insert `<C-p>`      | Move up                                |
+| Movement     | Insert `<C-n>`      | Move down                              |
 | Movement     | Insert `<C-b>`      | Move left                              |
 | Movement     | Insert `<C-f>`      | Move right                             |
 | Oil          | Normal `<C-n>`      | Oil: Move down                         |

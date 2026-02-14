@@ -30,8 +30,30 @@ end
 map("n", ";", ":", { desc = "CMD enter command mode" })
 
 -- Insert mode cursor moves
+map("i", "<C-p>", "<Up>", { desc = "Move cursor up" })
+map("i", "<C-n>", "<Down>", { desc = "Move cursor down" })
 map("i", "<C-b>", "<Left>", { desc = "Move cursor left" })
 map("i", "<C-f>", "<Right>", { desc = "Move cursor right" })
+
+-- Completion: keep keymap definitions in this file
+local blink_tab_group = vim.api.nvim_create_augroup("BlinkTabConfirm", { clear = true })
+vim.api.nvim_create_autocmd("InsertEnter", {
+  group = blink_tab_group,
+  callback = function(args)
+    vim.schedule(function()
+      if not vim.api.nvim_buf_is_valid(args.buf) then
+        return
+      end
+      vim.keymap.set("i", "<Tab>", function()
+        local ok, cmp = pcall(require, "blink.cmp")
+        if ok and cmp.select_and_accept() then
+          return ""
+        end
+        return "<Tab>"
+      end, { buffer = args.buf, expr = true, silent = true, desc = "Completion: Tab accept or tab" })
+    end)
+  end,
+})
 
 -- Save
 map("n", "<leader>ww", "<cmd>w<cr>", { desc = "Save" })
