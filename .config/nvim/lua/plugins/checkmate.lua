@@ -3,6 +3,8 @@ return {
   {
     "bngarren/checkmate.nvim",
     ft = { "markdown" },
-    opts = {},
+    opts = {
+      files = { "*.md" },
+    },
   },
 }

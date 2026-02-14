@@ -227,7 +227,7 @@
 - `windwp/nvim-ts-autotag`
 - `nvim-treesitter/nvim-treesitter-context`
 - `folke/todo-comments.nvim`
-- `bngarren/checkmate.nvim`
+- `bngarren/checkmate.nvim` (enabled for `*.md`; not applied to `asciidoc`)
 
 **Disabled**
 
