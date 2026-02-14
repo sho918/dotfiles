@@ -227,6 +227,7 @@
 - `windwp/nvim-ts-autotag`
 - `nvim-treesitter/nvim-treesitter-context`
 - `folke/todo-comments.nvim`
+- `bngarren/checkmate.nvim`
 
 **Disabled**
 
