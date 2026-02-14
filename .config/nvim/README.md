@@ -125,17 +125,11 @@
 | Substitute   | `gr`                | Replace operator                       |
 | Substitute   | `grr`               | Replace line                           |
 | Substitute   | Visual `gr`         | Replace selection                      |
-| CopilotChat  | `<leader>ag`        | Chat                                   |
-| Claude Code  | `<leader>ac`        | Toggle Claude Code                     |
-| Claude Code  | `<leader>af`        | Focus Claude Code                      |
-| Claude Code  | `<leader>ar`        | Resume Claude Code                     |
-| Claude Code  | `<leader>aC`        | Continue Claude Code                   |
-| Claude Code  | `<leader>am`        | Select Claude model                    |
-| Claude Code  | `<leader>ab`        | Add current buffer                     |
-| Claude Code  | `<leader>aB`        | Add file from tree                     |
-| Claude Code  | Visual `<leader>as` | Send selection                         |
-| Claude Code  | `<leader>aa`        | Accept diff                            |
-| Claude Code  | `<leader>ad`        | Deny diff                              |
+| Avante       | `<leader>aa`        | Ask                                    |
+| Avante       | `<leader>ac`        | Toggle sidebar                         |
+| Avante       | `<leader>ae`        | Edit with instructions                 |
+| Avante       | `<leader>af`        | Focus sidebar                          |
+| Avante       | `<leader>ar`        | Refresh                                |
 
 ### NvChad defaults (active in this config)
 
@@ -174,8 +168,8 @@
 **Completion/AI**
 
 - `saghen/blink.cmp`, `fang2hou/blink-copilot`
-- `zbirenbaum/copilot.lua`, `CopilotC-Nvim/CopilotChat.nvim`
-- `coder/claudecode.nvim`
+- `zbirenbaum/copilot.lua`
+- `yetone/avante.nvim`
 
 **LSP/Format/Lint**
 
