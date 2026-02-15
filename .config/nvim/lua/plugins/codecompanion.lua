@@ -19,6 +19,14 @@ return {
         action_palette = {
           provider = "snacks",
         },
+        chat = {
+          window = {
+            layout = "float",
+          },
+        },
+      },
+      opts = {
+        language = "Japanese",
       },
     },
     dependencies = {

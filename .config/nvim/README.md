@@ -126,7 +126,7 @@
 | Substitute   | `grr`               | Replace line                           |
 | Substitute   | Visual `gr`         | Replace selection                      |
 | CodeCompanion | `<leader>aa`        | Inline assistant                       |
-| CodeCompanion | `<leader>ac`        | Toggle chat                            |
+| CodeCompanion | `<leader>ac`        | Toggle chat (floating window)          |
 | CodeCompanion | `<leader>af`        | Actions palette                        |
 | CodeCompanion | Visual `<leader>ae` | Explain selection                      |
 
