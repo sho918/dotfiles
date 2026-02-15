@@ -33,6 +33,12 @@ return {
       selector = {
         provider = "snacks",
       },
+      windows = {
+        ask = {
+          floating = true,
+          start_insert = true,
+        },
+      },
     },
     dependencies = {
       "nvim-lua/plenary.nvim",

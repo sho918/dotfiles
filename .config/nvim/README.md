@@ -125,7 +125,7 @@
 | Substitute   | `gr`                | Replace operator                       |
 | Substitute   | `grr`               | Replace line                           |
 | Substitute   | Visual `gr`         | Replace selection                      |
-| Avante       | `<leader>aa`        | Ask                                    |
+| Avante       | `<leader>aa`        | Ask (floating prompt)                  |
 | Avante       | `<leader>ac`        | Toggle sidebar                         |
 | Avante       | `<leader>ae`        | Edit with instructions                 |
 | Avante       | `<leader>af`        | Focus sidebar                          |
