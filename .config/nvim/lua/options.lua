@@ -48,6 +48,7 @@ opt.inccommand = "split"
 
 -- UI
 opt.showmode = false
+opt.cmdheight = 0
 
 -- Persistent undo
 opt.undofile = true
