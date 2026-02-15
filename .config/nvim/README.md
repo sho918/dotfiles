@@ -231,3 +231,4 @@
 ## Mini Module Scope
 
 - Enabled: `mini.cursorword`, `mini.indentscope`, `mini.trailspace`, `mini.extra`
+- Trailing full-width spaces (`U+3000`) are also highlighted.
