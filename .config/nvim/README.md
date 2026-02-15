@@ -201,6 +201,7 @@
 - `folke/flash.nvim`
 - `jake-stewart/multicursor.nvim`
 - `rapan931/lasterisk.nvim`
+- `echasnovski/mini.nvim` (`mini.cursorword`, `mini.indentscope`, `mini.trailspace`, `mini.extra`)
 - `kevinhwang91/nvim-bqf`
 - `kevinhwang91/nvim-ufo`, `kevinhwang91/promise-async`
 - `tris203/precognition.nvim`
@@ -226,3 +227,7 @@
 
 - `nvim-tree/nvim-tree.lua`
 - `nvim-telescope/telescope.nvim`
+
+## Mini Module Scope
+
+- Enabled: `mini.cursorword`, `mini.indentscope`, `mini.trailspace`, `mini.extra`
