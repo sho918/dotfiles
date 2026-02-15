@@ -261,9 +261,8 @@ map("n", "gr", module_call("substitute", "operator"), { desc = "Replace with reg
 map("n", "grr", module_call("substitute", "line"), { desc = "Replace line with register" })
 map("x", "gr", module_call("substitute", "visual"), { desc = "Replace with register" })
 
--- Avante
-map("n", "<leader>aa", "<cmd>AvanteAsk<cr>", { desc = "Avante Ask" })
-map("n", "<leader>ac", "<cmd>AvanteToggle<cr>", { desc = "Avante Toggle" })
-map("n", "<leader>ae", "<cmd>AvanteEdit<cr>", { desc = "Avante Edit" })
-map("n", "<leader>af", "<cmd>AvanteFocus<cr>", { desc = "Avante Focus" })
-map("n", "<leader>ar", "<cmd>AvanteRefresh<cr>", { desc = "Avante Refresh" })
+-- CodeCompanion
+map("n", "<leader>aa", "<cmd>CodeCompanion<cr>", { desc = "CodeCompanion: Inline Assistant" })
+map("n", "<leader>ac", "<cmd>CodeCompanionChat Toggle<cr>", { desc = "CodeCompanion: Toggle Chat" })
+map("n", "<leader>af", "<cmd>CodeCompanionActions<cr>", { desc = "CodeCompanion: Actions" })
+map("v", "<leader>ae", ":<C-u>'<,'>CodeCompanion /explain<CR>", { desc = "CodeCompanion: Explain Selection" })

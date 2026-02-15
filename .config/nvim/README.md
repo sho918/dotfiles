@@ -125,11 +125,10 @@
 | Substitute   | `gr`                | Replace operator                       |
 | Substitute   | `grr`               | Replace line                           |
 | Substitute   | Visual `gr`         | Replace selection                      |
-| Avante       | `<leader>aa`        | Ask (floating prompt)                  |
-| Avante       | `<leader>ac`        | Toggle sidebar                         |
-| Avante       | `<leader>ae`        | Edit with instructions                 |
-| Avante       | `<leader>af`        | Focus sidebar                          |
-| Avante       | `<leader>ar`        | Refresh                                |
+| CodeCompanion | `<leader>aa`        | Inline assistant                       |
+| CodeCompanion | `<leader>ac`        | Toggle chat                            |
+| CodeCompanion | `<leader>af`        | Actions palette                        |
+| CodeCompanion | Visual `<leader>ae` | Explain selection                      |
 
 ### NvChad defaults (active in this config)
 
@@ -169,7 +168,7 @@
 
 - `saghen/blink.cmp`, `fang2hou/blink-copilot`
 - `zbirenbaum/copilot.lua`
-- `yetone/avante.nvim`
+- `olimorris/codecompanion.nvim`
 
 **LSP/Format/Lint**
 
