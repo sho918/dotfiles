@@ -95,4 +95,6 @@ npx skills add https://github.com/vercel-labs/agent-skills --skill vercel-compos
 
 # database
 npx skills add https://github.com/supabase/agent-skills --skill supabase-postgres-best-practices
+
+# Add https://github.com/obra/superpowers
 ```
