@@ -35,6 +35,14 @@
 | Oil          | Normal `<C-p>`      | Oil: Move up                           |
 | Save/Quit    | `<leader>ww`        | Save                                   |
 | Save/Quit    | `<leader>q`         | Close buffer                           |
+| Buffer       | `<leader>bb`        | New buffer                             |
+| Buffer       | `<leader>bn`        | Next buffer                            |
+| Buffer       | `<leader>bp`        | Previous buffer                        |
+| Buffer       | `<leader>bd`        | Delete buffer                          |
+| Buffer       | `<leader>bD`        | Force delete buffer                    |
+| Buffer       | `<leader>bl`        | Last buffer                            |
+| Buffer       | `<leader>br`        | Reload current buffer                  |
+| Buffer       | `<leader>bo`        | Delete other buffers                   |
 | Split        | `<leader>-`         | Horizontal split                       |
 | Split        | `<leader>\`         | Vertical split                         |
 | Window       | `<C-h>`             | Move left window (smart-splits)        |
@@ -152,7 +160,7 @@
 | WhichKey  | `<leader>wK` | WhichKey list                |
 | WhichKey  | `<leader>wk` | WhichKey query               |
 | Theme     | `<leader>th` | Theme picker                 |
-| Tabufline | `<leader>b`  | New buffer                   |
+| Tabufline | `<leader>b`  | Disabled (used as buffer prefix) |
 | Tabufline | `<tab>`      | Next buffer                  |
 | Tabufline | `<S-tab>`    | Previous buffer              |
 | Tabufline | `<leader>x`  | Close buffer                 |

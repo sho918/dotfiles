@@ -26,6 +26,33 @@ local function multicursor_call(method, ...)
   end
 end
 
+local function close_other_buffers()
+  local current = vim.api.nvim_get_current_buf()
+  local closed = 0
+  local skipped = 0
+
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if buf ~= current and vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].buflisted then
+      if vim.bo[buf].modified then
+        skipped = skipped + 1
+      else
+        local ok = pcall(vim.api.nvim_buf_delete, buf, { force = false })
+        if ok then
+          closed = closed + 1
+        else
+          skipped = skipped + 1
+        end
+      end
+    end
+  end
+
+  if skipped > 0 then
+    vim.notify(("Closed %d buffer(s), skipped %d modified/locked buffer(s)"):format(closed, skipped), vim.log.levels.INFO)
+  else
+    vim.notify(("Closed %d buffer(s)"):format(closed), vim.log.levels.INFO)
+  end
+end
+
 -- Basics
 map("n", ";", ":", { desc = "CMD enter command mode" })
 
@@ -57,6 +84,17 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 
 -- Save
 map("n", "<leader>ww", "<cmd>w<cr>", { desc = "Save" })
+
+-- Buffers
+pcall(vim.keymap.del, "n", "<leader>b")
+map("n", "<leader>bb", "<cmd>enew<cr>", { desc = "Buffer: New" })
+map("n", "<leader>bn", "<cmd>bnext<cr>", { desc = "Buffer: Next" })
+map("n", "<leader>bp", "<cmd>bprevious<cr>", { desc = "Buffer: Prev" })
+map("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Buffer: Delete" })
+map("n", "<leader>bD", "<cmd>bdelete!<cr>", { desc = "Buffer: Force Delete" })
+map("n", "<leader>bl", "<cmd>b#<cr>", { desc = "Buffer: Last" })
+map("n", "<leader>br", "<cmd>edit<cr>", { desc = "Buffer: Reload" })
+map("n", "<leader>bo", close_other_buffers, { desc = "Buffer: Delete Others" })
 
 -- Window splits / move
 map("n", "<leader>-", "<cmd>split<cr>", { desc = "Split Below" })
