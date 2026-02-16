@@ -5,7 +5,6 @@
   "blame-column.nvim": { "branch": "main", "commit": "af31fdd83905d1a07a115ac28ba93bbf93940bfc" },
   "blink-copilot": { "branch": "main", "commit": "7ad8209b2f880a2840c94cdcd80ab4dc511d4f39" },
   "blink.cmp": { "branch": "main", "commit": "4b18c32adef2898f95cdef6192cbd5796c1a332d" },
-  "checkmate.nvim": { "branch": "main", "commit": "fc8edd6ecf8e4095ef878780e4bed83cc5c56c14" },
   "codecompanion.nvim": { "branch": "main", "commit": "42cf6d1637fc8934421fe69745fd01098068ece6" },
   "conform.nvim": { "branch": "master", "commit": "c2526f1cde528a66e086ab1668e996d162c75f4f" },
   "copilot.lua": { "branch": "master", "commit": "3faffefbd6ddeb52578535ec6b730e0b72d7fd1a" },
