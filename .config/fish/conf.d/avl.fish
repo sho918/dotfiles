@@ -1,7 +1,16 @@
 function avl --description "aws-vault login with fzf profile picker"
     if test (count $argv) -gt 0
+        set -l escaped_args (string escape --style=script -- $argv)
+        set -l expanded_cmd "aws-vault login "(string join " " -- $escaped_args)
+
         command aws-vault login $argv
-        return $status
+        set -l login_status $status
+
+        if status is-interactive
+            builtin history append -- $expanded_cmd
+        end
+
+        return $login_status
     end
 
     if not command -q aws-vault
@@ -36,5 +45,15 @@ function avl --description "aws-vault login with fzf profile picker"
         return 1
     end
 
+    set -l escaped_profile (string escape --style=script -- $profile)
+    set -l expanded_cmd "aws-vault login $escaped_profile"
+
     command aws-vault login "$profile"
+    set -l login_status $status
+
+    if status is-interactive
+        builtin history append -- $expanded_cmd
+    end
+
+    return $login_status
 end
