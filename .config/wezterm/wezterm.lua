@@ -48,6 +48,10 @@ config.hyperlink_rules = {
     format = "$0",
   },
   {
+    regex = [[\bhttps?://localhost(?::\d{1,5})?\S*\b]],
+    format = "$0",
+  },
+  {
     regex = [[\bhttps?://(?:[\d]{1,3}\.){3}[\d]{1,3}\S*\b]],
     format = "$0",
   },
