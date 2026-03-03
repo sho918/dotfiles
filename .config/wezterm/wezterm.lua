@@ -44,15 +44,15 @@ config.quick_select_patterns = {
 -- https://wezterm.org/config/lua/config/hyperlink_rules.html
 config.hyperlink_rules = {
   {
-    regex = [[\bhttps?://[\w.-]+\.[a-zA-Z]{2,15}\S*\b]],
+    regex = [[\bhttps://[\w.-]+\.[a-zA-Z]{2,15}\S*\b]],
     format = "$0",
   },
   {
-    regex = [[\bhttps?://localhost(?::\d{1,5})?\S*\b]],
+    regex = [[\bhttps?://(?:localhost|127\.0\.0\.1)(?::\d{1,5})?\S*\b]],
     format = "$0",
   },
   {
-    regex = [[\bhttps?://(?:[\d]{1,3}\.){3}[\d]{1,3}\S*\b]],
+    regex = [[\bhttps://(?:[\d]{1,3}\.){3}[\d]{1,3}\S*\b]],
     format = "$0",
   },
 }
