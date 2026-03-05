@@ -326,7 +326,7 @@ show_preview() {
 
   if [ -n "$ref" ] && [ "$ref" != "-" ]; then
     printf '\n%sRecent Commits%s\n' "$c_section" "$c_reset"
-    git log --oneline -n 20 "$ref" 2>/dev/null | sed -n '1,40p'
+    git log --pretty=format:'%h %cd %s' --date=format-local:'%Y-%m-%d %H:%M' -n 20 "$ref" 2>/dev/null | sed -n '1,40p'
   fi
 }
 
