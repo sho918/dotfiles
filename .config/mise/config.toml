@@ -2,6 +2,7 @@
 node = "latest"
 "npm:@anthropic-ai/claude-code" = "latest"
 "npm:@fission-ai/openspec" = "latest"
+"npm:@googleworkspace/cli" = "latest"
 "npm:@openai/codex" = "latest"
 python = "latest"
 stylua = "2.3.1"
