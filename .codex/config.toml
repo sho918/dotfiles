@@ -1,6 +1,7 @@
-model = "gpt-5.3-codex"
+model = "gpt-5.4"
 model_reasoning_effort = "xhigh"
 plan_mode_reasoning_effort = "xhigh"
+service_tier = "fast"
 
 # sandbox_mode = "workspace-write"
 network_access = true
