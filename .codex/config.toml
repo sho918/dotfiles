@@ -1,5 +1,6 @@
 model = "gpt-5.3-codex"
 model_reasoning_effort = "xhigh"
+plan_mode_reasoning_effort = "xhigh"
 
 # sandbox_mode = "workspace-write"
 network_access = true
@@ -10,6 +11,9 @@ personality = "pragmatic"
 shell_snapshot = true
 multi_agent = true
 apps = true
+js_repl = true
+prevent_idle_sleep = true
+voice_transcription = true
 
 [tui]
 notifications = true
