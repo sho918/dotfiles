@@ -41,6 +41,9 @@ brew "yukiarrr/tap/ecsk"
 cask "session-manager-plugin"
 cask "aws-vault-binary"
 
+# GCP
+cask "gcloud-cli"
+
 # Font
 cask "font-jetbrains-mono"
 cask "font-jetbrains-mono-nerd-font"
