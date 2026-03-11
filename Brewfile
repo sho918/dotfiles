@@ -75,7 +75,7 @@ cask "notion-calendar"
 cask "discord"
 
 # App - Dev
-cask "wezterm"
+cask "wezterm@latest"
 cask "obsidian"
 cask "cursor"
 cask "visual-studio-code@insiders"
