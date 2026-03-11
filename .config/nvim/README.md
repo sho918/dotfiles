@@ -5,6 +5,15 @@
 - Leader: `<Space>`
 - Plugin manager: `lazy.nvim`
 - Tabline: theme toggle button is disabled
+- Bare `nvim` and `nvim .` start with `snacks.dashboard` instead of NvChad `nvdash`
+
+## Startup Dashboard
+
+- The startup screen is powered by `snacks.dashboard`.
+- Starting with a single directory argument keeps that directory as `cwd` and still opens the dashboard.
+- `Recent Projects` is inferred from the project roots of recently opened files.
+- Selecting a project switches to that directory and immediately opens the file picker there.
+- The startup shortcuts are intentionally minimal: find files, grep, recent files, config, and quit.
 
 ## Formatting
 
