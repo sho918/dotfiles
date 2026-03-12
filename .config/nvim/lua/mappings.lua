@@ -26,6 +26,35 @@ local function multicursor_call(method, ...)
   end
 end
 
+local function native_join_keys()
+  return "J"
+end
+
+local function smart_join_keys()
+  if vim.v.count > 0 then
+    return native_join_keys()
+  end
+
+  local ok, splitjoin = pcall(require, "mini.splitjoin")
+  if not ok then
+    return native_join_keys()
+  end
+
+  local _, helper = debug.getupvalue(splitjoin.operator, 2)
+  if type(helper) ~= "table" then
+    return native_join_keys()
+  end
+
+  local opts = helper.get_opts()
+  local region = helper.find_smallest_bracket_region(opts.position, opts.detect.brackets)
+  if region == nil or #helper.find_join_positions(region) == 0 then
+    return native_join_keys()
+  end
+
+  -- Use splitjoin's operator mapping path so `.` repeat keeps working.
+  return splitjoin.operator("join") .. " "
+end
+
 local function close_other_buffers()
   local current = vim.api.nvim_get_current_buf()
   local closed = 0
@@ -47,7 +76,10 @@ local function close_other_buffers()
   end
 
   if skipped > 0 then
-    vim.notify(("Closed %d buffer(s), skipped %d modified/locked buffer(s)"):format(closed, skipped), vim.log.levels.INFO)
+    vim.notify(
+      ("Closed %d buffer(s), skipped %d modified/locked buffer(s)"):format(closed, skipped),
+      vim.log.levels.INFO
+    )
   else
     vim.notify(("Closed %d buffer(s)"):format(closed), vim.log.levels.INFO)
   end
@@ -99,6 +131,7 @@ map("n", "<leader>bo", close_other_buffers, { desc = "Buffer: Delete Others" })
 -- Window splits / move
 map("n", "<leader>-", "<cmd>split<cr>", { desc = "Split Below" })
 map("n", "<leader>\\", "<cmd>vsplit<cr>", { desc = "Split Right" })
+map("n", "J", smart_join_keys, { desc = "Join line or arguments", expr = true })
 map("n", "<C-h>", module_call("smart-splits", "move_cursor_left"), { desc = "Go to left window" })
 map("n", "<C-j>", module_call("smart-splits", "move_cursor_down"), { desc = "Go to lower window" })
 map("n", "<C-k>", module_call("smart-splits", "move_cursor_up"), { desc = "Go to upper window" })

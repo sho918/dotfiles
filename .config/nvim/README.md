@@ -29,37 +29,48 @@
 
 ## Keybindings
 
-### Custom overrides (`lua/mappings.lua`)
+### Custom overrides and plugin-generated maps
 
-| Category     | Keys                | Description                            |
-| ------------ | ------------------- | -------------------------------------- |
-| Basic        | `;`                 | Command line                           |
-| Basic        | `<Esc>`             | Clear multicursor/search highlight     |
-| Completion   | Insert `<Tab>`      | Confirm selected completion            |
-| Movement     | Insert `<C-p>`      | Move up                                |
-| Movement     | Insert `<C-n>`      | Move down                              |
-| Movement     | Insert `<C-b>`      | Move left                              |
-| Movement     | Insert `<C-f>`      | Move right                             |
-| Oil          | Normal `<C-n>`      | Oil: Move down                         |
-| Oil          | Normal `<C-p>`      | Oil: Move up                           |
-| Save/Quit    | `<leader>ww`        | Save                                   |
-| Save/Quit    | `<leader>q`         | Close buffer                           |
-| Buffer       | `<leader>bb`        | New buffer                             |
-| Buffer       | `<leader>bn`        | Next buffer                            |
-| Buffer       | `<leader>bp`        | Previous buffer                        |
-| Buffer       | `<leader>bd`        | Delete buffer                          |
-| Buffer       | `<leader>bD`        | Force delete buffer                    |
-| Buffer       | `<leader>bl`        | Last buffer                            |
-| Buffer       | `<leader>br`        | Reload current buffer                  |
-| Buffer       | `<leader>bo`        | Delete other buffers                   |
-| Split        | `<leader>-`         | Horizontal split                       |
-| Split        | `<leader>\`         | Vertical split                         |
-| Window       | `<C-h>`             | Move left window (smart-splits)        |
-| Window       | `<C-j>`             | Move down window (smart-splits)        |
-| Window       | `<C-k>`             | Move up window (smart-splits)          |
-| Window       | `<C-l>`             | Move right window (smart-splits)       |
-| Line Move    | Visual `<C-j>`      | Move selection down                    |
-| Line Move    | Visual `<C-k>`      | Move selection up                      |
+| Category     | Keys                | Description                                           |
+| ------------ | ------------------- | ----------------------------------------------------- |
+| Basic        | `;`                 | Command line                                          |
+| Basic        | `<Esc>`             | Clear multicursor/search highlight                    |
+| Completion   | Insert `<Tab>`      | Confirm selected completion                           |
+| Movement     | Insert `<C-p>`      | Move up                                               |
+| Movement     | Insert `<C-n>`      | Move down                                             |
+| Movement     | Insert `<C-b>`      | Move left                                             |
+| Movement     | Insert `<C-f>`      | Move right                                            |
+| Oil          | Normal `<C-n>`      | Oil: Move down                                        |
+| Oil          | Normal `<C-p>`      | Oil: Move up                                          |
+| Save/Quit    | `<leader>ww`        | Save                                                  |
+| Save/Quit    | `<leader>q`         | Close buffer                                          |
+| Buffer       | `<leader>bb`        | New buffer                                            |
+| Buffer       | `<leader>bn`        | Next buffer                                           |
+| Buffer       | `<leader>bp`        | Previous buffer                                       |
+| Buffer       | `<leader>bd`        | Delete buffer                                         |
+| Buffer       | `<leader>bD`        | Force delete buffer                                   |
+| Buffer       | `<leader>bl`        | Last buffer                                           |
+| Buffer       | `<leader>br`        | Reload current buffer                                 |
+| Buffer       | `<leader>bo`        | Delete other buffers                                  |
+| Split        | `<leader>-`         | Horizontal split                                      |
+| Split        | `<leader>\`         | Vertical split                                        |
+| Editing      | `J`                 | Join arguments in brackets, otherwise native line join |
+| Editing      | `gS`                | Toggle split/join arguments (`mini.splitjoin`)        |
+| Editing      | `ga`                | Align without preview (`mini.align`)                  |
+| Editing      | `gA`                | Align with preview (`mini.align`)                     |
+| Window       | `<C-h>`             | Move left window (smart-splits)                       |
+| Window       | `<C-j>`             | Move down window (smart-splits)                       |
+| Window       | `<C-k>`             | Move up window (smart-splits)                         |
+| Window       | `<C-l>`             | Move right window (smart-splits)                      |
+| Line Move    | Visual `<C-j>`      | Move selection down                                   |
+| Line Move    | Visual `<C-k>`      | Move selection up                                     |
+| Line Move    | Normal `<M-l>`      | Move current line right (`mini.move`)                 |
+| Line Move    | Normal `<M-j>`      | Move current line down (`mini.move`)                  |
+| Line Move    | Normal `<M-k>`      | Move current line up (`mini.move`)                    |
+| Line Move    | Visual `<M-h>`      | Move selection left (`mini.move`)                     |
+| Line Move    | Visual `<M-l>`      | Move selection right (`mini.move`)                    |
+| Line Move    | Visual `<M-j>`      | Move selection down (`mini.move`)                     |
+| Line Move    | Visual `<M-k>`      | Move selection up (`mini.move`)                       |
 | Git          | `<leader>gg`        | LazyGit                                |
 | Git          | `<leader>gl`        | LazyGit log                            |
 | Git          | `<leader>gf`        | LazyGit current file                   |
@@ -218,7 +229,7 @@
 - `folke/flash.nvim`
 - `jake-stewart/multicursor.nvim`
 - `rapan931/lasterisk.nvim`
-- `echasnovski/mini.nvim` (`mini.cursorword`, `mini.indentscope`, `mini.trailspace`, `mini.extra`)
+- `echasnovski/mini.nvim` (`mini.align`, `mini.cursorword`, `mini.extra`, `mini.move`, `mini.splitjoin`, `mini.trailspace`)
 - `kevinhwang91/nvim-bqf`
 - `kevinhwang91/nvim-ufo`, `kevinhwang91/promise-async`
 - `tris203/precognition.nvim`
@@ -246,5 +257,6 @@
 
 ## Mini Module Scope
 
-- Enabled: `mini.cursorword`, `mini.indentscope`, `mini.trailspace`, `mini.extra`
+- Enabled: `mini.align`, `mini.cursorword`, `mini.extra`, `mini.move`, `mini.splitjoin`, `mini.trailspace`
+- `mini.move` keeps default mappings except Normal `<M-h>`, which stays bound to NvChad's horizontal terminal toggle.
 - Trailing full-width spaces (`U+3000`) are also highlighted.

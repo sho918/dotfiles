@@ -4,7 +4,14 @@ return {
     "echasnovski/mini.nvim",
     event = "VeryLazy",
     config = function()
+      require("mini.align").setup()
       require("mini.cursorword").setup()
+      require("mini.move").setup {
+        mappings = {
+          line_left = "",
+        },
+      }
+      require("mini.splitjoin").setup()
       require("mini.trailspace").setup()
       require("mini.extra").setup()
 
