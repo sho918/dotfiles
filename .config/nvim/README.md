@@ -208,6 +208,7 @@
 **Python/Venv**
 
 - `linux-cultist/venv-selector.nvim`
+- `venv-selector.nvim` keeps `vim.notify` owned by `noice.nvim` (`override_notify = false`) to avoid notification handler conflicts
 
 **Search/File**
 

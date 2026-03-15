@@ -7,6 +7,7 @@ return {
     opts = {
       options = {
         picker = "snacks",
+        override_notify = false,
       },
     },
   },
