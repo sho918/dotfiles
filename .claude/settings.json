@@ -6,7 +6,8 @@
   "permissions": {
     "allow": [],
     "deny": ["Bash(aws:*)", "Bash(aws-vault:*)"],
-    "defaultMode": "plan"
+    "defaultMode": "plan",
+    "disableBypassPermissionsMode": "disable"
   },
   "model": "opus",
   "hooks": {
@@ -21,6 +22,10 @@
         ]
       }
     ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "allowUnsandboxedCommands": false
   },
   "statusLine": {
     "type": "command",
