@@ -48,3 +48,12 @@ notifications = true
 # [mcp_servers.chrome-devtools]
 # command = "npx"
 # args = ["chrome-devtools-mcp@latest"]
+
+# https://docs.datadoghq.com/bits_ai/mcp_server/setup/?tab=codex
+# [mcp_servers.datadog]
+# url = "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp"
+
+# https://docs.sentry.io/ai/mcp/#codex
+# [mcp_servers.sentry]
+# url = "https://mcp.sentry.dev/mcp"
+
