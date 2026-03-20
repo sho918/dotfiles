@@ -1,0 +1,2 @@
+# Keep Atuin aligned with fish's custom history exclusion rules.
+history_filter = ["^avl(\\s|$)"]

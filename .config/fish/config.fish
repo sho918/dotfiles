@@ -26,10 +26,17 @@ set -x XDG_CONFIG_HOME "$HOME/.config"
 #
 # FZF
 #
-fzf_configure_bindings --directory=\ct --git_log= --git_status= --history=\cr --processes= --variables=
+fzf_configure_bindings --directory=\ct --git_log= --git_status= --processes= --variables=
 set fzf_preview_dir_cmd eza --all --color=always
 set fzf_fd_opts --hidden --max-depth 5
 set -x GHQ_SELECTOR fzf-tmux
+
+#
+# Atuin
+#
+if type -q atuin
+    atuin init fish | source
+end
 
 #
 # Zoxide

@@ -10,6 +10,7 @@ brew "fzf"
 brew "bat"
 brew "fd"
 brew "zoxide"
+brew "atuin"
 
 # Dev
 brew "mise"
