@@ -93,6 +93,49 @@ list_worktrees() {
   '
 }
 
+find_worktree_path_for_branch() {
+  target_branch=${1:-}
+
+  [ -n "$target_branch" ] || return 1
+
+  git worktree list --porcelain | awk -v target_branch="$target_branch" '
+    function short_branch(ref, v) {
+      v = ref
+      sub(/^refs\/heads\//, "", v)
+      return v
+    }
+    function flush() {
+      if (!found && path != "" && branch != "" && short_branch(branch) == target_branch) {
+        print path
+        found = 1
+        exit
+      }
+    }
+    /^worktree / {
+      flush()
+      path = substr($0, 10)
+      branch = ""
+      next
+    }
+    /^branch / {
+      branch = substr($0, 8)
+      next
+    }
+    /^$/ {
+      flush()
+      path = ""
+      branch = ""
+      next
+    }
+    END {
+      flush()
+      if (!found) {
+        exit 1
+      }
+    }
+  '
+}
+
 list_local_branches() {
   git for-each-ref --format='LOCAL%09%(refname:short)%09%(refname:short)%09%(upstream:short)%09%(objectname:short)' refs/heads \
     | awk -F '\t' '{
@@ -426,6 +469,11 @@ run_action() {
   fi
 
   if [ "$has_l" = "1" ]; then
+    existing_worktree_path=$(find_worktree_path_for_branch "$local_ref" || true)
+    if [ -n "$existing_worktree_path" ]; then
+      printf '%s\n' "$existing_worktree_path"
+      return 0
+    fi
     git switch "$local_ref"
     return 0
   fi
