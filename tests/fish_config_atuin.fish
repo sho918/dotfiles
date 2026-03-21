@@ -68,6 +68,11 @@ end
 
 set -l atuin_first (sed -n '1p' "$TEST_ATUIN_LOG")
 set -l atuin_second (sed -n '2p' "$TEST_ATUIN_LOG")
+set -l atuin_third (sed -n '3p' "$TEST_ATUIN_LOG")
 if test "$atuin_first" != "init"; or test "$atuin_second" != "fish"
     fail "atuin init fish was not called"
+end
+
+if test "$atuin_third" != "--disable-up-arrow"
+    fail "atuin init fish did not disable the up arrow binding"
 end
