@@ -29,6 +29,29 @@ set -x XDG_CONFIG_HOME "$HOME/.config"
 if type -q tv
     tv init fish | source
 
+    function tv_shell_history
+        set -l current_prompt (commandline -cp)
+
+        # Move to the next line so the prompt is not overwritten by tv.
+        printf "\n"
+
+        set -l output (
+            tv fish-history \
+                --input "$current_prompt" \
+                --inline \
+                --no-status-bar \
+                --show-preview \
+                --preview-word-wrap
+        )
+
+        if test -n "$output"
+            commandline -r "$output"
+        end
+
+        printf "\033[A"
+        commandline -f repaint
+    end
+
     function tv_ghq_cd
         if not type -q ghq
             commandline -f repaint
