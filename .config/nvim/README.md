@@ -6,6 +6,7 @@
 - Plugin manager: `lazy.nvim`
 - Tabline: theme toggle button is disabled
 - Bare `nvim` and `nvim .` start with `snacks.dashboard` instead of NvChad `nvdash`
+- Oil shows dotfiles by default; use `g.` inside Oil to toggle hidden entries
 
 ## Startup Dashboard
 
@@ -42,6 +43,7 @@
 | Movement     | Insert `<C-f>`      | Move right                                            |
 | Oil          | Normal `<C-n>`      | Oil: Move down                                        |
 | Oil          | Normal `<C-p>`      | Oil: Move up                                          |
+| Oil          | Normal `g.`         | Oil: Toggle hidden files                              |
 | Save/Quit    | `<leader>ww`        | Save                                                  |
 | Save/Quit    | `<leader>q`         | Close buffer                                          |
 | Buffer       | `<leader>bb`        | New buffer                                            |
@@ -105,7 +107,7 @@
 | Search       | `<leader>fz`        | Grep buffers                           |
 | Search       | `<leader>ma`        | Marks                                  |
 | Search       | `<leader>fa`        | Find all (hidden, ignored)             |
-| Oil          | `<leader>e`         | Oil float toggle                       |
+| Oil          | `<leader>e`         | Oil float toggle (hidden shown by default) |
 | Flash        | `s`                 | Flash jump                             |
 | Flash        | `S`                 | Flash treesitter                       |
 | Flash        | `r`                 | Flash remote                           |

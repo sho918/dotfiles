@@ -6,6 +6,9 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
       default_file_explorer = true,
+      view_options = {
+        show_hidden = true,
+      },
       float = {
         padding = 1,
         max_width = 0.6,
