@@ -207,6 +207,12 @@ fallback_channel = "files"
 # "files" = ["cat", "cp"]
 # ```
 "alias" = ["alias", "unalias"]
+"aws-vault-profiles" = [
+  "aws-vault login",
+  "aws-vault exec",
+  "aws-vault clear",
+  "aws-vault rotate",
+]
 "env" = ["export", "unset"]
 "dirs" = ["cd", "ls", "rmdir", "z"]
 "files" = [

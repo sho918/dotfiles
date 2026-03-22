@@ -6,10 +6,5 @@ function fish_should_add_to_history --description "Filter commands saved to hist
         return 1
     end
 
-    # avl appends the expanded aws-vault command manually.
-    if string match -qr '^avl(?:[[:space:]]|$)' -- $cmdline
-        return 1
-    end
-
     return 0
 end

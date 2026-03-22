@@ -1,0 +1,8 @@
+[metadata]
+name = "aws-vault-profiles"
+description = "A channel to select from aws-vault profiles"
+requirements = ["aws-vault"]
+
+[source]
+command = "aws-vault list --profiles"
+output = "{}"

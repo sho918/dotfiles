@@ -31,7 +31,6 @@ mkdir -p ~/.config/fish/{completions,conf.d}
 ln -s (PWD)/.config/fish/config.fish ~/.config/fish/
 ln -s (PWD)/.config/fish/fish_plugins ~/.config/fish/
 ln -s (PWD)/.config/fish/conf.d/abbr.fish ~/.config/fish/conf.d/
-ln -s (PWD)/.config/fish/conf.d/avl.fish ~/.config/fish/conf.d/
 ln -s (PWD)/.config/fish/conf.d/git-wt.fish ~/.config/fish/conf.d/
 ln -s (PWD)/.config/fish/conf.d/history-filter.fish ~/.config/fish/conf.d/
 ln -s (PWD)/.config/fish/completions/aws-vault.fish ~/.config/fish/completions/
