@@ -28,6 +28,40 @@ set -x XDG_CONFIG_HOME "$HOME/.config"
 #
 if type -q tv
     tv init fish | source
+
+    function tv_ghq_cd
+        if not type -q ghq
+            commandline -f repaint
+            return 1
+        end
+
+        set -l root (ghq root)
+        set -l preview_command "eza --all --color=always $root/{}"
+        if not type -q eza
+            set preview_command "ls -la $root/{}"
+        end
+
+        set -l selected (
+            tv \
+                --source-command "ghq list" \
+                --source-output "{}" \
+                --preview-command "$preview_command" \
+                --input-header "ghq" \
+                --input-prompt "repo> " \
+                --inline \
+                --no-status-bar
+        )
+
+        if test -n "$selected"
+            cd -- "$root/$selected"
+        end
+
+        commandline -f repaint
+    end
+
+    for mode in default insert
+        bind --mode $mode ctrl-g tv_ghq_cd
+    end
 end
 
 #
@@ -44,11 +78,6 @@ direnv hook fish | source
 # Jetbrains
 #
 fish_add_path $HOME/bin
-
-#
-# ghq
-#
-set -x GHQ_SELECTOR fzf-tmux
 
 #
 # GPG
