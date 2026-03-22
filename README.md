@@ -46,6 +46,8 @@ ln -s (PWD)/.config/wezterm/balance.lua ~/.config/wezterm/
 ln -s (PWD)/.config/wezterm/keybinds.lua ~/.config/wezterm/
 ln -s (PWD)/.config/navi/config.yaml ~/.config/navi/
 ln -s (PWD)/.config/navi/cheats ~/.config/navi/cheats
+test ! -e ~/.config/television || mv ~/.config/television ~/.config/television.bak
+ln -s (PWD)/.config/television ~/.config/
 ln -s (PWD)/.config/yazi/flavors ~/.config/yazi/flavors
 ln -s (PWD)/.config/yazi/theme.toml ~/.config/yazi/
 ln -s (PWD)/.config/mise/config.toml ~/.config/mise/
