@@ -10,7 +10,6 @@ brew "fzf"
 brew "bat"
 brew "fd"
 brew "zoxide"
-brew "atuin"
 
 # Dev
 brew "mise"
@@ -32,6 +31,7 @@ tap "laishulu/homebrew"
 brew "macism"
 cask "jetbrains-toolbox"
 brew "k1LoW/tap/git-wt"
+brew "television"
 
 tap "entireio/tap"
 brew "entireio/tap/entire"

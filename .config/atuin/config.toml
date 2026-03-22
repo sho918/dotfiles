@@ -1,3 +1,0 @@
-# Keep Atuin aligned with fish's custom history exclusion rules.
-invert = true
-history_filter = ["^avl(\\s|$)"]
