@@ -18,6 +18,7 @@ js_repl = true
 prevent_idle_sleep = true
 voice_transcription = true
 guardian_approval = true
+tui_app_server = true
 
 [tui]
 notifications = true
