@@ -41,6 +41,7 @@ if type -q tv
                 --inline \
                 --no-status-bar \
                 --show-preview \
+                --preview-header "Preview" \
                 --preview-word-wrap
         )
 
