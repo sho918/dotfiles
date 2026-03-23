@@ -15,5 +15,6 @@ abbr -a -g c cursor
 abbr -a -g a antigravity
 abbr -a -g gd gh dash
 abbr -a -g ga git add -A
+abbr -a -g avl aws-vault login
 
 abbr -a -g cc codex exec \"call git-commit skill and create commit in english\"
