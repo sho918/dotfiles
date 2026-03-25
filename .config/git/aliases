@@ -20,5 +20,5 @@
   pushf = push --force-with-lease --force-if-includes
   co = "!$HOME/.config/git/scripts/git-co"
   pushup = !git push --set-upstream origin `git symbolic-ref --short HEAD`
-  cleanup = !git branch -vv | awk '/: gone]/{print $1}' | xargs -I {} git branch -D {}
+  cleanup = "!$HOME/.config/git/scripts/git-cleanup"
   aliases = !git config -l | grep ^alias\\. | cut -c 7-
