@@ -7,22 +7,87 @@ die() {
   exit 1
 }
 
+log_info() {
+  printf 'git-cleanup: %s\n' "$*" >&2
+}
+
+now_seconds() {
+  date +%s
+}
+
+start_step() {
+  step=$1
+  context=${2:-}
+
+  if [ -n "$context" ]; then
+    log_info "starting $step $context"
+  else
+    log_info "starting $step"
+  fi
+
+  now_seconds
+}
+
+finish_step() {
+  step=$1
+  started_at=$2
+  context=${3:-}
+  elapsed=$(( $(now_seconds) - started_at ))
+
+  if [ -n "$context" ]; then
+    log_info "finished $step $context elapsed=${elapsed}s"
+  else
+    log_info "finished $step elapsed=${elapsed}s"
+  fi
+}
+
+fail_step() {
+  step=$1
+  started_at=$2
+  status=$3
+  context=${4:-}
+  elapsed=$(( $(now_seconds) - started_at ))
+
+  if [ -n "$context" ]; then
+    log_info "failed $step $context status=$status elapsed=${elapsed}s"
+  else
+    log_info "failed $step status=$status elapsed=${elapsed}s"
+  fi
+}
+
+count_nonempty_lines() {
+  printf '%s\n' "$1" | awk 'NF { count++ } END { print count + 0 }'
+}
+
 ensure_repo() {
   git rev-parse --is-inside-work-tree >/dev/null 2>&1 || die "not inside a Git repository"
 }
 
 list_gone_branches() {
-  git for-each-ref --format='%(refname:short)%09%(upstream:track)' refs/heads | awk -F '\t' '
+  step_started=$(start_step "list gone branches")
+
+  if refs_output=$(git for-each-ref --format='%(refname:short)%09%(upstream:track)' refs/heads); then
+    gone_branches=$(printf '%s\n' "$refs_output" | awk -F '\t' '
     index($2, "[gone]") {
       print $1
     }
-  '
+  ')
+    finish_step "list gone branches" "$step_started" "count=$(count_nonempty_lines "$gone_branches")"
+    printf '%s' "$gone_branches"
+    return 0
+  fi
+
+  status=$?
+  fail_step "list gone branches" "$step_started" "$status"
+  return "$status"
 }
 
 find_worktree_path_for_branch() {
   target_branch=$1
+  step_started=$(start_step "inspect worktrees" "branch=$target_branch")
 
-  git worktree list --porcelain | awk -v target="refs/heads/$target_branch" '
+  if worktree_list=$(git worktree list --porcelain); then
+    worktree_path=$(printf '%s\n' "$worktree_list" | awk -v target="refs/heads/$target_branch" '
     function flush() {
       if (!found && path != "" && branch_ref == target) {
         print path
@@ -52,65 +117,122 @@ find_worktree_path_for_branch() {
         exit 1
       }
     }
-  '
+  ' || true)
+    if [ -n "$worktree_path" ]; then
+      finish_step "inspect worktrees" "$step_started" "branch=$target_branch path=$worktree_path"
+      printf '%s\n' "$worktree_path"
+      return 0
+    fi
+
+    finish_step "inspect worktrees" "$step_started" "branch=$target_branch path=-"
+    return 1
+  fi
+
+  status=$?
+  fail_step "inspect worktrees" "$step_started" "$status" "branch=$target_branch"
+  return "$status"
 }
 
 is_worktree_clean() {
-  path=$1
-  status_output=$(git -C "$path" status --porcelain --untracked-files=normal)
-  [ -z "$status_output" ]
+  branch=$1
+  path=$2
+  step_started=$(start_step "check worktree cleanliness" "branch=$branch path=$path")
+
+  if status_output=$(git -C "$path" status --porcelain --untracked-files=normal); then
+    if [ -z "$status_output" ]; then
+      finish_step "check worktree cleanliness" "$step_started" "branch=$branch path=$path clean=yes"
+      return 0
+    fi
+
+    finish_step "check worktree cleanliness" "$step_started" "branch=$branch path=$path clean=no"
+    return 1
+  fi
+
+  status=$?
+  fail_step "check worktree cleanliness" "$step_started" "$status" "branch=$branch path=$path"
+  return "$status"
 }
 
 delete_branch() {
   branch=$1
-  git branch -D "$branch" >/dev/null
+  step_started=$(start_step "delete branch" "branch=$branch")
+
+  if git branch -D "$branch" >/dev/null; then
+    finish_step "delete branch" "$step_started" "branch=$branch"
+  else
+    status=$?
+    fail_step "delete branch" "$step_started" "$status" "branch=$branch"
+    return "$status"
+  fi
+
   printf 'git-cleanup: deleted branch %s\n' "$branch"
 }
 
 remove_worktree() {
   branch=$1
   path=$2
-  git worktree remove "$path" >/dev/null
+  step_started=$(start_step "remove worktree" "branch=$branch path=$path")
+
+  if git worktree remove "$path" >/dev/null; then
+    finish_step "remove worktree" "$step_started" "branch=$branch path=$path"
+  else
+    status=$?
+    fail_step "remove worktree" "$step_started" "$status" "branch=$branch path=$path"
+    return "$status"
+  fi
+
   printf 'git-cleanup: removed worktree %s for %s\n' "$path" "$branch"
 }
 
 cleanup_branch() {
   branch=$1
   current_path=$2
+  log_info "starting cleanup branch=$branch"
   worktree_path=$(find_worktree_path_for_branch "$branch" || true)
 
   if [ -z "$worktree_path" ]; then
+    log_info "cleanup branch=$branch linked_worktree=no"
     delete_branch "$branch"
+    log_info "finished cleanup branch=$branch result=deleted-branch"
     return 0
   fi
 
   if [ "$worktree_path" = "$current_path" ]; then
+    log_info "cleanup branch=$branch result=skipped reason=current-worktree path=$worktree_path"
     printf 'git-cleanup: skipped %s (current worktree: %s)\n' "$branch" "$worktree_path"
     return 0
   fi
 
   [ -d "$worktree_path" ] || die "worktree path missing for $branch: $worktree_path"
 
-  if ! is_worktree_clean "$worktree_path"; then
+  if ! is_worktree_clean "$branch" "$worktree_path"; then
+    log_info "cleanup branch=$branch result=skipped reason=dirty-worktree path=$worktree_path"
     printf 'git-cleanup: skipped %s (dirty worktree: %s)\n' "$branch" "$worktree_path"
     return 0
   fi
 
   remove_worktree "$branch" "$worktree_path"
   delete_branch "$branch"
+  log_info "finished cleanup branch=$branch result=removed-worktree-and-branch path=$worktree_path"
 }
 
 ensure_repo
 
 current_path=$(git rev-parse --show-toplevel)
+log_info "starting cleanup repo=$current_path"
 gone_branches=$(list_gone_branches)
 
 if [ -z "$gone_branches" ]; then
+  log_info "finished cleanup repo=$current_path branches=0"
   printf 'git-cleanup: nothing to clean\n'
   exit 0
 fi
+
+log_info "queued cleanup branches=$(count_nonempty_lines "$gone_branches")"
 
 printf '%s\n' "$gone_branches" | while IFS= read -r branch; do
   [ -n "$branch" ] || continue
   cleanup_branch "$branch" "$current_path"
 done
+
+log_info "finished cleanup repo=$current_path branches=$(count_nonempty_lines "$gone_branches")"
