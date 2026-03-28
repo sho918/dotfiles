@@ -2,13 +2,103 @@
 
 set -eu
 
-die() {
-  printf 'git-cleanup: %s\n' "$*" >&2
-  exit 1
+stderr_supports_color=0
+stdout_supports_color=0
+
+if [ -t 2 ]; then
+  stderr_supports_color=1
+fi
+
+if [ -t 1 ]; then
+  stdout_supports_color=1
+fi
+
+color_code() {
+  style=$1
+
+  case "$style" in
+    section)
+      printf '\033[1;34m'
+      ;;
+    progress)
+      printf '\033[2;36m'
+      ;;
+    success)
+      printf '\033[32m'
+      ;;
+    skip)
+      printf '\033[33m'
+      ;;
+    error)
+      printf '\033[31m'
+      ;;
+    reset)
+      printf '\033[0m'
+      ;;
+    *)
+      printf ''
+      ;;
+  esac
+}
+
+emit_line() {
+  fd=$1
+  style=$2
+  message=$3
+  color_enabled=$stdout_supports_color
+
+  if [ "$fd" -eq 2 ]; then
+    color_enabled=$stderr_supports_color
+  fi
+
+  if [ "$color_enabled" -eq 1 ]; then
+    line="$(color_code "$style")git-cleanup: $message$(color_code reset)"
+  else
+    line="git-cleanup: $message"
+  fi
+
+  if [ "$fd" -eq 2 ]; then
+    printf '%s\n' "$line" >&2
+  else
+    printf '%s\n' "$line"
+  fi
+}
+
+log_section() {
+  emit_line 2 section "$1"
 }
 
 log_info() {
-  printf 'git-cleanup: %s\n' "$*" >&2
+  emit_line 2 progress "$1"
+}
+
+log_success() {
+  emit_line 2 success "$1"
+}
+
+log_skip() {
+  emit_line 2 skip "$1"
+}
+
+log_error() {
+  emit_line 2 error "$1"
+}
+
+print_success() {
+  emit_line 1 success "$1"
+}
+
+print_skip() {
+  emit_line 1 skip "$1"
+}
+
+die() {
+  log_error "$*"
+  exit 1
+}
+
+print_notice() {
+  emit_line 1 skip "$1"
 }
 
 now_seconds() {
@@ -49,9 +139,9 @@ fail_step() {
   elapsed=$(( $(now_seconds) - started_at ))
 
   if [ -n "$context" ]; then
-    log_info "failed $step $context status=$status elapsed=${elapsed}s"
+    log_error "failed $step $context status=$status elapsed=${elapsed}s"
   else
-    log_info "failed $step status=$status elapsed=${elapsed}s"
+    log_error "failed $step status=$status elapsed=${elapsed}s"
   fi
 }
 
@@ -165,7 +255,7 @@ delete_branch() {
     return "$status"
   fi
 
-  printf 'git-cleanup: deleted branch %s\n' "$branch"
+  print_success "deleted branch $branch"
 }
 
 remove_worktree() {
@@ -181,50 +271,64 @@ remove_worktree() {
     return "$status"
   fi
 
-  printf 'git-cleanup: removed worktree %s for %s\n' "$path" "$branch"
+  print_success "removed worktree $path for $branch"
+}
+
+start_branch_section() {
+  branch=$1
+
+  if [ "${branch_section_count:-0}" -gt 0 ]; then
+    printf '\n' >&2
+  fi
+
+  branch_section_count=$((branch_section_count + 1))
+  log_section "--- branch=$branch ---"
 }
 
 cleanup_branch() {
   branch=$1
   current_path=$2
+  start_branch_section "$branch"
   log_info "starting cleanup branch=$branch"
   worktree_path=$(find_worktree_path_for_branch "$branch" || true)
 
   if [ -z "$worktree_path" ]; then
     log_info "cleanup branch=$branch linked_worktree=no"
     delete_branch "$branch"
-    log_info "finished cleanup branch=$branch result=deleted-branch"
+    log_success "finished cleanup branch=$branch result=deleted-branch"
     return 0
   fi
 
   if [ "$worktree_path" = "$current_path" ]; then
-    log_info "cleanup branch=$branch result=skipped reason=current-worktree path=$worktree_path"
-    printf 'git-cleanup: skipped %s (current worktree: %s)\n' "$branch" "$worktree_path"
+    log_skip "cleanup branch=$branch result=skipped reason=current-worktree path=$worktree_path"
+    print_skip "skipped $branch (current worktree: $worktree_path)"
     return 0
   fi
 
   [ -d "$worktree_path" ] || die "worktree path missing for $branch: $worktree_path"
 
   if ! is_worktree_clean "$branch" "$worktree_path"; then
-    log_info "cleanup branch=$branch result=skipped reason=dirty-worktree path=$worktree_path"
-    printf 'git-cleanup: skipped %s (dirty worktree: %s)\n' "$branch" "$worktree_path"
+    log_skip "cleanup branch=$branch result=skipped reason=dirty-worktree path=$worktree_path"
+    print_skip "skipped $branch (dirty worktree: $worktree_path)"
     return 0
   fi
 
   remove_worktree "$branch" "$worktree_path"
   delete_branch "$branch"
-  log_info "finished cleanup branch=$branch result=removed-worktree-and-branch path=$worktree_path"
+  log_success "finished cleanup branch=$branch result=removed-worktree-and-branch path=$worktree_path"
 }
 
 ensure_repo
 
 current_path=$(git rev-parse --show-toplevel)
+branch_section_count=0
+log_section "=== repo=$current_path ==="
 log_info "starting cleanup repo=$current_path"
 gone_branches=$(list_gone_branches)
 
 if [ -z "$gone_branches" ]; then
-  log_info "finished cleanup repo=$current_path branches=0"
-  printf 'git-cleanup: nothing to clean\n'
+  log_success "finished cleanup repo=$current_path branches=0"
+  print_notice "nothing to clean"
   exit 0
 fi
 
@@ -235,4 +339,4 @@ printf '%s\n' "$gone_branches" | while IFS= read -r branch; do
   cleanup_branch "$branch" "$current_path"
 done
 
-log_info "finished cleanup repo=$current_path branches=$(count_nonempty_lines "$gone_branches")"
+log_success "finished cleanup repo=$current_path branches=$(count_nonempty_lines "$gone_branches")"
