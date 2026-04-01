@@ -11,6 +11,14 @@ ensure_repo() {
   git rev-parse --is-inside-work-tree >/dev/null 2>&1 || die "not inside a Git repository"
 }
 
+clear_local_git_env() {
+  # `git !alias` exports repo-local vars like GIT_DIR, which make nested
+  # `git -C <other-worktree>` calls operate on the current worktree instead.
+  for var_name in $(git rev-parse --local-env-vars); do
+    unset "$var_name"
+  done
+}
+
 detect_target_branch() {
   if [ "${1:-}" = "main" ] || [ "${1:-}" = "master" ]; then
     printf '%s\n' "$1"
@@ -40,6 +48,7 @@ find_repo_root_worktree() {
 }
 
 ensure_repo
+clear_local_git_env
 
 target_branch=$(detect_target_branch "${1:-}")
 repo_root_worktree=$(find_repo_root_worktree)
