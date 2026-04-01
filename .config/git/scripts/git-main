@@ -30,38 +30,11 @@ detect_target_branch() {
   die "neither main nor master exists"
 }
 
-find_other_worktree_for_branch() {
-  branch=$1
-  current_path=$(git rev-parse --show-toplevel)
-
-  git worktree list --porcelain | awk -v target="refs/heads/$branch" -v current="$current_path" '
-    function flush() {
-      if (path != "" && branch_ref == target && path != current) {
-        print path
-        found = 1
-        exit
-      }
-    }
+find_repo_root_worktree() {
+  git worktree list --porcelain | awk '
     /^worktree / {
-      flush()
-      path = substr($0, 10)
-      branch_ref = ""
-      next
-    }
-    /^branch / {
-      branch_ref = substr($0, 8)
-      next
-    }
-    /^$/ {
-      flush()
-      path = ""
-      branch_ref = ""
-      next
-    }
-    END {
-      if (!found) {
-        flush()
-      }
+      print substr($0, 10)
+      exit
     }
   '
 }
@@ -69,12 +42,14 @@ find_other_worktree_for_branch() {
 ensure_repo
 
 target_branch=$(detect_target_branch "${1:-}")
-other_worktree=$(find_other_worktree_for_branch "$target_branch" || true)
+repo_root_worktree=$(find_repo_root_worktree)
 
-if [ -n "$other_worktree" ]; then
-  printf 'git-main: %s is already checked out in %s\n' "$target_branch" "$other_worktree"
-  printf '%s\n' "$other_worktree"
-  exit 0
+[ -n "$repo_root_worktree" ] || die "unable to determine the repo root worktree"
+
+repo_root_branch=$(git -C "$repo_root_worktree" branch --show-current)
+
+if [ "$repo_root_branch" != "$target_branch" ]; then
+  git -C "$repo_root_worktree" switch "$target_branch"
 fi
 
-git switch "$target_branch"
+printf '%s\n' "$repo_root_worktree"
