@@ -23,6 +23,12 @@ tui_app_server = true
 [tui]
 notifications = true
 
+[beta]
+rmcp = true
+
+[plugins."github@openai-curated"]
+enabled = true
+
 # [mcp_servers.context7]
 # command = "npx"
 # args = ["-y", "@upstash/context7-mcp"]
