@@ -1,0 +1,9 @@
+[
+  {
+    "context": "Workspace && !Terminal",
+    "bindings": {
+      "shift shift": "file_finder::Toggle",
+      "ctrl ctrl": "command_palette::Toggle"
+    }
+  }
+]
