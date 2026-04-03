@@ -11,9 +11,6 @@ abbr -a -g dig doggo
 abbr -a -g v nvim
 abbr -a -g vim nvim
 abbr -a -g pp pnpm
-abbr -a -g c cursor
-abbr -a -g a antigravity
-abbr -a -g gd gh dash
 abbr -a -g ga git add -A
 abbr -a -g avl aws-vault login
 
