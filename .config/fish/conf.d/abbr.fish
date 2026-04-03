@@ -11,6 +11,7 @@ abbr -a -g dig doggo
 abbr -a -g v nvim
 abbr -a -g vim nvim
 abbr -a -g pp pnpm
+abbr -a -g c zed
 abbr -a -g ga git add -A
 abbr -a -g avl aws-vault login
 
