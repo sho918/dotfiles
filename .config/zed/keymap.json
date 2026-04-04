@@ -11,7 +11,14 @@
     "bindings": {
       "space g a": "git::Blame",
       "space e": "project_panel::ToggleFocus",
+      "space o": "editor::ToggleCodeActions",
       "space w": "workspace::Save"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == insert && !menu",
+    "bindings": {
+      "ctrl-m": "editor::ShowCompletions"
     }
   }
 ]
