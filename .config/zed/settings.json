@@ -45,7 +45,7 @@
   },
   "vim_mode": true,
   "icon_theme": "Catppuccin Mocha",
-  "ui_font_size": 14.0,
+  "ui_font_size": 13.5,
   "buffer_font_size": 13.0,
   "theme": "Catppuccin Mocha",
 }

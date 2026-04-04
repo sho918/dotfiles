@@ -5,7 +5,10 @@
   },
   "permissions": {
     "allow": [],
-    "deny": ["Bash(aws:*)", "Bash(aws-vault:*)"],
+    "deny": [
+      "Bash(aws:*)",
+      "Bash(aws-vault:*)"
+    ],
     "defaultMode": "plan",
     "disableBypassPermissionsMode": "disable"
   },
@@ -23,10 +26,6 @@
       }
     ]
   },
-  "sandbox": {
-    "enabled": true,
-    "allowUnsandboxedCommands": false
-  },
   "statusLine": {
     "type": "command",
     "command": "npx -y ccusage statusline",
@@ -36,5 +35,9 @@
     "example-skills@anthropic-agent-skills": true
   },
   "language": "japanese",
+  "sandbox": {
+    "enabled": true,
+    "allowUnsandboxedCommands": false
+  },
   "alwaysThinkingEnabled": true
 }
