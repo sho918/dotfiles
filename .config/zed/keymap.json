@@ -5,5 +5,12 @@
       "shift shift": "file_finder::Toggle",
       "ctrl ctrl": "command_palette::Toggle"
     }
+  },
+  {
+    "context": "Editor && vim_mode == normal && !menu",
+    "bindings": {
+      "space e": "project_panel::ToggleFocus",
+      "space w": "workspace::Save"
+    }
   }
 ]
