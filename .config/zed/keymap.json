@@ -9,6 +9,7 @@
   {
     "context": "Editor && vim_mode == normal && !menu",
     "bindings": {
+      "space g a": "git::Blame",
       "space e": "project_panel::ToggleFocus",
       "space w": "workspace::Save"
     }
