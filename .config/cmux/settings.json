@@ -1,0 +1,43 @@
+{
+  "$schema": "https://raw.githubusercontent.com/manaflow-ai/cmux/main/web/data/cmux-settings.schema.json",
+  "schemaVersion": 1,
+  "app": {
+    "appearance": "dark"
+  },
+  "sidebarAppearance": {
+    "matchTerminalBackground": true
+  },
+  "browser": {
+    "theme": "dark",
+    "openTerminalLinksInCmuxBrowser": false,
+    "interceptTerminalOpenCommandInCmuxBrowser": false
+  },
+  "shortcuts": {
+    "bindings": {
+      "splitDown": [
+        "ctrl+a",
+        "-"
+      ],
+      "splitRight": [
+        "ctrl+a",
+        "\\"
+      ],
+      "toggleSplitZoom": [
+        "ctrl+a",
+        "z"
+      ],
+      "toggleTerminalCopyMode": [
+        "ctrl+a",
+        "enter"
+      ],
+      "find": [
+        "ctrl+a",
+        "f"
+      ],
+      "focusLeft": "ctrl+h",
+      "focusDown": "ctrl+j",
+      "focusUp": "ctrl+k",
+      "focusRight": "ctrl+l"
+    }
+  }
+}

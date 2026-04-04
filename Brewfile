@@ -76,6 +76,8 @@ cask "notion-calendar"
 cask "discord"
 
 # App - Dev
+tap "manaflow-ai/cmux"
+cask "cmux"
 cask "wezterm@latest"
 cask "obsidian"
 cask "cursor"

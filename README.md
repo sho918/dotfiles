@@ -26,7 +26,7 @@ curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fi
 fisher update
 
 # Symlink
-mkdir -p ~/.config/{fish,tmux,alacritty,git,wezterm,navi,zed,yazi,mise,lazygit,sketchybar}
+mkdir -p ~/.config/{fish,tmux,alacritty,git,ghostty,cmux,wezterm,navi,zed,yazi,mise,lazygit,sketchybar}
 mkdir -p ~/.config/fish/{completions,conf.d}
 ln -s (PWD)/.config/fish/config.fish ~/.config/fish/
 ln -s (PWD)/.config/fish/fish_plugins ~/.config/fish/
@@ -40,9 +40,10 @@ ln -s (PWD)/.config/git/aliases ~/.config/git/
 ln -s (PWD)/.config/git/allowed_signers ~/.config/git/
 ln -s (PWD)/.config/git/scripts ~/.config/git/
 ln -s (PWD)/.config/git/hooks ~/.config/git/
+ln -s (PWD)/.config/ghostty/config ~/.config/ghostty/
+ln -s (PWD)/.config/cmux/settings.json ~/.config/cmux/
 ln -s (PWD)/.config/wezterm/wezterm.lua ~/.config/wezterm/
 ln -s (PWD)/.config/wezterm/balance.lua ~/.config/wezterm/
-ln -s (PWD)/.config/wezterm/keybinds.lua ~/.config/wezterm/
 ln -s (PWD)/.config/navi/config.yaml ~/.config/navi/
 ln -s (PWD)/.config/navi/cheats ~/.config/navi/cheats
 ln -s (PWD)/.config/television ~/.config/

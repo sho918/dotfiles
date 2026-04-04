@@ -1,0 +1,7 @@
+font-family = UDEV Gothic 35NF
+font-size = 14
+theme = Catppuccin Mocha
+font-feature = -calt,-clig,-liga
+scrollback-limit = 10000000
+background-opacity = 0.8
+background-blur = 5
