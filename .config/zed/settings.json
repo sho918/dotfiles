@@ -7,6 +7,7 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "soft_wrap": "editor_width",
   "git_panel": {
     "dock": "right"
   },
@@ -45,7 +46,7 @@
   },
   "vim_mode": true,
   "icon_theme": "Catppuccin Mocha",
-  "ui_font_size": 13.5,
+  "ui_font_size": 13.0,
   "buffer_font_size": 13.0,
   "theme": "Catppuccin Mocha",
 }
