@@ -72,10 +72,7 @@ gh extension install dlvhdr/gh-dash
 
 # Claude Code
 mkdir -p ~/.claude
-ln -s (PWD)/.claude/CLAUDE.md ~/.claude/
 ln -s (PWD)/.claude/settings.json ~/.claude/
-ln -s (PWD)/.claude/permissive-open.sb ~/.claude/
-ln -s (PWD)/.claude/hooks ~/.claude/hooks
 
 # Codex
 mkdir -p ~/.codex
@@ -85,6 +82,9 @@ ln -s (PWD)/.codex/config.toml ~/.codex/
 # Agent Skills
 #
 npx skills add https://github.com/vercel-labs/skills --skill find-skills
+
+# dev
+npx skills add obra/superpowers
 
 # git
 npx skills add https://github.com/github/awesome-copilot --skill gh-cli
@@ -101,6 +101,4 @@ npx skills add https://github.com/vercel-labs/agent-skills --skill vercel-compos
 
 # database
 npx skills add https://github.com/supabase/agent-skills --skill supabase-postgres-best-practices
-
-# Add https://github.com/obra/superpowers
 ```
