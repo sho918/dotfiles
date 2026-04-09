@@ -1,15 +1,22 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "permissions": {
     "allow": [],
-    "deny": [
-      "Bash(aws:*)",
-      "Bash(aws-vault:*)"
-    ],
+    "deny": ["Bash(aws:*)", "Bash(aws-vault:*)"],
     "defaultMode": "plan",
     "disableBypassPermissionsMode": "disable"
   },
   "enabledPlugins": {
-    "example-skills@anthropic-agent-skills": true
+    "example-skills@anthropic-agent-skills": true,
+    "codex@openai-codex": true
+  },
+  "extraKnownMarketplaces": {
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    }
   },
   "language": "japanese",
   "sandbox": {
