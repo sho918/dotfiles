@@ -136,5 +136,6 @@ function yy
 end
 
 #
-# git-wt
+# claude-code
 #
+set -x CLAUDE_CODE_EFFORT_LEVEL max
