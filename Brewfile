@@ -11,6 +11,10 @@ brew "bat"
 brew "fd"
 brew "zoxide"
 
+# AI
+cask "codex"
+cask "claude-code"
+
 # Dev
 brew "mise"
 brew "tmux"
