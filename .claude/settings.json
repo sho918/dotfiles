@@ -16,6 +16,12 @@
         "source": "github",
         "repo": "openai/codex-plugin-cc"
       }
+    },
+    "cc-company": {
+      "source": {
+        "source": "github",
+        "repo": "Shin-sibainu/cc-company"
+      }
     }
   },
   "language": "japanese",
