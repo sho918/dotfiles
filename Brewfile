@@ -11,10 +11,6 @@ brew "bat"
 brew "fd"
 brew "zoxide"
 
-# AI
-cask "codex"
-cask "claude-code"
-
 # Dev
 brew "mise"
 brew "tmux"
@@ -90,6 +86,9 @@ cask "visual-studio-code@insiders"
 # App - AI
 cask "chatgpt"
 cask "claude"
+cask "codex"
+cask "claude-code"
+brew "copilot-cli"
 
 # App - Other
 cask "zoom"
