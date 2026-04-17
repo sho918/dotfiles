@@ -3,7 +3,7 @@
   "permissions": {
     "allow": [],
     "deny": ["Bash(aws:*)", "Bash(aws-vault:*)"],
-    "defaultMode": "plan",
+    "defaultMode": "auto",
     "disableBypassPermissionsMode": "disable"
   },
   "enabledPlugins": {
@@ -86,3 +86,4 @@
     ]
   }
 }
+
