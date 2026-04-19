@@ -6,30 +6,6 @@
     "defaultMode": "auto",
     "disableBypassPermissionsMode": "disable"
   },
-  "enabledPlugins": {
-    "example-skills@anthropic-agent-skills": true,
-    "codex@openai-codex": true
-  },
-  "extraKnownMarketplaces": {
-    "openai-codex": {
-      "source": {
-        "source": "github",
-        "repo": "openai/codex-plugin-cc"
-      }
-    },
-    "cc-company": {
-      "source": {
-        "source": "github",
-        "repo": "Shin-sibainu/cc-company"
-      }
-    }
-  },
-  "language": "japanese",
-  "sandbox": {
-    "enabled": true,
-    "allowUnsandboxedCommands": false
-  },
-  "alwaysThinkingEnabled": true,
   "hooks": {
     "UserPromptSubmit": [
       {
@@ -84,6 +60,31 @@
         ]
       }
     ]
-  }
+  },
+  "enabledPlugins": {
+    "example-skills@anthropic-agent-skills": true,
+    "codex@openai-codex": true
+  },
+  "extraKnownMarketplaces": {
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    },
+    "cc-company": {
+      "source": {
+        "source": "github",
+        "repo": "Shin-sibainu/cc-company"
+      }
+    }
+  },
+  "language": "japanese",
+  "sandbox": {
+    "enabled": true,
+    "allowUnsandboxedCommands": false
+  },
+  "alwaysThinkingEnabled": true,
+  "skipAutoPermissionPrompt": true
 }
 
