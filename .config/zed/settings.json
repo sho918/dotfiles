@@ -45,8 +45,8 @@
     "metrics": false,
   },
   "vim_mode": true,
-  "icon_theme": "Catppuccin Mocha",
+  "icon_theme": "Catppuccin Frappé",
   "ui_font_size": 13.0,
   "buffer_font_size": 13.0,
-  "theme": "Catppuccin Mocha",
+  "theme": "Ayu Dark",
 }
