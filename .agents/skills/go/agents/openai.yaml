@@ -1,0 +1,4 @@
+interface:
+  display_name: "Go"
+  short_description: "Review, simplify, commit, push, and PR"
+  default_prompt: "Use $go after implementation to run the review/simplify loop, then commit, push, and open a draft PR."
