@@ -86,6 +86,9 @@ npx skills add https://github.com/vercel-labs/skills --skill find-skills
 # dev
 npx skills add obra/superpowers
 
+# prompt tuning (install or refresh from upstream)
+npx skills add https://github.com/mizchi/chezmoi-dotfiles/tree/main/dot_claude/skills/empirical-prompt-tuning
+
 # git
 npx skills add https://github.com/github/awesome-copilot --skill gh-cli
 npx skills add https://github.com/github/awesome-copilot --skill git-commit
