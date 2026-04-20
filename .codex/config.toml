@@ -19,6 +19,7 @@ prevent_idle_sleep = true
 voice_transcription = true
 guardian_approval = true
 tui_app_server = true
+memories = true
 
 [tui]
 notifications = true
