@@ -56,13 +56,11 @@ list_worktrees() {
         return
       }
       sha = substr(head, 1, 7)
-      if (branch != "") {
-        name = short_branch(branch)
-        target = name
-      } else {
-        name = "(detached@" sha ")"
-        target = path
+      if (branch == "") {
+        return
       }
+      name = short_branch(branch)
+      target = name
       printf "WORKTREE\t%s\t%s\t%s\t%s\n", name, target, path, head
     }
     /^worktree / {
@@ -183,10 +181,6 @@ list_candidates() {
     }
     $1 == "WORKTREE" {
       key = $2
-      # Detached worktrees do not map to a branch name.
-      if (key ~ /^\(detached@/) {
-        key = "DETACHED:" $4
-      }
       remember(key)
       names[key] = $2
       worktree_path[key] = $4
