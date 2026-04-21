@@ -1,0 +1,4 @@
+interface:
+  display_name: "Finalize"
+  short_description: "Commit, push, reply, and resolve"
+  default_prompt: "Use $finalize to commit and push review fixes, then reply to matching review comments and resolve their threads."
