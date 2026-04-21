@@ -83,6 +83,7 @@ ln -s (PWD)/.codex/config.toml ~/.codex/
 #
 mkdir -p ~/.agents/skills
 ln -s (PWD)/.agents/skills/go ~/.agents/skills/
+ln -s (PWD)/.agents/skills/finalize ~/.agents/skills/
 
 npx skills add https://github.com/vercel-labs/skills --skill find-skills
 
