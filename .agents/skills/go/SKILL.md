@@ -42,7 +42,7 @@ Do not continue to commit/push/PR from `main`, `master`, a detached HEAD, or an 
 
 ## Step 2: Run the Loop
 
-Default loop limit: 5 iterations. Use a different limit only if the user explicitly sets one.
+Default loop limit: 3 iterations. Use a different limit only if the user explicitly sets one.
 
 Each iteration must run in this order:
 
