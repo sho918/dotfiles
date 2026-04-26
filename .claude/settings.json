@@ -2,7 +2,12 @@
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "permissions": {
     "allow": [],
-    "deny": ["Bash(aws:*)", "Bash(aws-vault:*)"],
+    "deny": [
+      "Bash(aws:*)",
+      "Bash(aws-vault:*)",
+      "Read(//**/.env*)",
+      "Edit(//**/.env*)"
+    ],
     "defaultMode": "auto",
     "disableBypassPermissionsMode": "disable"
   },
@@ -82,7 +87,8 @@
   "language": "japanese",
   "sandbox": {
     "enabled": true,
-    "allowUnsandboxedCommands": false
+    "allowUnsandboxedCommands": false,
+    "enableWeakerNetworkIsolation": true
   },
   "alwaysThinkingEnabled": true,
   "skipAutoPermissionPrompt": true
