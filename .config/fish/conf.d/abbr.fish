@@ -15,4 +15,4 @@ abbr -a -g c zed
 abbr -a -g ga git add -A
 abbr -a -g avl aws-vault login
 
-abbr -a -g cc codex exec -c model_reasoning_effort=medium -m gpt-5.3-codex-spark \"Use the git-commit skill to create commits in English. Continue until the Worktree is clean. Ensure that commits are separated into meaningful units.\"
+abbr -a -g cc codex exec -m gpt-5.3-codex-spark \"Use the git-commit skill to create commits in English. Continue until the Worktree is clean. Ensure that commits are separated into meaningful units.\"
