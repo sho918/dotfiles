@@ -91,6 +91,10 @@
     "enableWeakerNetworkIsolation": true
   },
   "alwaysThinkingEnabled": true,
-  "skipAutoPermissionPrompt": true
+  "voice": {
+    "enabled": true,
+    "mode": "tap"
+  },
+  "skipAutoPermissionPrompt": true,
+  "voiceEnabled": true
 }
-
