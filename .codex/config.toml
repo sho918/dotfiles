@@ -20,6 +20,7 @@ voice_transcription = true
 guardian_approval = true
 tui_app_server = true
 memories = true
+external_migration = true
 
 [tui]
 notifications = true
