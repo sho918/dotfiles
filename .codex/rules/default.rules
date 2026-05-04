@@ -1,0 +1,13 @@
+prefix_rule(pattern=["gh", "api"], decision="allow")
+prefix_rule(pattern=["gh", "pr", "view"], decision="allow")
+prefix_rule(pattern=["gh", "pr", "list"], decision="allow")
+prefix_rule(pattern=["gh", "run", "view"], decision="allow")
+prefix_rule(pattern=["gh", "run", "list"], decision="allow")
+
+prefix_rule(pattern=["pnpm", "view"], decision="allow")
+prefix_rule(pattern=["pnpm", "info"], decision="allow")
+prefix_rule(pattern=["pnpm", "outdated"], decision="allow")
+prefix_rule(pattern=["pnpm", "audit"], decision="allow")
+
+prefix_rule(pattern=["npm", "view"], decision="allow")
+prefix_rule(pattern=["npm", "info"], decision="allow")
