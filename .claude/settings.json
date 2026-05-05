@@ -68,7 +68,8 @@
   },
   "enabledPlugins": {
     "example-skills@anthropic-agent-skills": true,
-    "codex@openai-codex": true
+    "codex@openai-codex": true,
+    "rust-analyzer-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "openai-codex": {
@@ -98,4 +99,3 @@
   "skipAutoPermissionPrompt": true,
   "voiceEnabled": true
 }
-
