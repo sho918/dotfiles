@@ -36,6 +36,11 @@ brew "television"
 tap "entireio/tap"
 brew "entireio/tap/entire"
 
+# Security
+brew "gitleaks"
+brew "trufflehog"
+brew "git-filter-repo"
+
 # AWS
 brew "awscli"
 brew "yukiarrr/tap/ecsk"
