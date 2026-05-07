@@ -9,16 +9,16 @@
   f = fetch --prune
   cm = commit -m
   cob = checkout -b
-  cow = wt
+  cow = ws new
 
   dev = switch develop
-  main = "!$HOME/.config/git/scripts/git-main"
-  master = "!$HOME/.config/git/scripts/git-main master"
+  main = ws main
+  master = ws main
   back = switch -
   amend = commit --amend --no-edit
   undo = reset HEAD~
   pushf = push --force-with-lease --force-if-includes
-  co = "!$HOME/.config/git/scripts/git-co"
+  co = ws open
   pushup = !git push --set-upstream origin `git symbolic-ref --short HEAD`
-  cleanup = "!$HOME/.config/git/scripts/git-cleanup"
+  cleanup = ws cleanup
   aliases = !git config -l | grep ^alias\\. | cut -c 7-

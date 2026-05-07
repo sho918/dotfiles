@@ -31,14 +31,13 @@ mkdir -p ~/.config/fish/{completions,conf.d}
 ln -s (PWD)/.config/fish/config.fish ~/.config/fish/
 ln -s (PWD)/.config/fish/fish_plugins ~/.config/fish/
 ln -s (PWD)/.config/fish/conf.d/abbr.fish ~/.config/fish/conf.d/
-ln -s (PWD)/.config/fish/conf.d/git-wt.fish ~/.config/fish/conf.d/
+ln -s (PWD)/.config/fish/conf.d/git-ws.fish ~/.config/fish/conf.d/
 ln -s (PWD)/.config/fish/conf.d/history-filter.fish ~/.config/fish/conf.d/
 ln -s (PWD)/.config/fish/completions/aws-vault.fish ~/.config/fish/completions/
 ln -s (PWD)/.config/fish/completions/container-use.fish ~/.config/fish/completions/
 ln -s (PWD)/.config/git/config ~/.config/git/
 ln -s (PWD)/.config/git/aliases ~/.config/git/
 ln -s (PWD)/.config/git/allowed_signers ~/.config/git/
-ln -s (PWD)/.config/git/scripts ~/.config/git/
 ln -s (PWD)/.config/git/hooks ~/.config/git/
 ln -s (PWD)/.config/ghostty/config ~/.config/ghostty/
 ln -s (PWD)/.config/cmux/settings.json ~/.config/cmux/

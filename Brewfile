@@ -1,8 +1,10 @@
 # Git
+tap "sho918/git-ws", "https://github.com/sho918/git-ws"
 brew "git"
 brew "git-now"
 brew "ghq"
 brew "git-split-diffs"
+brew "sho918/git-ws/git-ws"
 
 # Fish
 brew "fish"
@@ -30,7 +32,6 @@ brew "ripgrep"
 tap "laishulu/homebrew"
 brew "macism"
 cask "jetbrains-toolbox"
-brew "k1LoW/tap/git-wt"
 brew "television"
 
 tap "entireio/tap"
