@@ -21,6 +21,7 @@ guardian_approval = true
 tui_app_server = true
 memories = true
 external_migration = true
+hooks = true
 
 [tui]
 notifications = true
