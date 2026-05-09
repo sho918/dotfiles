@@ -1,8 +1,8 @@
 model = "gpt-5.5"
 model_reasoning_effort = "xhigh"
 plan_mode_reasoning_effort = "xhigh"
-model_context_window = 1000000
-model_auto_compact_token_limit = 900000
+# model_context_window = 1000000
+# model_auto_compact_token_limit = 900000
 # service_tier = "fast"
 
 # sandbox_mode = "workspace-write"
@@ -25,9 +25,8 @@ hooks = true
 
 [tui]
 notifications = true
-
-[beta]
-rmcp = true
+status_line = ["model-with-reasoning", "project-name", "git-branch", "pull-request-number"]
+status_line_use_colors = true
 
 [plugins."github@openai-curated"]
 enabled = true
