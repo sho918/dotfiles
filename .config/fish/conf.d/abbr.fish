@@ -35,7 +35,7 @@ function __abbr_cc
             end
         end
 
-        set -l filesystem_entries '":project_roots"={ "."="write" }'
+        set -l filesystem_entries '"/"="read"' '":tmpdir"="write"' '":slash_tmp"="write"' '":project_roots"={ "."="write" }'
 
         for dir in $writable_roots
             set -l escaped_dir (__abbr_cc_escape_toml_string "$dir")
