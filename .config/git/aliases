@@ -1,5 +1,5 @@
 [alias]
-  b = branch -vv
+  b = ws list --type local --prs
   d = diff
   ds = diff --staged
   l = log --pretty=format:'%C(red)%h%Creset %C(green)%cd%Creset %s %C(yellow)[%an] <%ae>%Creset %C(cyan)%d%Creset' --abbrev-commit --date=format-local:'%Y-%m-%d %H:%M'
