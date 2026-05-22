@@ -1,0 +1,4 @@
+interface:
+  display_name: "Merge Remote Default Branch"
+  short_description: "Merge remote main or master safely"
+  default_prompt: "Use $merge-remote-default-branch to merge the latest remote main or master branch and resolve conflicts."
