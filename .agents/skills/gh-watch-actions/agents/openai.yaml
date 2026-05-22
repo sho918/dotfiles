@@ -1,0 +1,4 @@
+interface:
+  display_name: "GH Watch Actions"
+  short_description: "Watch GitHub Actions and fix failures"
+  default_prompt: "Use $gh-watch-actions to monitor a specified GitHub Actions run, investigate failures, apply focused fixes, and recheck the run."
