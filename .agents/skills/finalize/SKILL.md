@@ -13,6 +13,21 @@ This skill may implement clear finalization fixes. Ask only when the next change
 
 Default loop limit: 3 cycles per stage. If CI or review feedback fails in the same stage 3 times, stop and report the exact state, evidence, and next required decision.
 
+## Active Remote Wait Gate
+
+Remote work that is still running is not a final state. After every PR state fetch, inspect `recommended_next_step`, visible check buckets/states, and detected bot signal statuses before deciding whether to end the turn.
+
+Do not send a final report or `NOT_DONE` when any of these active states are present:
+
+- `recommended_next_step` is `wait_for_ci` or `wait_for_bot_reviews`.
+- Any required or detected check has bucket `pending`.
+- Any relevant state is `QUEUED`, `IN_PROGRESS`, or `PENDING`.
+- Any detected Copilot/Greptile signal has `status: pending`.
+
+When the active wait gate is triggered, keep polling in the same turn. Give brief status updates about every 30 seconds, then re-run the state helper or `gh pr checks` until the state moves to success, failure, actionable review feedback, or a real blocker.
+
+You may stop while remote work is active only when the user gave an explicit timebox or stop instruction, GitHub/API state cannot be queried after the documented fallback paths, or the same stage reached the 3-cycle failure limit. In that case, report the reason as blocked or timeboxed, not complete.
+
 ## Progress Checklist
 
 Copy this checklist and keep it updated:
@@ -197,6 +212,8 @@ Detection sources include:
 
 If a detected Bot check is pending, keep waiting. If a detected Bot check fails, or Bot comments/review threads appear, proceed to review handling. If neither Copilot nor Greptile appears on the PR, skip this wait and record that no Bot signal was detected.
 
+If the helper returns `recommended_next_step: wait_for_bot_reviews`, stay in this step and keep waiting. A pending Greptile/Copilot check with zero review threads is still active work, not a reason to end the finalize turn.
+
 ## Step 8: Fetch and Address Review Threads
 
 When review feedback exists, fetch thread-aware state plus REST numeric comment IDs:
@@ -296,6 +313,7 @@ python .agents/skills/finalize/scripts/fetch_review_threads.py --repo OWNER/REPO
 Confirm:
 
 - PR is open and not draft.
+- `recommended_next_step` is `complete`; otherwise return to the indicated step instead of producing a final report.
 - Visible CI checks are green or explicitly caveated by the user.
 - Detected Copilot/Greptile signals are complete or no signal was detected.
 - Every target review thread has `isResolved: true`.

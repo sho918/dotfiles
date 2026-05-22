@@ -7,6 +7,7 @@ import unittest
 from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).resolve().parent
+SKILL_PATH = SCRIPT_DIR.parent / "SKILL.md"
 sys.path.insert(0, str(SCRIPT_DIR))
 
 from fetch_pr_finalization_state import (  # noqa: E402
@@ -93,6 +94,42 @@ class FinalizationStateTest(unittest.TestCase):
             ),
             "wait_for_bot_reviews",
         )
+
+    def test_greptile_in_progress_waits_even_without_threads(self) -> None:
+        checks = [
+            {
+                "name": "Greptile Review",
+                "bucket": "pending",
+                "state": "IN_PROGRESS",
+                "workflow": "review",
+            }
+        ]
+        bot_signals = detect_bot_signals(checks=checks, reviews=[], comments=[])
+
+        self.assertEqual(
+            summarize_next_step(
+                pull_request={"isDraft": False},
+                checks_summary=classify_checks(
+                    [{"name": "CI", "bucket": "pass", "state": "SUCCESS"}]
+                ),
+                bot_signals=bot_signals,
+                review_summary={"unresolved_threads": 0},
+            ),
+            "wait_for_bot_reviews",
+        )
+
+    def test_skill_forbids_final_report_while_remote_checks_are_active(self) -> None:
+        skill_text = SKILL_PATH.read_text()
+
+        for required_text in (
+            "Active Remote Wait Gate",
+            "wait_for_ci",
+            "wait_for_bot_reviews",
+            "IN_PROGRESS",
+            "NOT_DONE",
+        ):
+            with self.subTest(required_text=required_text):
+                self.assertIn(required_text, skill_text)
 
 
 if __name__ == "__main__":
