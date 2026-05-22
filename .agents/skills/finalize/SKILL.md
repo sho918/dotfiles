@@ -1,17 +1,17 @@
 ---
 name: finalize
-description: Use when finalizing already-implemented GitHub review fixes, publishing a finished branch, creating a missing PR, replying to review comments, resolving review threads, or completing end-to-end PR cleanup after fixes are implemented.
+description: Use when a branch or GitHub pull request is ready for final completion, including SDD handoff, cleanup, CI failures, draft-to-ready transition, Copilot or Greptile feedback, review replies, or unresolved review threads.
 ---
 
 # Finalize
 
 ## Overview
 
-Finish review-fix work after implementation is complete: verify, publish the branch through `github:yeet` when available, reply to matching GitHub review comments as published single inline replies, resolve those review threads, and re-check the final state.
+Drive a branch or PR to a finished GitHub state. This skill owns the final sequence: optional SDD verify/archive, deslop cleanup, local verification, publish, CI wait/fix loop, ready-for-review transition, Copilot/Greptile review wait, review-comment fixes, inline replies, thread resolution, and final state confirmation.
 
-This skill is for finalization, not investigation. If the review feedback still needs triage or implementation, use a review-handling skill first, then return here.
+This skill may implement clear finalization fixes. Ask only when the next change is ambiguous, broad, conflicts with the user's scope, or would alter product behavior beyond review/CI cleanup.
 
-For commit, push, and PR creation, use the `github:yeet` skill when it is available. The `finalize` constraints and the user's explicit instructions override `yeet` defaults: use English Semantic Commit style for commit messages and PR titles, write PR bodies in Japanese with at least `概要`, `影響範囲`, and `レビュー観点`, and default to a draft PR unless the user explicitly asks otherwise.
+Default loop limit: 3 cycles per stage. If CI or review feedback fails in the same stage 3 times, stop and report the exact state, evidence, and next required decision.
 
 ## Progress Checklist
 
@@ -19,10 +19,15 @@ Copy this checklist and keep it updated:
 
 ```markdown
 Finalize:
-- [ ] Confirm branch, PR, and intended diff
-- [ ] Fetch existing thread-aware review context when a PR exists
-- [ ] Run relevant verification
-- [ ] Use `github:yeet` for commit, push, and PR creation when available
+- [ ] Confirm branch, PR, base, and intended diff
+- [ ] Run SDD verify/archive when an active SDD change exists
+- [ ] Run a scoped deslop cleanup
+- [ ] Run local verification
+- [ ] Commit, push, and ensure a draft PR exists
+- [ ] Wait for CI and fix failures until green or blocked
+- [ ] Mark the PR ready for review
+- [ ] Wait for detected Copilot/Greptile review signals
+- [ ] Address actionable review comments
 - [ ] Reply to matching review comments with REST inline replies
 - [ ] Resolve matching review threads
 - [ ] Re-fetch and confirm final state
@@ -42,36 +47,159 @@ git remote -v
 Resolve the PR from the user's URL/number when provided. Otherwise use local branch context:
 
 ```bash
-gh pr view --json number,url,title,headRefName,baseRefName
+gh pr view --json number,url,title,headRefName,baseRefName,isDraft,state
 ```
 
-If no PR can be resolved from the user request or current branch, do not stop just because the PR is missing. Record that PR creation is required, then inspect enough context to let `github:yeet` create it safely after commit and push:
+If no PR can be resolved, record that PR creation is required and inspect enough context to create it safely:
 
 ```bash
 gh repo view --json nameWithOwner,defaultBranchRef
 git branch --show-current
 ```
 
-Use the repository default branch as the PR base unless the user request, branch naming, or repository metadata clearly indicates a different base.
+Use the repository default branch as the PR base unless the user request, branch naming, existing PR target, or repository metadata clearly indicates a different base.
 
 Stop and ask before continuing when any of these are true:
 
-- The branch is `main`, `master`, or detached.
+- The branch is `main`, `master`, or detached and no safe feature branch/worktree is already selected.
 - The worktree contains unrelated changes that cannot be separated safely.
 - No PR exists and the PR base, title, or body cannot be inferred safely from the branch, diff, commits, and user request.
-- The user asked for review-fix implementation but the actual fixes are not done yet.
+- A requested review/CI fix would change behavior outside the finalization scope.
 
-If the worktree is clean, continue only when the current HEAD already contains the review fixes that need to be pushed/replied/resolved.
+If the worktree is clean, continue only when the current HEAD already contains the work that needs to be finalized.
 
-## Step 2: Fetch Review Threads
+## Step 2: SDD Verify and Archive Before Deslop
 
-When a PR already exists, use the bundled read-only helper to fetch thread-aware state plus REST numeric comment IDs:
+Before deslop, check whether the branch carries an active SDD change:
 
 ```bash
-python .agents/skills/finalize/scripts/fetch_review_threads.py > /tmp/finalize-review-threads.json
+find docs/sdd/changes -mindepth 1 -maxdepth 1 -type d 2>/dev/null
+git diff --name-only -- docs/sdd docs/product-specs
+```
+
+Run SDD finalization only when an active SDD change exists, the branch name/user request indicates SDD work, or the diff touches active SDD artifacts. If no active SDD work exists, record SDD as skipped.
+
+When SDD applies:
+
+- Use the repo's `sdd-verify` / `sdd-archive` skill or documented command when available.
+- Treat `sdd-verify` as a hard gate. Do not archive if verification records a P1, failing requirement, or unresolved blocker.
+- Archive only after verification is accepted as `verified`.
+- Move verified changes from `docs/sdd/changes/<change-id>/` to `docs/sdd/archive/YYYY-MM-DD-<change-id>/` according to the repo convention.
+- Update related durable product specs when the repo's SDD process expects it.
+- Update archived `change.yaml` with `status: archived`, `verified_at`, and `archived_at` when those fields exist in local convention.
+- If the PR URL does not exist yet, record that `delivery.pr_ref` must be filled after PR creation. After the PR exists, make a small follow-up commit that writes the PR URL into archived `change.yaml`.
+
+After archive edits, run the repo formatter/checks that own the changed docs before moving to deslop.
+
+## Step 3: Deslop and Local Verification
+
+Run a scoped deslop pass after SDD verify/archive and before publishing:
+
+- Load and use the `deslop` skill when available.
+- Compare against the intended base branch, for example `git diff --stat origin/main...HEAD`.
+- Remove only AI-generated slop introduced by the branch: unnecessary comments, abnormal defensive code, gratuitous casts, over-nested code, duplicated boilerplate, inflated wording, or redundant tests.
+- Keep behavior unchanged unless fixing a clear bug.
+- Do not run broad rewrites or repo-wide formatting unless the repo requires it for touched files.
+
+Run the smallest reliable local verification set for the touched area. Always run:
+
+```bash
+git diff --check
+```
+
+Do not claim success when checks are skipped, blocked, timed out, or failing. Record the exact caveat.
+
+## Step 4: Publish and Ensure Draft PR
+
+When commit, push, or PR creation is needed, load and use `github:yeet` as the primary publish workflow. The constraints below override `yeet` defaults:
+
+- Stage only intended files.
+- Create an English Semantic Commit, such as `fix(api): handle missing review threads` or `docs(finalize): add CI completion flow`.
+- Push the current branch.
+- Ensure a PR exists, creating one if missing.
+- Use an English Semantic Commit PR title.
+- Write the PR body in Japanese with at least `概要`, `影響範囲`, and `レビュー観点`.
+- Include verification results honestly, including skipped, blocked, timed-out, or failed checks.
+- Default to a draft PR until CI is green.
+
+If no uncommitted changes exist, do not create an empty commit unless the user explicitly asks for one.
+
+After publish, capture the PR number, URL, head branch, base branch, and pushed commit:
+
+```bash
+gh pr view --json number,url,title,headRefName,baseRefName,isDraft
+git rev-parse --short HEAD
+```
+
+If `github:yeet` is unavailable or blocked, use the fallback publish flow only when the repository state is still safe: re-read `git diff` and `git status --porcelain`, stage explicit paths, commit, fetch, push with upstream tracking, then create a draft PR with a body file.
+
+## Step 5: Wait for CI and Fix Until Green
+
+Use the bundled read-only helper to summarize PR state:
+
+```bash
+python .agents/skills/finalize/scripts/fetch_pr_finalization_state.py > /tmp/finalize-pr-state.json
 ```
 
 For an explicit PR:
+
+```bash
+python .agents/skills/finalize/scripts/fetch_pr_finalization_state.py --repo OWNER/REPO --pr NUMBER > /tmp/finalize-pr-state.json
+```
+
+Visible CI checks are green only when no check has bucket `fail`, `cancel`, or `pending`. Treat `skipping` as neutral. If a check provider is external and logs are unavailable, record the URL and status instead of guessing.
+
+Wait for CI with GitHub CLI:
+
+```bash
+gh pr checks PR_NUMBER --watch --interval 10
+gh pr checks PR_NUMBER --json name,state,bucket,link,workflow
+```
+
+If CI is pending, keep waiting and provide periodic status updates. If CI fails or is cancelled:
+
+1. Count one CI loop cycle.
+2. Load and use `github:gh-fix-ci` when available for log inspection.
+3. Inspect failing check names, run URLs, and logs before editing.
+4. Apply the smallest fix tied to the observed failure. The user's finalization request grants approval for clear CI fixes; ask only if the fix is broad, risky, unrelated, or ambiguous.
+5. Run relevant local verification.
+6. Commit and push the fix.
+7. Return to CI wait.
+
+Stop after 3 CI fix cycles in the same finalize run and report the failing checks, latest run URLs, local verification, and current commit.
+
+## Step 6: Mark the PR Ready
+
+Only after CI is green, convert the draft PR to ready for review:
+
+```bash
+gh pr ready PR_NUMBER
+gh pr view PR_NUMBER --json isDraft,state,url
+```
+
+Do not mark ready while visible CI is failing, cancelled, or pending unless the user explicitly overrides the risk.
+
+## Step 7: Wait for Copilot and Greptile
+
+After the PR is ready, wait only for Copilot/Greptile signals that are actually detected on the PR. Do not invent missing Bot requirements.
+
+Use the state helper repeatedly:
+
+```bash
+python .agents/skills/finalize/scripts/fetch_pr_finalization_state.py --repo OWNER/REPO --pr NUMBER > /tmp/finalize-pr-state.json
+```
+
+Detection sources include:
+
+- Check name, workflow, or description containing `copilot` or `greptile`.
+- Review author containing `copilot` or `greptile`.
+- PR comment author containing `copilot` or `greptile`.
+
+If a detected Bot check is pending, keep waiting. If a detected Bot check fails, or Bot comments/review threads appear, proceed to review handling. If neither Copilot nor Greptile appears on the PR, skip this wait and record that no Bot signal was detected.
+
+## Step 8: Fetch and Address Review Threads
+
+When review feedback exists, fetch thread-aware state plus REST numeric comment IDs:
 
 ```bash
 python .agents/skills/finalize/scripts/fetch_review_threads.py --repo OWNER/REPO --pr NUMBER > /tmp/finalize-review-threads.json
@@ -86,108 +214,24 @@ Use this output to identify each target thread's:
 
 Do not rely on flat PR comments as the source of truth for inline review-thread state.
 
-Target only threads that are unresolved, not outdated, and actually addressed by the current work or by a required explanation. Skip already-resolved and outdated threads unless the user explicitly asks to handle them.
+Target unresolved, not-outdated, actionable threads. Skip already-resolved and outdated threads unless the user explicitly asks to handle them.
 
-If no PR exists yet, skip this step until after `github:yeet` creates the PR. Newly created PRs usually have no review threads; mark reply and resolve work as skipped unless the user provided an explicit review context to handle.
+For actionable threads:
 
-## Step 3: Verify and Publish with `github:yeet`
+- Verify the review technically before editing.
+- Implement clear fixes directly.
+- Ask only when comments conflict, require product/architecture judgment, or exceed the branch scope.
+- Run relevant local verification after fixes.
+- Commit and push review fixes.
+- Return to CI wait if new commits trigger checks.
 
-Run the smallest reliable verification set for the touched area before committing. Prefer existing project commands from scripts, task runners, or local docs. Always run:
+Use at most 3 review-fix cycles in one finalize run. If unresolved actionable feedback remains after 3 cycles, stop and report the remaining threads.
 
-```bash
-git diff --check
-```
+If `fetch_review_threads.py` fails only because its initial auth check disagrees with otherwise working `gh api` access, fetch `reviewThreads` directly with `gh api graphql` instead of treating that as proof that GitHub is unreachable.
 
-Do not claim success when checks are skipped, blocked, timed out, or failing. Report the exact caveat instead.
+## Step 9: Reply Without Pending Review
 
-When commit, push, or PR creation is needed, load and use `github:yeet` as the primary publish workflow. Give `yeet` these explicit constraints:
-
-- Stage only intended files.
-- Create an English Semantic Commit, such as `fix(api): handle missing review threads` or `docs(finalize): document PR creation fallback`.
-- Push the current branch.
-- Ensure a PR exists, creating one if missing.
-- Use an English Semantic Commit PR title, such as `docs(finalize): add PR creation fallback`.
-- Write the PR body in Japanese with at least `概要`, `影響範囲`, and `レビュー観点`.
-- Include verification results honestly. If checks were skipped, blocked, timed out, or failed, say that clearly.
-- Default to a draft PR unless the user explicitly requested a ready-for-review PR.
-
-If no uncommitted changes exist, do not create an empty commit unless the user explicitly asks for one.
-
-After `yeet` finishes, capture the PR number, PR URL, head branch, and pushed commit hash before continuing to review replies:
-
-```bash
-gh pr view --json number,url,title,headRefName,baseRefName
-git rev-parse --short HEAD
-```
-
-If `github:yeet` is not available or cannot complete the publish flow, state why and use the fallback below only when the repository state is still safe.
-
-## Step 4: Fallback Publish Flow
-
-Use this fallback only when `github:yeet` is unavailable or blocked. Before committing:
-
-1. Re-read `git diff` and `git status --porcelain`.
-2. Stage only intended files.
-3. Create an English Semantic Commit, such as `fix(api): handle missing review threads` or `docs(finalize): document PR creation fallback`.
-4. If hooks rewrite files, inspect the new diff and make a follow-up commit when appropriate.
-
-If no uncommitted changes exist, do not create an empty commit unless the user explicitly asks for one.
-
-Before pushing, check whether the remote branch has moved:
-
-```bash
-git fetch origin
-git status -sb
-```
-
-If the upstream branch is ahead or diverged, integrate the remote changes according to the repository's normal policy before pushing. Do not force-push unless the user explicitly requested it and it is safe for the branch.
-
-Push the current branch with upstream tracking when needed:
-
-```bash
-git push -u origin HEAD
-```
-
-Record the pushed commit hash for the review replies:
-
-```bash
-git rev-parse --short HEAD
-```
-
-After push succeeds, re-check whether a PR exists for the current branch:
-
-```bash
-gh pr view --json number,url,title,headRefName,baseRefName
-```
-
-If no PR exists, create one. Default to a draft PR unless the user explicitly requested a ready-for-review PR.
-
-PR creation rules:
-
-- The title must be an English Semantic Commit title, such as `docs(finalize): add PR creation fallback`.
-- The body must be Japanese and include at least `概要`, `影響範囲`, and `レビュー観点`.
-- Include verification results honestly. If checks were skipped, blocked, timed out, or failed, say that clearly.
-
-Use a body file so shell quoting cannot corrupt the PR text:
-
-```bash
-gh pr create \
-  --draft \
-  --base BASE_BRANCH \
-  --head CURRENT_BRANCH \
-  --title 'docs(finalize): add PR creation fallback' \
-  --body-file /tmp/finalize-pr-body.md
-```
-
-After creation, capture the PR number and URL for review-thread operations and the final report:
-
-```bash
-gh pr view --json number,url,title,headRefName,baseRefName
-```
-
-## Step 5: Reply Without Pending Review
-
-After `github:yeet` or the fallback publish flow succeeds, reply to each matching review comment using the REST pull request review-comment reply endpoint:
+After the relevant fix commit is pushed and CI has returned green, reply to each matching review comment using the REST pull request review-comment reply endpoint:
 
 ```bash
 gh api \
@@ -220,9 +264,7 @@ Those paths can create or modify pending reviews. The REST reply endpoint publis
 
 If a REST reply fails, stop for that thread and do not resolve it.
 
-If there are no matching review threads, skip this step and state that no review replies were needed.
-
-## Step 6: Resolve Threads
+## Step 10: Resolve Threads
 
 Resolve only after the matching REST reply succeeded:
 
@@ -236,20 +278,29 @@ Do not resolve a thread when:
 
 - The reply failed.
 - The pushed commit is missing or failed to push.
+- CI is still failing for the fix commit.
 - The thread is unrelated to the current changes.
 - The reviewer comment is still technically unresolved.
 
-If there are no matching review threads, skip this step and state that no thread resolution was needed.
+If there are no matching review threads, state that no review replies or thread resolution were needed.
 
-## Step 7: Confirm Final State
+## Step 11: Confirm Final State
 
-Re-run the helper:
+Re-run both helpers:
 
 ```bash
+python .agents/skills/finalize/scripts/fetch_pr_finalization_state.py --repo OWNER/REPO --pr NUMBER > /tmp/finalize-pr-state-after.json
 python .agents/skills/finalize/scripts/fetch_review_threads.py --repo OWNER/REPO --pr NUMBER > /tmp/finalize-review-threads-after.json
 ```
 
-Confirm every target thread has `isResolved: true`. Also confirm the final repo state:
+Confirm:
+
+- PR is open and not draft.
+- Visible CI checks are green or explicitly caveated by the user.
+- Detected Copilot/Greptile signals are complete or no signal was detected.
+- Every target review thread has `isResolved: true`.
+- `delivery.pr_ref` follow-up is committed when SDD archive needed the PR URL.
+- The local worktree contains no unintended changes.
 
 ```bash
 git status -sb
@@ -260,6 +311,10 @@ Final reports must include:
 - Commit hash and message, or explain why no commit was needed.
 - Push result and branch.
 - PR number and URL, including whether it was newly created.
+- SDD verify/archive result, or why it was skipped.
+- Deslop summary.
 - Verification commands and outcomes.
+- CI final state.
+- Copilot/Greptile wait result.
 - Review threads replied to and resolved.
-- Any threads skipped, blocked, or still unresolved.
+- Any threads, checks, or Bot signals skipped, blocked, or still unresolved.

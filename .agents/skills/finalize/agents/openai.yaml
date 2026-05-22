@@ -1,4 +1,4 @@
 interface:
   display_name: "Finalize"
-  short_description: "Commit, push, reply, and resolve"
-  default_prompt: "Use $finalize to commit and push review fixes, then reply to matching review comments and resolve their threads."
+  short_description: "Finish PRs through CI, reviews, and thread resolution"
+  default_prompt: "Use $finalize to run any needed SDD verify/archive and deslop cleanup, publish the branch, wait for CI, open the PR for review, wait for detected Copilot/Greptile feedback, address review comments, reply inline, and resolve review threads."
