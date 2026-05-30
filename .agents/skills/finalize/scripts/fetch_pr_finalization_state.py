@@ -16,7 +16,10 @@ from typing import Any
 from urllib.parse import urlparse
 
 CHECK_FIELDS = "name,state,bucket,link,workflow,description,startedAt,completedAt,event"
-PR_FIELDS = "number,url,title,state,isDraft,headRefName,baseRefName,reviewDecision,reviews,comments"
+PR_FIELDS = (
+    "number,url,title,state,isDraft,headRefName,baseRefName,reviewDecision,"
+    "reviews,comments,reviewRequests,statusCheckRollup"
+)
 
 THREAD_QUERY = """\
 query(
@@ -48,6 +51,8 @@ BOT_ALIASES = {
 NEUTRAL_BUCKETS = {"pass", "skipping"}
 FAILING_BUCKETS = {"fail", "cancel"}
 PENDING_BUCKETS = {"pending"}
+ACTIVE_STATES = {"expected", "in_progress", "pending", "queued", "requested", "waiting"}
+FAILED_STATES = {"action_required", "cancelled", "cancel", "error", "failure", "failed", "timed_out"}
 
 
 def run(cmd: list[str], stdin: str | None = None, allow_exit_codes: tuple[int, ...] = (0,)) -> str:
@@ -85,10 +90,14 @@ def parse_repo(value: str) -> tuple[str, str]:
 
 
 def normalize_bucket(value: Any) -> str:
-    bucket = str(value or "").lower()
+    bucket = str(value or "").strip().lower()
     if bucket in FAILING_BUCKETS | PENDING_BUCKETS | NEUTRAL_BUCKETS:
         return bucket
     return "unknown"
+
+
+def normalize_state(value: Any) -> str:
+    return str(value or "").strip().lower().replace("-", "_").replace(" ", "_")
 
 
 def classify_checks(checks: list[dict[str, Any]]) -> dict[str, Any]:
@@ -130,6 +139,23 @@ def text_matches_bot(value: Any, aliases: tuple[str, ...]) -> bool:
     return any(alias in text for alias in aliases)
 
 
+def entry_matches_bot(entry: Any, aliases: tuple[str, ...]) -> bool:
+    if isinstance(entry, dict):
+        if any(text_matches_bot(entry.get(field), aliases) for field in (
+            "name",
+            "workflow",
+            "workflowName",
+            "description",
+            "context",
+            "title",
+        )):
+            return True
+        return any(entry_matches_bot(value, aliases) for value in entry.values())
+    if isinstance(entry, list):
+        return any(entry_matches_bot(item, aliases) for item in entry)
+    return text_matches_bot(entry, aliases)
+
+
 def merge_bot_status(current: str, candidate: str) -> str:
     rank = {"not_found": 0, "complete": 1, "pending": 2, "failed": 3}
     return candidate if rank[candidate] > rank[current] else current
@@ -141,7 +167,49 @@ def check_bot_status(check: dict[str, Any]) -> str:
         return "failed"
     if bucket in PENDING_BUCKETS:
         return "pending"
+    for field in ("state", "status", "conclusion"):
+        state = normalize_state(check.get(field))
+        if state in FAILED_STATES:
+            return "failed"
+        if state in ACTIVE_STATES:
+            return "pending"
     return "complete"
+
+
+def review_bot_status(review: dict[str, Any]) -> str:
+    state = normalize_state(review.get("state") or review.get("status"))
+    if state in FAILED_STATES:
+        return "failed"
+    if state in ACTIVE_STATES:
+        return "pending"
+    return "complete"
+
+
+def comment_bot_status(comment: dict[str, Any]) -> str:
+    body = str(comment.get("body") or "").lower()
+    if any(text in body for text in ("in progress", "queued", "reviewing", "still reviewing")):
+        return "pending"
+    return "complete"
+
+
+def source_name(prefix: str, entry: dict[str, Any], fallback: str = "<unnamed>") -> str:
+    for field in ("name", "workflowName", "workflow", "context", "title"):
+        value = entry.get(field)
+        if value:
+            return f"{prefix}:{value}"
+    return f"{prefix}:{fallback}"
+
+
+def iter_rollup_entries(value: Any) -> list[dict[str, Any]]:
+    if isinstance(value, list):
+        return [entry for item in value for entry in iter_rollup_entries(item)]
+    if not isinstance(value, dict):
+        return []
+    if isinstance(value.get("nodes"), list):
+        return [entry for item in value["nodes"] for entry in iter_rollup_entries(item)]
+    if isinstance(value.get("edges"), list):
+        return [entry for item in value["edges"] for entry in iter_rollup_entries(item.get("node"))]
+    return [value]
 
 
 def detect_bot_signals(
@@ -149,6 +217,8 @@ def detect_bot_signals(
     checks: list[dict[str, Any]],
     reviews: list[dict[str, Any]],
     comments: list[dict[str, Any]],
+    review_requests: list[dict[str, Any]] | None = None,
+    status_check_rollup: Any = None,
 ) -> dict[str, dict[str, Any]]:
     signals = {
         name: {"detected": False, "status": "not_found", "sources": []}
@@ -169,15 +239,29 @@ def detect_bot_signals(
             author = (review.get("author") or {}).get("login")
             if text_matches_bot(author, aliases):
                 signals[bot]["detected"] = True
-                signals[bot]["status"] = merge_bot_status(signals[bot]["status"], "complete")
+                signals[bot]["status"] = merge_bot_status(signals[bot]["status"], review_bot_status(review))
                 signals[bot]["sources"].append(f"review:{author}")
 
         for comment in comments:
             author = (comment.get("author") or {}).get("login")
             if text_matches_bot(author, aliases):
                 signals[bot]["detected"] = True
-                signals[bot]["status"] = merge_bot_status(signals[bot]["status"], "complete")
+                signals[bot]["status"] = merge_bot_status(signals[bot]["status"], comment_bot_status(comment))
                 signals[bot]["sources"].append(f"comment:{author}")
+
+        for review_request in review_requests or []:
+            if entry_matches_bot(review_request, aliases):
+                signals[bot]["detected"] = True
+                signals[bot]["status"] = merge_bot_status(signals[bot]["status"], "pending")
+                signals[bot]["sources"].append(source_name("reviewRequest", review_request, "requested reviewer"))
+
+        for rollup_entry in iter_rollup_entries(status_check_rollup):
+            if entry_matches_bot(rollup_entry, aliases):
+                signals[bot]["detected"] = True
+                signals[bot]["status"] = merge_bot_status(
+                    signals[bot]["status"], check_bot_status(rollup_entry)
+                )
+                signals[bot]["sources"].append(source_name("statusCheckRollup", rollup_entry))
 
     return signals
 
@@ -296,6 +380,8 @@ def build_state(repo: str | None, pr: str | None) -> dict[str, Any]:
         checks=checks,
         reviews=pull_request.get("reviews") or [],
         comments=pull_request.get("comments") or [],
+        review_requests=pull_request.get("reviewRequests") or [],
+        status_check_rollup=pull_request.get("statusCheckRollup"),
     )
     review_summary = fetch_review_summary(owner, repo_name, int(pull_request["number"]))
 

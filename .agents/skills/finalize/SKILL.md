@@ -74,9 +74,17 @@ git branch --show-current
 
 Use the repository default branch as the PR base unless the user request, branch naming, existing PR target, or repository metadata clearly indicates a different base.
 
+If `git branch --show-current` is empty because the repository is in detached HEAD, create a safe feature branch in the current worktree and continue without asking:
+
+```bash
+git switch -c codex/<short-intent-slug>
+```
+
+If `codex/<short-intent-slug>` is unavailable, use a collision-free variant such as `codex-<short-intent-slug>` or append the short HEAD SHA. This auto-branch rule applies only to detached HEAD. Do not silently continue on `main`, `master`, or the repository default branch.
+
 Stop and ask before continuing when any of these are true:
 
-- The branch is `main`, `master`, or detached and no safe feature branch/worktree is already selected.
+- The branch is `main`, `master`, or the repository default branch and no safe feature branch/worktree is already selected.
 - The worktree contains unrelated changes that cannot be separated safely.
 - No PR exists and the PR base, title, or body cannot be inferred safely from the branch, diff, commits, and user request.
 - A requested review/CI fix would change behavior outside the finalization scope.
@@ -207,10 +215,12 @@ python .agents/skills/finalize/scripts/fetch_pr_finalization_state.py --repo OWN
 Detection sources include:
 
 - Check name, workflow, or description containing `copilot` or `greptile`.
+- `statusCheckRollup` entries whose name, workflow, context, app, or state belongs to Copilot/Greptile.
+- `reviewRequests` entries for Copilot/Greptile; an outstanding review request is `status: pending`.
 - Review author containing `copilot` or `greptile`.
 - PR comment author containing `copilot` or `greptile`.
 
-If a detected Bot check is pending, keep waiting. If a detected Bot check fails, or Bot comments/review threads appear, proceed to review handling. If neither Copilot nor Greptile appears on the PR, skip this wait and record that no Bot signal was detected.
+If a detected Bot check, status rollup entry, review, comment, or review request is pending, keep waiting. Treat `QUEUED`, `IN_PROGRESS`, `PENDING`, `REQUESTED`, and review-request presence as active remote work. If a detected Bot check fails, or Bot comments/review threads appear, proceed to review handling. If neither Copilot nor Greptile appears on the PR, skip this wait and record that no Bot signal was detected.
 
 If the helper returns `recommended_next_step: wait_for_bot_reviews`, stay in this step and keep waiting. A pending Greptile/Copilot check with zero review threads is still active work, not a reason to end the finalize turn.
 
