@@ -1,4 +1,10 @@
 {
+  "diagnostics": {
+    "inline": {
+      "update_debounce_ms": 0,
+      "enabled": true
+    }
+  },
   "cli_default_open_behavior": "existing_window",
   "project_panel": {
     "dock": "left"
