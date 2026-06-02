@@ -7,7 +7,7 @@ requirements = ["fish"]
 command = "fish -c 'history --null'"
 entry_delimiter = "\u0000"
 output = "{}"
-no_sort = true
+no_sort = false
 frecency = false
 
 [preview]
