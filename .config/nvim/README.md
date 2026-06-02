@@ -4,17 +4,35 @@
 
 - Leader: `<Space>`
 - Plugin manager: `lazy.nvim`
+- Lazy.nvim rocks support is enabled for Neorg dependencies.
 - Tabline: theme toggle button is disabled
 - Bare `nvim` and `nvim .` start with `snacks.dashboard` instead of NvChad `nvdash`
+- `cd ~/neorg && nvim` and `nvim ~/neorg` open `~/neorg/index.norg`
 - Oil shows dotfiles by default; use `g.` inside Oil to toggle hidden entries
 
 ## Startup Dashboard
 
 - The startup screen is powered by `snacks.dashboard`.
 - Starting with a single directory argument keeps that directory as `cwd` and still opens the dashboard.
+- Starting with the exact `~/neorg` directory opens `~/neorg/index.norg` instead of the dashboard.
 - `Recent Projects` is inferred from the project roots of recently opened files.
 - Selecting a project switches to that directory and immediately opens the file picker there.
 - The startup shortcuts are intentionally minimal: find files, grep, recent files, config, and quit.
+
+## Neorg
+
+- Neorg is installed via `nvim-neorg/neorg` and requires `luarocks`.
+- The default Neorg workspace is `notes = ~/neorg`.
+- The workspace index file is `~/neorg/index.norg`.
+- Journal entries are stored under `~/neorg/journal` with the nested date strategy.
+- Useful commands:
+  - `:Neorg workspace` shows the current workspace.
+  - `:Neorg workspace notes` switches to the notes workspace.
+  - `:Neorg journal today` opens today's journal entry.
+  - `:Neorg journal custom YYYY-mm-dd` opens a journal entry for a specific date.
+  - `:Neorg journal toc open` opens the journal table of contents.
+  - `:Neorg journal toc update` updates the journal table of contents.
+- In `.norg` files, `<C-Space>` cycles TODO states.
 
 ## Formatting
 
@@ -227,6 +245,7 @@
 
 **UI/Editing**
 
+- `nvim-neorg/neorg`
 - `folke/noice.nvim`, `rcarriga/nvim-notify`, `MunifTanjim/nui.nvim`
 - `folke/trouble.nvim`
 - `folke/flash.nvim`
