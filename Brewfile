@@ -14,6 +14,8 @@ brew "fd"
 brew "zoxide"
 
 # Dev
+brew "jq"
+brew "yq"
 brew "mise"
 brew "tmux"
 brew "lazydocker"
