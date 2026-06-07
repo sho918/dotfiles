@@ -1,4 +1,12 @@
 {
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry"
+    },
+    "codex-acp": {
+      "type": "registry"
+    }
+  },
   "diagnostics": {
     "inline": {
       "update_debounce_ms": 0,
