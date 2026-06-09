@@ -9,7 +9,7 @@ description: Use when a user asks to merge, take in, sync, or resolve conflicts 
 
 Merge the latest remote-tracking default branch into the current work branch. Core rule: fetch and merge `origin/main`, `origin/master`, or the remote default ref; never trust stale local `main` / `master` unless explicitly requested.
 
-Normal merge is the default. Rebase, squash, local-base merges, and push require explicit user direction.
+Normal merge is the default. Rebase, squash, and local-base merges require explicit user direction. Push after the verified merge commit unless the user explicitly asks for local-only or no-push handling.
 
 ## Workflow
 
@@ -71,12 +71,12 @@ Normal merge is the default. Rebase, squash, local-base merges, and push require
    ```
    Use the repo's existing commit style when obvious.
 
-9. Push only if the user asked for push, PR, or full follow-through:
+9. Push after the verified merge commit:
    ```bash
    git push
    git status --short --branch
    ```
-   Otherwise stop after the local merge commit.
+   Stop after the local merge commit only when the user explicitly asks for local-only or no-push handling.
 
 ## Quick Reference
 
@@ -87,7 +87,8 @@ Normal merge is the default. Rebase, squash, local-base merges, and push require
 | Local `main` / `master` is stale | Ignore it; use fetched `origin/<branch>` |
 | `このブランチ優先` | Preserve branch behavior inside remote-side structure |
 | Conflict markers removed | Still run semantic searches |
-| User did not mention push | Create local merge commit only |
+| User did not mention push | Push after the local merge commit |
+| User requested local-only / no-push | Create local merge commit only |
 
 ## Common Mistakes
 
@@ -96,5 +97,5 @@ Normal merge is the default. Rebase, squash, local-base merges, and push require
 | Merging local `main` / `master` because it exists | Fetch and merge `origin/<branch>` unless local was explicitly requested |
 | Treating marker removal as completion | Search for stale names, generated drift, and failing assertions |
 | Using `-X ours` to honor "branch wins" | Preserve branch intent manually when remote refactors moved the code |
-| Auto-pushing after a merge request | Push only when the user asked for push, PR, or full publish follow-through |
+| Stopping after a merge request without push | Push after the verified merge commit unless the user explicitly requested local-only or no-push handling |
 | Reporting green without evidence | List exactly which verification ran and which checks were skipped or blocked |
