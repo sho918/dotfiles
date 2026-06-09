@@ -72,7 +72,7 @@ tap "FelixKratz/formulae"
 brew "sketchybar"
 
 # App - Essential
-cask "orbstack"
+cask "docker-desktop"
 cask "espanso"
 cask "cmd-eikana"
 cask "bitwarden"
