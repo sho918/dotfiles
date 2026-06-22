@@ -1,0 +1,4 @@
+interface:
+  display_name: "Japanese Tech Writing"
+  short_description: "Applies Japanese technical writing standards"
+  default_prompt: "Use $japanese-tech-writing to revise this Japanese technical draft."
