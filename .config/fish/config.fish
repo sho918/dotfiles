@@ -138,4 +138,4 @@ end
 #
 # claude-code
 #
-set -x CLAUDE_CODE_EFFORT_LEVEL max
+# set -x CLAUDE_CODE_EFFORT_LEVEL max
