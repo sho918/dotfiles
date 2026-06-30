@@ -21,7 +21,13 @@ function __abbr_cc_escape_toml_string --argument-names value
 end
 
 function __abbr_cc
-    set -l prompt "Use the git-commit skill to create commits in English. Continue until the Worktree is clean. Ensure that commits are separated into meaningful units."
+    set -l prompt (string join " " \
+        "Use the git-commit skill to create commits in English." \
+        "Continue until the Worktree is clean." \
+        "Ensure that commits are separated into meaningful units." \
+        "Never bypass git commit signing: do not use --no-gpg-sign, commit.gpgsign=false, git config commit.gpgsign false, git config --unset commit.gpgsign, or GIT_CONFIG_* injection to disable commit.gpgsign." \
+        "If signing fails, report the gpg/SSH agent socket cause without disabling signing." \
+        "If any git commit command fails, stop and print the exact commit message planned for the failed commit, plus the matching git commit command when practical, so the user can retry manually after fixing the cause.")
     set -l cmd codex exec
 
     if command git rev-parse --is-inside-work-tree >/dev/null 2>&1
