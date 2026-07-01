@@ -41,7 +41,16 @@ function __abbr_cc
             end
         end
 
-        set -l filesystem_entries '"/"="read"' '":tmpdir"="write"' '":slash_tmp"="write"' '":project_roots"={ "."="write" }'
+        set -l unix_socket_paths
+        if set -q SSH_AUTH_SOCK; and test -S "$SSH_AUTH_SOCK"
+            for socket_path in "$SSH_AUTH_SOCK" (path resolve "$SSH_AUTH_SOCK" 2>/dev/null) (command readlink "$SSH_AUTH_SOCK" 2>/dev/null)
+                if test -n "$socket_path"; and not contains -- "$socket_path" $unix_socket_paths
+                    set -a unix_socket_paths "$socket_path"
+                end
+            end
+        end
+
+        set -l filesystem_entries '"/"="read"' '":tmpdir"="write"' '":slash_tmp"="write"' '":workspace_roots"={ "."="write" }'
 
         for dir in $writable_roots
             set -l escaped_dir (__abbr_cc_escape_toml_string "$dir")
@@ -50,6 +59,17 @@ function __abbr_cc
 
         set -l filesystem_config (string join "" "permissions.cc_commit.filesystem={" (string join ", " $filesystem_entries) "}")
         set -a cmd --config 'default_permissions="cc_commit"' --config "$filesystem_config"
+
+        if test (count $unix_socket_paths) -gt 0
+            set -l unix_socket_entries
+            for socket_path in $unix_socket_paths
+                set -l escaped_socket_path (__abbr_cc_escape_toml_string "$socket_path")
+                set -a unix_socket_entries "\"$escaped_socket_path\"=\"allow\""
+            end
+
+            set -l unix_socket_config (string join "" "permissions.cc_commit.network.unix_sockets={" (string join ", " $unix_socket_entries) "}")
+            set -a cmd --config 'permissions.cc_commit.network.enabled=true' --config "$unix_socket_config"
+        end
     else
         set -a cmd --sandbox workspace-write
     end
