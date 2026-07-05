@@ -1,4 +1,0 @@
-interface:
-  display_name: "Finalize"
-  short_description: "Finish PRs through CI, reviews, and thread resolution"
-  default_prompt: "Use $finalize to run any needed SDD verify/archive and deslop cleanup, publish the branch, wait for CI, open the PR for review, wait for detected Copilot/Greptile feedback, address review comments, reply inline, and resolve review threads."
