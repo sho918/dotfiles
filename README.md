@@ -80,14 +80,6 @@ ln -s (PWD)/.codex/config.toml ~/.codex/
 #
 # Agent Skills
 #
-mkdir -p ~/.agents/skills
-ln -s (PWD)/.agents/skills/go ~/.agents/skills/
-ln -s (PWD)/.agents/skills/finalize ~/.agents/skills/
-ln -s (PWD)/.agents/skills/merge-remote-default-branch ~/.agents/skills/
-ln -s (PWD)/.agents/skills/gh-watch-actions ~/.agents/skills/
-ln -s (PWD)/.agents/skills/japanese-tech-writing ~/.agents/skills/
-ln -s (PWD)/.agents/skills/writing-adrs ~/.agents/skills/
-
 npx skills add https://github.com/vercel-labs/skills --skill find-skills
 
 # dev
