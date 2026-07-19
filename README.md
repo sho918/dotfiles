@@ -84,6 +84,7 @@ npx skills add https://github.com/vercel-labs/skills --skill find-skills
 
 # dev
 npx skills add obra/superpowers
+npx skills add mattpocock/skills
 
 # prompt tuning (install or refresh from upstream)
 npx skills add https://github.com/mizchi/chezmoi-dotfiles/tree/main/dot_claude/skills/empirical-prompt-tuning
