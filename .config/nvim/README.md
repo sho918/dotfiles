@@ -5,6 +5,8 @@
 - Leader: `<Space>`
 - Plugin manager: `lazy.nvim`
 - Lazy.nvim rocks support is enabled for Neorg dependencies.
+- Tree-sitter: `nvim-treesitter` main branch for Neovim 0.12+, with the `tree-sitter` CLI managed by `Brewfile`.
+- `:TSInstallAll` installs every parser listed in `lua/plugins/nvim-treesitter.lua`.
 - Tabline: theme toggle button is disabled
 - Bare `nvim` and `nvim .` start with `snacks.dashboard` instead of NvChad `nvdash`
 - `cd ~/neorg && nvim` and `nvim ~/neorg` open `~/neorg/index.norg`

@@ -2,8 +2,18 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
+    lazy = false,
     dependencies = {
-      "nvim-treesitter/nvim-treesitter-textobjects",
+      {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        branch = "main",
+        opts = {
+          select = {
+            lookahead = true,
+          },
+        },
+      },
       { "windwp/nvim-ts-autotag", opts = {} },
       { "JoosepAlviste/nvim-ts-context-commentstring", opts = {} },
     },
@@ -21,15 +31,6 @@ return {
         "css",
         "markdown",
         "markdown_inline",
-      },
-      highlight = { enable = true },
-      indent = { enable = true },
-      matchup = { enable = true },
-      textobjects = {
-        select = {
-          enable = true,
-          lookahead = true,
-        },
       },
     },
   },

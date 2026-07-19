@@ -1,5 +1,22 @@
 require "nvchad.autocmds"
 
+local treesitter_indent_group = vim.api.nvim_create_augroup("TreesitterIndent", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  group = treesitter_indent_group,
+  callback = function(args)
+    local has_parser, parser = pcall(vim.treesitter.get_parser, args.buf)
+    if not has_parser then
+      return
+    end
+
+    local has_query, query = pcall(vim.treesitter.query.get, parser:lang(), "indents")
+    if has_query and query then
+      vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end
+  end,
+})
+
 -- 補完メニュー表示中は Copilot のインライン提案を隠す
 local copilot_group = vim.api.nvim_create_augroup("CopilotBlink", { clear = true })
 

@@ -283,37 +283,37 @@ vim.api.nvim_create_autocmd("LspAttach", {
 map(
   { "x", "o" },
   "af",
-  module_call("nvim-treesitter.textobjects.select", "select_textobject", "@function.outer"),
+  module_call("nvim-treesitter-textobjects.select", "select_textobject", "@function.outer", "textobjects"),
   { desc = "TS Function outer" }
 )
 map(
   { "x", "o" },
   "if",
-  module_call("nvim-treesitter.textobjects.select", "select_textobject", "@function.inner"),
+  module_call("nvim-treesitter-textobjects.select", "select_textobject", "@function.inner", "textobjects"),
   { desc = "TS Function inner" }
 )
 map(
   { "x", "o" },
   "ac",
-  module_call("nvim-treesitter.textobjects.select", "select_textobject", "@class.outer"),
+  module_call("nvim-treesitter-textobjects.select", "select_textobject", "@class.outer", "textobjects"),
   { desc = "TS Class outer" }
 )
 map(
   { "x", "o" },
   "ic",
-  module_call("nvim-treesitter.textobjects.select", "select_textobject", "@class.inner"),
+  module_call("nvim-treesitter-textobjects.select", "select_textobject", "@class.inner", "textobjects"),
   { desc = "TS Class inner" }
 )
 map(
   { "x", "o" },
   "aa",
-  module_call("nvim-treesitter.textobjects.select", "select_textobject", "@parameter.outer"),
+  module_call("nvim-treesitter-textobjects.select", "select_textobject", "@parameter.outer", "textobjects"),
   { desc = "TS Parameter outer" }
 )
 map(
   { "x", "o" },
   "ia",
-  module_call("nvim-treesitter.textobjects.select", "select_textobject", "@parameter.inner"),
+  module_call("nvim-treesitter-textobjects.select", "select_textobject", "@parameter.inner", "textobjects"),
   { desc = "TS Parameter inner" }
 )
 
