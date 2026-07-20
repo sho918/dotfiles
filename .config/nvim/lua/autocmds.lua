@@ -6,7 +6,7 @@ vim.api.nvim_create_autocmd("FileType", {
   group = treesitter_indent_group,
   callback = function(args)
     local has_parser, parser = pcall(vim.treesitter.get_parser, args.buf)
-    if not has_parser then
+    if not has_parser or not parser then
       return
     end
 
