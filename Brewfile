@@ -37,6 +37,7 @@ tap "laishulu/homebrew"
 brew "macism"
 cask "jetbrains-toolbox"
 brew "television"
+brew "crit"
 
 tap "entireio/tap"
 brew "entireio/tap/entire"
@@ -66,7 +67,7 @@ brew "im-select"
 cask "google-japanese-ime"
 
 # Browser
-cask "thebrowsercompany-dia"
+cask "google-chrome"
 
 # UI
 tap "FelixKratz/formulae"
@@ -75,7 +76,7 @@ brew "sketchybar"
 # App - Essential
 cask "docker-desktop"
 cask "espanso"
-cask "cmd-eikana"
+cask "karabiner-elements"
 cask "bitwarden"
 cask "raycast"
 
