@@ -80,28 +80,29 @@ ln -s (PWD)/.codex/config.toml ~/.codex/
 #
 # Agent Skills
 #
-npx skills add https://github.com/vercel-labs/skills --skill find-skills
 
-# dev
+# Dev
 npx skills add obra/superpowers
 npx skills add mattpocock/skills
 
-# prompt tuning (install or refresh from upstream)
-npx skills add https://github.com/mizchi/chezmoi-dotfiles/tree/main/dot_claude/skills/empirical-prompt-tuning
-
-# git
+# Git
 npx skills add https://github.com/github/awesome-copilot --skill gh-cli
 npx skills add https://github.com/github/awesome-copilot --skill git-commit
 
-# frontend design
+# Design
 npx skills add https://github.com/vercel-labs/agent-skills --skill web-design-guidelines
 npx skills add https://github.com/anthropics/skills --skill frontend-design
 npx skills add https://github.com/nextlevelbuilder/ui-ux-pro-max-skill --skill ui-ux-pro-max
 
-# react
+# React
 npx skills add https://github.com/vercel-labs/agent-skills --skill vercel-react-best-practices
 npx skills add https://github.com/vercel-labs/agent-skills --skill vercel-composition-patterns
 
-# database
+# Database
 npx skills add https://github.com/supabase/agent-skills --skill supabase-postgres-best-practices
+
+# Visualize
+npx skills add https://github.com/humanlayer/skills --skill show-me
+npx skills add https://github.com/cathrynlavery/diagram-design --skill diagram-design
+npx skills add https://github.com/mathbullet/skills --skill html
 ```
