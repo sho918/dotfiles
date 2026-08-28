@@ -33,14 +33,9 @@ brew "tree-sitter-cli"
 brew "lazygit"
 brew "ripgrep"
 brew "luarocks"
-tap "laishulu/homebrew"
-brew "macism"
 cask "jetbrains-toolbox"
 brew "television"
 brew "crit"
-
-tap "entireio/tap"
-brew "entireio/tap/entire"
 
 # Security
 brew "gitleaks"
@@ -62,8 +57,8 @@ cask "font-jetbrains-mono-nerd-font"
 cask "font-udev-gothic-nf"
 
 # IME
-tap "daipeihust/tap"
-brew "im-select"
+tap "laishulu/homebrew"
+brew "macism"
 cask "google-japanese-ime"
 
 # Browser
