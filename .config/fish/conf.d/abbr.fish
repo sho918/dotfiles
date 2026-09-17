@@ -74,7 +74,7 @@ function __abbr_cc
         set -a cmd --sandbox workspace-write
     end
 
-    set -a cmd -m gpt-5.3-codex-spark --config 'model_reasoning_effort="low"' "$prompt"
+    set -a cmd -m gpt-5.6-luna --config 'model_reasoning_effort="low"' "$prompt"
     string join -- " " (string escape -- $cmd)
 end
 
