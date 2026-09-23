@@ -85,6 +85,7 @@ ln -s (PWD)/.codex/config.toml ~/.codex/
 npx skills add obra/superpowers
 npx skills add mattpocock/skills
 npx skills add https://github.com/cursor/plugins --skill unslop
+npx skills add https://github.com/iwasa-kosui/tanteki --skill tanteki
 
 # Git
 npx skills add https://github.com/github/awesome-copilot --skill gh-cli
