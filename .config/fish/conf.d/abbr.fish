@@ -22,7 +22,18 @@ end
 
 function __abbr_cc
     set -l prompt (string join " " \
-        "Use the git-commit skill to create commits in English." \
+        "Use the git-commit skill to create commit messages in Japanese, including both the subject and body." \
+        "Insert a single ASCII space between English letters/digits and Japanese text in commit messages; for example, write 'API を 3 回呼び出す' instead of 'APIを3回呼び出す'. Preserve identifiers such as code symbols, file paths, and URLs without inserting spaces inside them.")
+    __abbr_cc_command "$prompt"
+end
+
+function __abbr_cce
+    __abbr_cc_command "Use the git-commit skill to create commits in English."
+end
+
+function __abbr_cc_command --argument-names prompt
+    set prompt (string join " " \
+        "$prompt" \
         "Continue until the Worktree is clean." \
         "Ensure that commits are separated into meaningful units." \
         "Never bypass git commit signing: do not use --no-gpg-sign, commit.gpgsign=false, git config commit.gpgsign false, git config --unset commit.gpgsign, or GIT_CONFIG_* injection to disable commit.gpgsign." \
@@ -79,3 +90,4 @@ function __abbr_cc
 end
 
 abbr -a -g cc --function __abbr_cc
+abbr -a -g cce --function __abbr_cce
