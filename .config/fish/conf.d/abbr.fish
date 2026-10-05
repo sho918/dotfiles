@@ -45,8 +45,13 @@ function __abbr_cc_command --argument-names prompt
         set -l writable_roots
         set -l git_dir (command git rev-parse --path-format=absolute --git-dir 2>/dev/null)
         set -l common_dir (command git rev-parse --path-format=absolute --git-common-dir 2>/dev/null)
+        # uv-backed commit hooks also need to write to uv's configured cache.
+        set -l uv_cache_dir
+        if command -q uv
+            set uv_cache_dir (command uv cache dir 2>/dev/null)
+        end
 
-        for dir in $git_dir $common_dir
+        for dir in $git_dir $common_dir $uv_cache_dir
             if test -n "$dir"; and not contains -- "$dir" $writable_roots
                 set -a writable_roots "$dir"
             end
