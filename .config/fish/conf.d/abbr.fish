@@ -51,7 +51,18 @@ function __abbr_cc_command --argument-names prompt
             set uv_cache_dir (command uv cache dir 2>/dev/null)
         end
 
-        for dir in $git_dir $common_dir $uv_cache_dir
+        # Go-backed hooks need the configured build, module, and linter caches.
+        set -l go_cache_dirs
+        if command -q go
+            set go_cache_dirs (command go env GOCACHE GOMODCACHE 2>/dev/null | string match -- '/*')
+        end
+
+        set -l golangci_lint_cache_dir
+        if command -q golangci-lint
+            set golangci_lint_cache_dir (command golangci-lint cache status 2>/dev/null | string replace --filter --regex '^Dir: ' '' | string match -- '/*')
+        end
+
+        for dir in $git_dir $common_dir $uv_cache_dir $go_cache_dirs $golangci_lint_cache_dir
             if test -n "$dir"; and not contains -- "$dir" $writable_roots
                 set -a writable_roots "$dir"
             end
