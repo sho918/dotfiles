@@ -107,4 +107,6 @@ npx skills add https://github.com/supabase/agent-skills --skill supabase-postgre
 npx skills add https://github.com/humanlayer/skills --skill show-me
 npx skills add https://github.com/cathrynlavery/diagram-design --skill diagram-design
 npx skills add https://github.com/mathbullet/skills --skill html
+npx skills add tt-a1i/archify
+npx skills add mizchi/explainer
 ```
