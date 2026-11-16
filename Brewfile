@@ -69,7 +69,6 @@ tap "FelixKratz/formulae"
 brew "sketchybar"
 
 # App - Essential
-cask "docker-desktop"
 cask "espanso"
 cask "karabiner-elements"
 cask "bitwarden"
