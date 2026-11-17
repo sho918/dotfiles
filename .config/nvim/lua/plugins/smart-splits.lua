@@ -1,20 +1,24 @@
+local wezterm_ready = vim.env.WEZTERM_PANE ~= nil and vim.env.WEZTERM_PANE ~= "" and vim.env.SMART_SPLITS_WEZTERM ~= nil
+
 ---@type NvPluginSpec
 return {
   {
-    "mrjones2014/smart-splits.nvim",
+    "smart-splits-nvim/smart-splits.nvim",
+    version = "^3.0.0",
     lazy = false,
-    init = function()
-      -- Needed early for WezTerm integration
-      vim.g.smart_splits_multiplexer_integration = "wezterm"
-    end,
-    config = function()
-      require("smart-splits").setup {
-        ignored_buftypes = { "nofile", "quickfix", "prompt" },
-        ignored_filetypes = { "NvimTree" },
-        default_amount = 3,
-        disable_multiplexer_nav_when_zoomed = true,
-        log_level = "info",
-      }
-    end,
+    dependencies = {
+      {
+        "smart-splits-nvim/backend-wezterm",
+        main = "smart-splits-backend-wezterm",
+        opts = {},
+      },
+    },
+    opts = {
+      ignored_buftypes = { "nofile", "quickfix", "prompt" },
+      ignored_filetypes = { "NvimTree" },
+      resize = { amount = 3 },
+      mux = { backend = wezterm_ready and "smart-splits-backend-wezterm" or nil },
+      log = { level = "info" },
+    },
   },
 }

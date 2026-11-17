@@ -20,6 +20,7 @@
 - `Recent Projects` is inferred from the project roots of recently opened files.
 - Selecting a project switches to that directory and immediately opens the file picker there.
 - The startup shortcuts are intentionally minimal: find files, grep, recent files, config, and quit.
+- Dashboard shortcuts are displayed on consecutive lines without blank rows between items.
 
 ## Neorg
 
@@ -95,18 +96,18 @@
 | Line Move    | Visual `<M-k>`      | Move selection up (`mini.move`)                       |
 | Git          | `<leader>gg`        | LazyGit                                |
 | Git          | `<leader>gl`        | LazyGit log                            |
-| Git          | `<leader>gf`        | LazyGit current file                   |
-| Git          | `<leader>gd`        | Diffview worktree                      |
-| Git          | `<leader>gD`        | Diffview previous commit               |
-| Git          | `<leader>gs`        | Diffview staged                        |
+| Git          | `<leader>gf`        | LazyGit current file history            |
+| Git          | `<leader>gd`        | CodeDiff worktree                      |
+| Git          | `<leader>gD`        | CodeDiff previous commit               |
+| Git          | `<leader>gs`        | CodeDiff staged                        |
 | Git          | `<leader>gh`        | File history                           |
 | Git          | `<leader>gH`        | Branch history                         |
-| Git          | `<leader>gm`        | Diffview main                          |
-| Git          | `<leader>gM`        | Diffview master                        |
+| Git          | `<leader>gm`        | CodeDiff main                          |
+| Git          | `<leader>gM`        | CodeDiff master                        |
 | Git          | `<leader>gr`        | PR review menu                         |
 | Git          | Visual `<leader>gr` | PR suggest change                      |
-| Git          | `<leader>gq`        | Diffview close                         |
-| Git          | `<leader>gt`        | Diffview file panel                    |
+| Git          | `<leader>gq`        | CodeDiff close (diff view only)         |
+| Git          | `<leader>gt`        | CodeDiff file panel (explorer only)     |
 | Git          | `<leader>gp`        | Preview hunk                           |
 | Git          | `<leader>hr`        | Reset hunk                             |
 | Git          | `<leader>hs`        | Stage hunk                             |
@@ -175,10 +176,6 @@
 | Substitute   | `gr`                | Replace operator                       |
 | Substitute   | `grr`               | Replace line                           |
 | Substitute   | Visual `gr`         | Replace selection                      |
-| CodeCompanion | `<leader>aa`        | Inline assistant                       |
-| CodeCompanion | `<leader>ac`        | Toggle chat (floating window)          |
-| CodeCompanion | `<leader>af`        | Actions palette                        |
-| CodeCompanion | Visual `<leader>ae` | Explain selection                      |
 
 ### NvChad defaults (active in this config)
 
@@ -218,7 +215,6 @@
 
 - `saghen/blink.cmp`, `fang2hou/blink-copilot`
 - `zbirenbaum/copilot.lua`
-- `olimorris/codecompanion.nvim`
 
 **LSP/Format/Lint**
 
@@ -240,32 +236,31 @@
 **Git**
 
 - `lewis6991/gitsigns.nvim`
-- `sindrets/diffview.nvim`
-- `kdheepak/lazygit.nvim`
+- `esmuellert/codediff.nvim`
 - `Yu-Leo/blame-column.nvim`
 - `otavioschwanck/github-pr-reviewer.nvim`
 
 **UI/Editing**
 
 - `nvim-neorg/neorg`
-- `folke/noice.nvim`, `rcarriga/nvim-notify`, `MunifTanjim/nui.nvim`
+- `folke/noice.nvim`, `MunifTanjim/nui.nvim`
 - `folke/trouble.nvim`
 - `folke/flash.nvim`
 - `jake-stewart/multicursor.nvim`
 - `rapan931/lasterisk.nvim`
-- `echasnovski/mini.nvim` (`mini.align`, `mini.cursorword`, `mini.extra`, `mini.move`, `mini.splitjoin`, `mini.trailspace`)
+- `nvim-mini/mini.nvim` (`mini.align`, `mini.cursorword`, `mini.extra`, `mini.move`, `mini.splitjoin`, `mini.trailspace`)
 - `kevinhwang91/nvim-bqf`
 - `kevinhwang91/nvim-ufo`, `kevinhwang91/promise-async`
 - `tris203/precognition.nvim`
 - `gbprod/substitute.nvim`
-- `tpope/vim-surround`
+- `kylechui/nvim-surround`
 - `smjonas/inc-rename.nvim`
 - `WilliamHsieh/overlook.nvim`
 - `b0o/incline.nvim`
-- `mvllow/modes.nvim`
+- [`modes.nvim`](https://git.sr.ht/~mellow/modes.nvim) (SourceHut)
 - `TaDaa/vimade`
 - `keaising/im-select.nvim`
-- `mrjones2014/smart-splits.nvim`
+- `smart-splits-nvim/smart-splits.nvim`, `smart-splits-nvim/backend-wezterm`
 - `andymass/vim-matchup`
 - `nvim-treesitter/nvim-treesitter`
 - `nvim-treesitter/nvim-treesitter-textobjects`
@@ -284,3 +279,13 @@
 - Enabled: `mini.align`, `mini.cursorword`, `mini.extra`, `mini.move`, `mini.splitjoin`, `mini.trailspace`
 - `mini.move` keeps default mappings except Normal `<M-h>`, which stays bound to NvChad's horizontal terminal toggle.
 - Trailing full-width spaces (`U+3000`) are also highlighted.
+
+## Plugin integrations
+
+- Snacks provides notifications and lazygit integration; Noice keeps message routing and command-line UI.
+- CodeDiff v4 replaces Diffview. Existing Git prefixes stay the same; `<leader>gq` closes a CodeDiff view and `<leader>gt` toggles the file panel in its explorer view.
+- CodeDiff downloads its native diff library on first use.
+- `nvim-surround` v4 keeps the core `ys`, `ds`, and `cs` operations.
+- `modes.nvim` loads automatically from SourceHut and derives mode colors from the active theme; the previous `setup()` options are no longer used.
+- Smart-splits v3 enables its WezTerm backend only when both `WEZTERM_PANE` and `SMART_SPLITS_WEZTERM` are available. Existing panes without the handshake and other terminals use Neovim-only window movement without a backend warning. `.config/wezterm/wezterm.lua` loads the matching GUI plugin and blocks pane navigation while zoomed. Start a new WezTerm window after reloading its config to enable cross-pane navigation.
+- Blink stays on the NvChad-provided `1.*` version constraint; Copilot completion remains enabled.

@@ -78,7 +78,7 @@ return {
             title = "Shortcuts",
             section = "keys",
             indent = 2,
-            gap = 1,
+            gap = 0,
             padding = 1,
           },
           { section = "startup", padding = 1 },
@@ -87,6 +87,7 @@ return {
       git = { enabled = true },
       picker = { enabled = true },
       input = { enabled = true },
+      notifier = { enabled = true },
     },
   },
 }

@@ -52,7 +52,7 @@ local function smart_join_keys()
   end
 
   -- Use splitjoin's operator mapping path so `.` repeat keeps working.
-  return splitjoin.operator("join") .. " "
+  return splitjoin.operator "join" .. " "
 end
 
 local function close_other_buffers()
@@ -142,20 +142,18 @@ map("v", "<C-j>", ":m '>+1<cr>gv=gv", { desc = "Move selection down" })
 map("v", "<C-k>", ":m '<-2<cr>gv=gv", { desc = "Move selection up" })
 
 -- Git
-map("n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
-map("n", "<leader>gl", "<cmd>LazyGitLog<cr>", { desc = "LazyGit Log" })
-map("n", "<leader>gf", "<cmd>LazyGitCurrentFile<cr>", { desc = "LazyGit: Current File" })
-map("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Git Diff (Working Tree)" })
-map("n", "<leader>gD", "<cmd>DiffviewOpen HEAD~1<cr>", { desc = "Git Diff (Prev Commit)" })
-map("n", "<leader>gh", "<cmd>DiffviewFileHistory %<cr>", { desc = "Git File History" })
-map("n", "<leader>gH", "<cmd>DiffviewFileHistory<cr>", { desc = "Git Branch History" })
-map("n", "<leader>gs", "<cmd>DiffviewOpen --cached<cr>", { desc = "Git Diff (Staged)" })
-map("n", "<leader>gm", "<cmd>DiffviewOpen main...HEAD<cr>", { desc = "Git Diff (main)" })
-map("n", "<leader>gM", "<cmd>DiffviewOpen master...HEAD<cr>", { desc = "Git Diff (master)" })
+map("n", "<leader>gg", module_call("snacks", "lazygit.open"), { desc = "LazyGit" })
+map("n", "<leader>gl", module_call("snacks", "lazygit.log"), { desc = "LazyGit Log" })
+map("n", "<leader>gf", module_call("snacks", "lazygit.log_file"), { desc = "LazyGit: Current File History" })
+map("n", "<leader>gd", "<cmd>CodeDiff<cr>", { desc = "Git Diff (Working Tree)" })
+map("n", "<leader>gD", "<cmd>CodeDiff HEAD~1<cr>", { desc = "Git Diff (Prev Commit)" })
+map("n", "<leader>gh", "<cmd>CodeDiff history %<cr>", { desc = "Git File History" })
+map("n", "<leader>gH", "<cmd>CodeDiff history<cr>", { desc = "Git Branch History" })
+map("n", "<leader>gs", "<cmd>CodeDiff --staged<cr>", { desc = "Git Diff (Staged)" })
+map("n", "<leader>gm", "<cmd>CodeDiff main...HEAD<cr>", { desc = "Git Diff (main)" })
+map("n", "<leader>gM", "<cmd>CodeDiff master...HEAD<cr>", { desc = "Git Diff (master)" })
 map("n", "<leader>gr", "<cmd>PR<cr>", { desc = "PR Review Menu" })
 map("v", "<leader>gr", ":<C-u>'<,'>PRSuggestChange<CR>", { desc = "PR Suggest Change" })
-map("n", "<leader>gq", "<cmd>DiffviewClose<cr>", { desc = "Git: Close Diffview" })
-map("n", "<leader>gt", "<cmd>DiffviewToggleFiles<cr>", { desc = "Git: Toggle File Panel" })
 map("n", "<leader>gp", module_call("gitsigns", "preview_hunk"), { desc = "Git: Preview Hunk" })
 map("n", "<leader>gb", module_call("snacks", "git.blame_line"), { desc = "Git: Blame Line" })
 map("n", "<leader>ga", "<cmd>BlameColumnToggle<cr>", { desc = "Git: Blame Column" })
@@ -331,9 +329,3 @@ map("n", "<leader>pv", module_call("overlook.api", "open_in_vsplit"), { desc = "
 map("n", "gr", module_call("substitute", "operator"), { desc = "Replace with register" })
 map("n", "grr", module_call("substitute", "line"), { desc = "Replace line with register" })
 map("x", "gr", module_call("substitute", "visual"), { desc = "Replace with register" })
-
--- CodeCompanion
-map("n", "<leader>aa", "<cmd>CodeCompanion<cr>", { desc = "CodeCompanion: Inline Assistant" })
-map("n", "<leader>ac", "<cmd>CodeCompanionChat Toggle<cr>", { desc = "CodeCompanion: Toggle Chat" })
-map("n", "<leader>af", "<cmd>CodeCompanionActions<cr>", { desc = "CodeCompanion: Actions" })
-map("v", "<leader>ae", ":<C-u>'<,'>CodeCompanion /explain<CR>", { desc = "CodeCompanion: Explain Selection" })
