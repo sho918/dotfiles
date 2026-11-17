@@ -66,6 +66,9 @@ ln -s (PWD)/espanso/config/default.yml (espanso path config)/config/
 # Mise
 mise install
 
+# Enable secret scanning before commits in this repository
+git config --local core.hooksPath .githooks
+
 # gh
 gh extension install dlvhdr/gh-dash
 
@@ -110,3 +113,7 @@ npx skills add https://github.com/mathbullet/skills --skill html
 npx skills add tt-a1i/archify
 npx skills add mizchi/explainer
 ```
+
+このリポジトリでは、[BetterLeaks](https://github.com/betterleaks/betterleaks) でコミット前にステージ済みの変更を検査します。通常の `git commit`、`cc`、`cce` のいずれでも実行され、秘密情報の検出時や検査の実行エラー時はコミットを中止します。検出した値はマスクし、キーの有効性を確認する外部 API 通信は行いません。
+
+クローン後は `mise install betterleaks` と `git config --local core.hooksPath .githooks` を実行してください。フックを回避するコミットや GitHub 上の直接編集には適用されません。既存の履歴を検査する場合は `betterleaks git --redact --verbose --validation=false` を実行します。

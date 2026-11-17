@@ -1,0 +1,9 @@
+#!/bin/sh
+set -eu
+
+if ! command -v betterleaks >/dev/null 2>&1; then
+    echo 'BetterLeaks が見つかりません。mise install betterleaks を実行してください。' >&2
+    exit 1
+fi
+
+exec betterleaks git --pre-commit --staged --redact --verbose --no-banner --validation=false
